@@ -1,0 +1,821 @@
+<!-- <div class="example-wrap">
+  <form class="form-row k-form row position-relative" [formGroup]="rolesForm">
+    COLUMN 1
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ employeeRole?.district1Description }}</h3>
+        <p>Additional positions - welfare officials</p>
+
+          Table B -- Additional positions - welfare officials
+
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict1Job" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableBDistrict1Job
+            formControlName="tableBDistrict1Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district1)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableBDistrict1FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableBDistrict1FromJob
+                  formControlName="tableBDistrict1FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableBDistrict1UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableBDistrict1UntilJob
+                formControlName="tableBDistrict1UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict1Minister" text="Ministry"></kendo-label>
+
+          <kendo-dropdownlist
+            #tableBDistrict1Minister
+            formControlName="tableBDistrict1Minister"
+            [textField]="'text'"
+            [valuePrimitive]="true"
+            [valueField]="'value'"
+            [data]="list"
+          >
+          </kendo-dropdownlist>
+        </kendo-formfield>
+
+
+          Table C -- Secondary positions - welfare officials.
+
+        Table C -- job a
+        <h5 class="mt-5 text-right">Secondary positions - welfare officials</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableCDistrict1AJob" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict1AJob
+            formControlName="tableCDistrict1AJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district1)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict1AFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict1AFromJob
+                  formControlName="tableCDistrict1AFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict1AUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict1AUntilJob
+                formControlName="tableCDistrict1AUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+        Table C -- job b
+        <kendo-formfield>
+          <kendo-label [for]="tableCDistrict1BJob" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict1BJob
+            formControlName="tableCDistrict1BJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district1)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict1BFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict1BFromJob
+                  formControlName="tableCDistrict1BFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableADistrict1FromJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableADistrict1FromJob
+                formControlName="tableADistrict1FromJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+
+          Table A -- The social worker is responsible for professional trust workers
+
+        <h5 class="mt-5 text-right">The social worker is responsible for professional trust workers</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableADistrict1Job" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableADistrict1Job
+            formControlName="tableADistrict1Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district1)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableADistrict1FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableADistrict1FromJob
+                  formControlName="tableADistrict1FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableADistrict1UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableADistrict1UntilJob
+                formControlName="tableADistrict1UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ employeeRole?.district2Description }}</h3>
+        <p>Additional positions - welfare officials</p>
+
+          Table B -- Additional positions - welfare officials
+
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict2Job" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableBDistrict2Job
+            formControlName="tableBDistrict2Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district2)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableBDistrict2FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableBDistrict2FromJob
+                  formControlName="tableBDistrict2FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableBDistrict2UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableBDistrict2UntilJob
+                formControlName="tableBDistrict2UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict2Minister" text="Ministry"></kendo-label>
+          <kendo-dropdownlist
+            #tableBDistrict2Minister
+            formControlName="tableBDistrict2Minister"
+            [textField]="'text'"
+            [valuePrimitive]="true"
+            [valueField]="'value'"
+            [data]="list"
+          >
+          </kendo-dropdownlist>
+        </kendo-formfield>
+
+
+          Table C -- Secondary positions - welfare officials.
+
+
+        Table C -- Job A
+        <h5 class="mt-5 text-right">Secondary positions - welfare officials</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableCDistrict2AJob" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict2AJob
+            formControlName="tableCDistrict2AJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district2)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict2AFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict2AFromJob
+                  formControlName="tableCDistrict2AFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict2AUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict2AUntilJob
+                formControlName="tableCDistrict2AUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        Table C -- Job B
+        <kendo-formfield>
+          <kendo-label [for]="tableCDistrict2BJob" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict2BJob
+            formControlName="tableCDistrict2BJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district2)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict2BFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict2BFromJob
+                  formControlName="tableCDistrict2BFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict2BUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict2BUntilJob
+                formControlName="tableCDistrict2BUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+
+          Table A -- The social worker is responsible for professional trust workers
+
+        <h5 class="mt-5 text-right">The social worker is responsible for professional trust workers</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableADistrict2Job" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableADistrict2Job
+            formControlName="tableADistrict2Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district2)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableADistrict2FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableADistrict2FromJob
+                  formControlName="tableADistrict2FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableADistrict2UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableADistrict2UntilJob
+                formControlName="tableADistrict2UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    COLUMN 3
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ employeeRole?.district3Description }}</h3>
+        <p>Additional positions - welfare officials</p>
+
+          Table B -- Additional positions - welfare officials
+
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict3Job" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableBDistrict3Job
+            formControlName="tableBDistrict3Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district3)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableBDistrict3FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableBDistrict3FromJob
+                  formControlName="tableBDistrict3FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableBDistrict3UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableBDistrict3UntilJob
+                formControlName="tableBDistrict3UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict3Minister" text="Ministry"></kendo-label>
+          <kendo-dropdownlist
+            #tableBDistrict3Minister
+            formControlName="tableBDistrict3Minister"
+            [textField]="'text'"
+            [valuePrimitive]="true"
+            [valueField]="'value'"
+            [data]="list"
+          >
+          </kendo-dropdownlist>
+        </kendo-formfield>
+
+
+          Table C -- Secondary positions - welfare officials.
+
+
+        Table C -- Job a
+        <h5 class="mt-5 text-right">Secondary positions - welfare officials</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableCDistrict3AJob" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict3AJob
+            formControlName="tableCDistrict3AJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district3)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict3AFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict3AFromJob
+                  formControlName="tableCDistrict3AFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict3AUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict3AUntilJob
+                formControlName="tableCDistrict3AUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        Table C -- Job b
+        <kendo-formfield>
+          <kendo-label [for]="tableCDistrict3BJob" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict3BJob
+            formControlName="tableCDistrict3BJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district3)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict3BFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict3BFromJob
+                  formControlName="tableCDistrict3BFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict3BUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict3BUntilJob
+                formControlName="tableCDistrict3BUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+
+          Table A -- The social worker is responsible for professional trust workers
+
+        <h5 class="mt-5 text-right">The social worker is responsible for professional trust workers</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableADistrict3Job" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableADistrict3Job
+            formControlName="tableADistrict3Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district3)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableADistrict3FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableADistrict3FromJob
+                  formControlName="tableADistrict3FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableADistrict3UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableADistrict3UntilJob
+                formControlName="tableADistrict3UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    COLUMN 4
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ employeeRole?.district4Description }}</h3>
+        <p>Additional positions - welfare officials</p>
+
+          Table B -- Additional positions - welfare officials
+
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict4Job" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableBDistrict4Job
+            formControlName="tableBDistrict4Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district4)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableBDistrict4FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableBDistrict4FromJob
+                  formControlName="tableBDistrict4FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableBDistrict4UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableBDistrict4UntilJob
+                formControlName="tableBDistrict4UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label [for]="tableBDistrict4Minister" text="Ministry"></kendo-label>
+          <kendo-dropdownlist
+            #tableBDistrict4Minister
+            formControlName="tableBDistrict4Minister"
+            [textField]="'text'"
+            [valuePrimitive]="true"
+            [valueField]="'value'"
+            [data]="list"
+          >
+          </kendo-dropdownlist>
+        </kendo-formfield>
+
+
+          Table C -- Secondary positions - welfare officials.
+
+
+        Table C -- job a
+        <h5 class="mt-5 text-right">Secondary positions - welfare officials</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableCDistrict4AJob" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict4AJob
+            formControlName="tableCDistrict4AJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district4)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict4AFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict4AFromJob
+                  formControlName="tableCDistrict4AFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict4AUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict4AUntilJob
+                formControlName="tableCDistrict4AUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        Table C -- job b
+        <kendo-formfield>
+          <kendo-label [for]="tableCDistrict4BJob" class="input-label" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableCDistrict4BJob
+            formControlName="tableCDistrict4BJob"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district4)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableCDistrict4BFromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableCDistrict4BFromJob
+                  formControlName="tableCDistrict4BFromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableCDistrict4BUntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableCDistrict4BUntilJob
+                formControlName="tableCDistrict4BUntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+
+
+          Table A -- The social worker is responsible for professional trust workers
+
+        <h5 class="mt-5 text-right">The social worker is responsible for professional trust workers</h5>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="tableADistrict4Job" text="Job"></kendo-label>
+          <kendo-combobox
+            #tableADistrict4Job
+            formControlName="tableADistrict4Job"
+            [textField]="'jobNumber'"
+            [valuePrimitive]="true"
+            [valueField]="'id'"
+            [data]="searchJobList"
+            [filterable]="true"
+            (filterChange)="handleFilter($event, employeeRole?.district4)"
+          >
+          </kendo-combobox>
+        </kendo-formfield>
+        <div class="k-list-horizontal d-flex">
+          <div class="w-50">
+            <div class="ml-2">
+              <kendo-formfield>
+                <kendo-label class="input-label" [for]="tableADistrict4FromJob" text="Date from"></kendo-label>
+                <kendo-datepicker
+                  #tableADistrict4FromJob
+                  formControlName="tableADistrict4FromJob"
+                  [min]="min"
+                  [max]="max"
+                >
+                </kendo-datepicker>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="w-50">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="tableADistrict4UntilJob" text="Date to"></kendo-label>
+              <kendo-datepicker
+                #tableADistrict4UntilJob
+                formControlName="tableADistrict4UntilJob"
+                [min]="min"
+                [max]="max"
+              >
+              </kendo-datepicker>
+            </kendo-formfield>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <button class="k-button k-primary roles-save-btn" (click)="submitFormRoles()">Submit</button>
+  </form>
+</div> -->

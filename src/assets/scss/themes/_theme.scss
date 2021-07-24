@@ -1,0 +1,101 @@
+////////////////////////////////
+//Normal
+///////////////////////////////
+@include media-breakpoint-up(sm) {
+  html[data-font="normal"] {
+    font-size: 11px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html[data-font="normal"] {
+    font-size: 12px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html[data-font="normal"] {
+    font-size: 13px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  html[data-font="normal"] {
+    font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  html[data-font="normal"] {
+    font-size: 16px;
+  }
+}
+////////////////////////////////
+//BIG
+///////////////////////////////
+@include media-breakpoint-up(sm) {
+  html[data-font="big"] {
+    font-size: 11px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html[data-font="big"] {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html[data-font="big"] {
+    font-size: 17px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  html[data-font="big"] {
+    font-size: 18px;
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  html[data-font="big"] {
+    font-size: 20px;
+  }
+}
+////////////////////////////////
+//Large
+///////////////////////////////
+@include media-breakpoint-up(sm) {
+  html[data-font="large"] {
+    font-size: 11px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html[data-font="large"] {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html[data-font="large"] {
+    font-size: 21px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  html[data-font="large"] {
+    font-size: 22px;
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  html[data-font="large"] {
+    font-size: 24px;
+  }
+}
+
+.-is-white-bcg {
+  background-color:$bcg;
+  padding-bottom: 1px;
+}

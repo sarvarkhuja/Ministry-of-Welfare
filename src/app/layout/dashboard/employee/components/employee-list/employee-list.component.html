@@ -1,0 +1,311 @@
+<dx-data-grid
+  id="gridContainer"
+  style="height: 84vh"
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [wordWrapEnabled]="true"
+  [showBorders]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [columnMinWidth]="columnMinWidth"
+  [columnWidth]="columnWidth"
+  (onToolbarPreparing)="onToolbarPreparing($event)"
+>
+<dxi-column type="buttons" [width]="100">
+  <dxi-button hint="Edit" icon="edit" [onClick]="edit">
+  </dxi-button>
+</dxi-column>
+
+  <ng-template ngFor let-column [ngForOf]="columns">
+    <dxi-column
+      allowSearch="{{ column.allowSearch }}"
+      caption="{{ column.captionInEnglish }}"
+      dataField="{{ column.dataField }}"
+      dataType="{{ column.dataType }}"
+      format="{{ column.format }}"
+    >
+    </dxi-column>
+  </ng-template>
+
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel [visible]="true" [width]="240" placeholder="Search by code or name..."> </dxo-search-panel>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+  <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+  <dxo-paging [pageSize]="pageSize"></dxo-paging>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-pager
+    [visible]="true"
+    [allowedPageSizes]="allowedPageSizes"
+    [displayMode]="displayMode"
+    [showPageSizeSelector]="showPageSizeSelector"
+    [showInfo]="showInfo"
+    [showNavigationButtons]="showNavButtons"
+  >
+  </dxo-pager>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+  <dxo-export [enabled]="true" [excelFilterEnabled]="true" fileName="Employees"></dxo-export>
+
+  <dxo-summary>
+    <dxi-group-item column="nationalId" summaryType="count"> </dxi-group-item>
+    <dxi-total-item column="nationalId" summaryType="count"> </dxi-total-item>
+  </dxo-summary>
+</dx-data-grid>
+
+<!-- TODO: OLD LOGIC; REMOVE ONCE REWRITTEN -->
+<!-- <h1 class="employee-title">
+  {{ 'רשימת עובדים' | translate: 'Employees List' }}
+</h1>
+<kendo-grid
+  [data]="(data$ | async) || defaultValue"
+  [style.height.vh]="70"
+  [columnMenu]="{ filter: true }"
+  filterable="menu"
+  [filter]="state.filter || defaultFilter"
+  [resizable]="true"
+  [reorderable]="true"
+  [groupable]="true"
+  [group]="groups"
+  (sortChange)="sortChangeEvent($event)"
+  [sortable]="{
+    mode: 'multiple'
+  }"
+  [sort]="sort"
+  [pageSize]="state.take || 0"
+  [skip]="state.skip || 0"
+  [pageable]="{
+    buttonCount: 4,
+    info: true,
+    pageSizes: pageSizes,
+    previousNext: true
+  }"
+  (groupChange)="groupChange($event)"
+  (pageChange)="onPageStateChanges($event)"
+  (columnResize)="columnResize($event)"
+  (columnReorder)="columnReorder($event)"
+  (columnVisibilityChange)="onVisibilityChange($event)"
+  (dataStateChange)="onDataStateChange($event)"
+  id="kendoGrid"
+  #grid
+>
+  <ng-template kendoGridToolbarTemplate [position]="'top'">
+    <div class="d-flex w-100 justify-content-between">
+      <search-employee (selectionChange)="showSearchResults($event)" toolbar></search-employee>
+      <div class="d-flex">
+        <button [hidden]="true" kendoButton class="mt-1 my-auto primary-color" look="flat" (click)="grid.autoFitColumns()">
+          Auto-fit all columns
+        </button>
+
+        <button
+          kendoButton
+          class="mt-1 my-auto primary-color"
+          routerLink="../../../employee-information"
+          look="flat"
+          [imageUrl]="'assets/images/add.svg'"
+        >
+          {{ 'הוספה' | translate: 'Add' }}
+        </button>
+        <button
+          kendoGridExcelCommand
+          class="my-auto mt-1 primary-color"
+          look="flat"
+          [imageUrl]="'/assets/images/excel.svg'"
+        >
+          {{ 'ייצוא לאקסל' | translate: 'Export to Excel' }}
+        </button>
+        <button
+          kendoButton
+          class="my-auto primary-color"
+          (click)="saveTemplateDialogOpen()"
+          [ngClass]="{ 'd-none': !hasChangesInTemplate }"
+          [disabled]="!hasChangesInTemplate"
+          look="flat"
+        >
+          Save current state
+        </button>
+        <div #popup class="my-auto mt-1 position-relative layouts">
+          <div class="d-flex mx-2">
+            <p (click)="toggleUserInfo()" class="my-0 mx-1 font-weight-bold primary-color">Layouts</p>
+            <i class="k-icon k-i-arrow-s" [ngClass]="{ 'is-active': openUserInfoBoolean }"></i>
+          </div>
+
+          <div *ngIf="openUserInfoBoolean" class="position-absolute layouts-wrapper">
+            <kendo-listview [data]="templates" containerClass="k-d-flex k-flex-col k-flex-nowrap">
+              <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+                <div class="m-1 single-item" [ngClass]="{ active: currentTemplate.id === dataItem.id }">
+                  <img
+                    class="pr-2 outlined-dropdown__delete"
+                    src="assets/images/edit.svg"
+                    alt="edit icon in the form of pencil"
+                    (click)="editTemplateDialogOpen()"
+                  />
+                  <span (click)="showSelectedLayout($event, dataItem)" class="template flex-grow-1">{{
+                    dataItem.name
+                  }}</span>
+                  <img
+                    class="pr-2 outlined-dropdown__delete"
+                    src="assets/images/delete.svg"
+                    alt=""
+                    (click)="deleteTemplate(dataItem)"
+                  />
+                </div>
+              </ng-template>
+            </kendo-listview>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <kendo-grid-command-column [width]="40" class="edit-button-column" [columnMenu]="false" [reorderable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      <a class="button-column" [routerLink]="['../../../employee-information', 'edit', dataItem.nationalId]">
+        <img src="assets/images/edit.svg" />
+      </a>
+    </ng-template>
+  </kendo-grid-command-column>
+
+  <ng-template ngFor let-templateCol [ngForOf]="templateColumns">
+    <kendo-grid-column
+      field="{{ templateCol.field }}"
+      title="{{ templateCol.columnName | translate: templateCol.englishColumnName}}"
+      [width]="templateCol.width ? templateCol.width : 120"
+      [hidden]="templateCol.isHidden"
+      [filterable]="true"
+      [filter]="templateCol.type"
+      [editor]="templateCol.type"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <ng-container [ngSwitch]="templateCol.type">
+          <span *ngSwitchCase="'date'">
+            {{ $intl.formatDate($intl.parseDate(dataItem[templateCol.field]), templateCol.format || 'd') }}
+          </span>
+          <span *ngSwitchDefault>
+            {{ dataItem[templateCol.field] }}
+          </span>
+        </ng-container>
+      </ng-template>
+    </kendo-grid-column>
+  </ng-template>
+
+  <kendo-grid-messages [pagerItemsPerPage]="'מספר הרשומות לעמוד:' | translate: 'Records per page'"></kendo-grid-messages>
+  <kendo-grid-excel fileName="Employees.xlsx"></kendo-grid-excel>
+</kendo-grid>
+
+
+<kendo-dialog
+  title="Save current state as"
+  *ngIf="saveTemplateDialogOpened"
+  (close)="saveTemplateDialogClose()"
+  [minWidth]="250"
+  [width]="370"
+  [height]="330"
+>
+  <div class="layout-wrapper">
+    <div *ngFor="let template of templates">
+      <p
+        class="layout-wrapper__single"
+        [ngClass]="{ 'is-active': template.id == selectedTemplate.id }"
+        (click)="selectListItem(template)"
+      >
+        {{ template.name }}
+      </p>
+    </div>
+  </div>
+
+  <kendo-dialog-actions>
+    <div class="dialog-action-wrapper d-flex">
+      <div class="flex-grow-1 text-right">
+        <a kendoButton class="btn pr-0 d-inline-flex" look="flat" (click)="addTemplateDialogOpen()">
+          <img src="assets/images/add.svg" alt="" class="m-1" srcset="" />
+          New state
+        </a>
+      </div>
+      <button class="secondary-button btn" (click)="saveTemplateAs(selectedTemplate)">Save</button>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog
+  [title]="'Create new state'"
+  *ngIf="addTemplateDialogOpened"
+  (close)="addTemplateDialogClose(status.close)"
+  [minWidth]="250"
+  [width]="350"
+  [height]="200"
+>
+  <div class="d-indline-grid text-right w-100">
+    <kendo-label text="State Name" [for]="templateNameInput"> </kendo-label>
+    <input #templateNameInput [(ngModel)]="templateName" kendoTextBox class="w-100" name="templateName" />
+  </div>
+
+  <kendo-dialog-actions>
+    <div class="dialog-action-wrapper">
+      <div class="w-50 text-center">
+        <button kendoButton class="btn d-inline-flex" look="flat" (click)="addTemplateDialogClose(status.no)">
+          {{ 'ביטול' | translate: 'Cancel'}}
+        </button>
+      </div>
+      <div class="w-50 text-center">
+        <button class="secondary-button btn" (click)="addTemplateDialogClose(status.yes)">
+          {{ 'Create' }}
+        </button>
+      </div>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog
+  [title]="'Create new state'"
+  *ngIf="editTemplateDialogOpened"
+  (close)="editTemplateDialogClose(status.close)"
+  [minWidth]="250"
+  [width]="350"
+  [height]="200"
+>
+  <div class="d-indline-grid text-right w-100">
+    <kendo-label text="State Name" [for]="templateNameInput"> </kendo-label>
+    <input #templateNameInput [(ngModel)]="templateName" kendoTextBox class="w-100" name="templateName" />
+  </div>
+
+  <kendo-dialog-actions>
+    <div class="dialog-action-wrapper">
+      <div class="w-50 text-center">
+        <button kendoButton class="btn d-inline-flex" look="flat" (click)="editTemplateDialogClose(status.no)">
+          {{ 'ביטול' | translate: 'Cancel'}}
+        </button>
+      </div>
+      <div class="w-50 text-center">
+        <button class="secondary-button btn" (click)="editTemplateDialogClose(status.yes)">
+          {{ 'Create' }}
+        </button>
+      </div>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog *ngIf="sureDialog" (close)="sureDialogClose(status.close)" [minWidth]="250" [width]="350" [height]="150">
+  <div class="d-indline-grid text-right w-100">Do you want to save changes to any template?</div>
+  <kendo-dialog-actions>
+    <div class="dialog-action-wrapper">
+      <div class="w-50 text-center">
+        <button kendoButton class="btn d-inline-flex" look="flat" (click)="sureDialogClose(status.no)">
+          {{ 'לא' | translate: 'No'}}
+        </button>
+      </div>
+      <div class="w-50 text-center">
+        <button class="secondary-button btn" (click)="sureDialogClose(status.yes)">
+          {{ 'כן' | translate: 'Yes'}}
+        </button>
+      </div>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog> -->

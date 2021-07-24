@@ -1,0 +1,67 @@
+<h4 class="text-right">
+  {{ nationalId ? ('עריכת עובד' | translate: 'Update employee') : ('הוספת עובד' | translate: 'Add employee') }}
+</h4>
+
+<app-employee-quick-search></app-employee-quick-search>
+<c-tabs>
+  <c-tab-item>
+    <c-tab-label>Personal details</c-tab-label>
+    <c-tab-body>
+        <personal-details-tab></personal-details-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Workspaces</c-tab-label>
+    <c-tab-body>
+        <workspaces-tab></workspaces-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Jobs</c-tab-label>
+    <c-tab-body>
+        <jobs-tab></jobs-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Roles</c-tab-label>
+    <c-tab-body>
+        <roles-tab></roles-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Leave work</c-tab-label>
+    <c-tab-body>
+        <leave-work-tab></leave-work-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Employees's Obligation</c-tab-label>
+    <c-tab-body>
+        <employee-obligation-tab></employee-obligation-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Proficiency Reward</c-tab-label>
+    <c-tab-body>
+        <proficiency-reward-tab></proficiency-reward-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>General courses & Training</c-tab-label>
+    <c-tab-body>
+        <general-courses-tab></general-courses-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Course 'Oz'</c-tab-label>
+    <c-tab-body>
+        <course-cycles-tab></course-cycles-tab>
+    </c-tab-body>
+  </c-tab-item>
+  <c-tab-item>
+    <c-tab-label>Personal Payments</c-tab-label>
+    <c-tab-body>
+        <personal-payment-tab></personal-payment-tab>
+    </c-tab-body>
+  </c-tab-item>
+</c-tabs>

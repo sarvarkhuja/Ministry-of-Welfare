@@ -1,0 +1,59 @@
+<div class="d-flex mb-3">
+  <h3 class="m-0">
+    {{ 'טבלאות כלליות' | translate: 'General tables' }}
+  </h3>
+</div>
+<div>
+  <div class="d-flex position-absolute mb-2">
+    <kendo-textbox
+      placeholder="Search for a table"
+      class="w-300 h-37 mb-2"
+      (valueChange)="search($event)"
+      [clearButton]="true"
+    >
+      <ng-template kendoTextBoxPrefixTemplate>
+        <button kendoButton look="clear" icon="search"></button>
+      </ng-template>
+    </kendo-textbox>
+  </div>
+  <ul class="row-list__wrapper pr-0">
+    <ng-container *ngIf="filteredGeneralTable$ | async as filteredGeneralTable">
+      <kendo-tabstrip
+        *ngIf="filteredGeneralTable.length > 0; else noData"
+        [tabPosition]="'right'"
+        (tabSelect)="onTabSelect($event)"
+        #tabstrip
+      >
+        <kendo-tabstrip-tab *ngFor="let data of filteredGeneralTable; let index = index" [selected]="index === 0">
+          <ng-template kendoTabTitle>
+            <li class="single-table w-300">
+              {{ data.tableId | padStart: 3 }} | {{ data.tableDescription }}
+            </li>
+          </ng-template>
+          <ng-template kendoTabContent>
+            <div class="pr-4">
+              <general-table-item [tableId]="data.tableId"></general-table-item>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+      </kendo-tabstrip>
+
+      <ng-template #noData>
+        <kendo-tabstrip [tabPosition]="'right'">
+          <kendo-tabstrip-tab [selected]="true" [disabled]="true">
+            <ng-template kendoTabTitle>
+              <li class="single-role w-300">
+                {{ 'אין נתונים' | translate: 'No data' }}
+              </li>
+            </ng-template>
+            <ng-template kendoTabContent>
+              <div class="pr-4">
+                <general-table-item [tableId]="0"></general-table-item>
+              </div>
+            </ng-template>
+          </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+      </ng-template>
+    </ng-container>
+  </ul>
+</div>

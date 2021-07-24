@@ -1,0 +1,208 @@
+<div class="menu-header">
+  <span class="menu-header__name">מאגר עובדים </span>
+  <button class="primary-button" [routerLink]="['/']">&lt; Back</button>
+</div>
+
+<div class="container-fluid rows">
+  <!-- First row -->
+  <div class="single-row">
+    <a class="single-item blue" [routerLink]="['/employees']">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'הצגת עובד' | translate: 'Employees List' }}
+        </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="['/employees']">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'קלט עובד' | translate: 'Edit Employees List' }}
+        </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">נתונים נוספים</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Second row -->
+  <div class="single-row">
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">דוחות קבועים</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">הדרכת עובדי מינהל וזכאות</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">קורסים כללים</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Third row -->
+  <div class="single-row">
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">השתלמות כללית</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מדריכים במחלקות קטנות</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מחולל דוחות ושאילתות</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

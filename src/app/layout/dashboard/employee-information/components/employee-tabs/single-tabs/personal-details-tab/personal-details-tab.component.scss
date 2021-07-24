@@ -1,0 +1,48 @@
+@import '../../../../../../../../assets/scss/utils/variables';
+@import '../../../../../../../../assets/scss/utils/mixins';
+@import '../../../../../../../../assets/scss/utils/functions';
+
+.form-col {
+  &:nth-child(2) {
+    border-left: 1px solid $bcg-inactive;
+    border-right: 1px solid $bcg-inactive;
+  }
+}
+
+.employee-data-rows {
+  .k-form-field {
+    margin-top: 0;
+    margin-bottom: rem(12px);
+  }
+
+  .radio-buttons {
+    margin-top: rem(16px);
+    margin-bottom: rem(20px);
+  }
+
+  .education-field {
+    width: rem(267px);
+  }
+
+  .education-years {
+    margin-right: rem(12px);
+    align-self: flex-end;
+    .input-label {
+      width: max-content;
+    }
+  }
+
+  .education-years-value {
+    width: rem(80px);
+  }
+
+  .jobs-percent {
+    text-align: right;
+    font-size: 1rem;
+  }
+
+  .job-connection {
+    text-align: justify;
+    margin-bottom: rem(20px);
+  }
+}

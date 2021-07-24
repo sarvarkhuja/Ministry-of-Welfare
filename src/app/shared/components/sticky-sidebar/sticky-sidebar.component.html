@@ -1,0 +1,24 @@
+<div class="d-flex">
+  <div class="nav flex-column nav-pills">
+    <a
+      *ngFor="let section of sections"
+      class="nav-link input-label pointer"
+      [ngClass]="{
+        active: currentSection === section.name,
+        '-is-required': section.isRequired
+      }"
+      (click)="scrollTo(section.name)"
+    >
+      {{ section.name }}
+    </a>
+  </div>
+
+  <div
+    class="forms p-1 pl-3 pr-3 flex-grow-1 bd-highlight"
+    scrollSpy
+    [spiedTags]="['DIV']"
+    (sectionChange)="sectionChanged($event)"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>

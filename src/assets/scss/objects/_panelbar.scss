@@ -1,0 +1,61 @@
+
+.custom-template-for-panelbar {
+  padding: 1.5rem 0;
+  color: $text;
+  .k-radio-item {
+    margin-top: 0.5rem;
+  }
+}
+
+.panelbar--plus-minus {
+  .k-panelbar {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+
+    .k-item {
+      .k-link {
+        background-color: $bcg-table;
+        border-bottom: rem(2px) solid $primary-active;
+        height: rem(51px);
+        font-size: rem(19px);
+        padding: rem(8px) rem(40px);
+        &:hover {
+          background-color: $primary-focused-bcg;
+          cursor: pointer;
+        }
+        &.k-state-selected {
+          background-color: $primary-focused-bcg;
+          box-shadow: none;
+          &:hover {
+            background-color: $primary-focused-bcg;
+            cursor: pointer;
+          }
+          .k-state-hover {
+            cursor: pointer;
+            background-color: $primary-focused-bcg;
+          }
+        }
+
+        .k-i-arrow-s::before {
+          content: url('/assets/images/plus-without-bg.svg');
+          position: relative;
+          top: 0px;
+        }
+
+        .k-i-arrow-n::before {
+          content: url('/assets/images/minus-without-bg.svg');
+          position: relative;
+        }
+      }
+    }
+
+    .k-panelbar-expand,
+    .k-panelbar-collapse {
+      right: inherit;
+      top: inherit;
+      margin-top: 0.1em;
+      margin-left: rem(-25px);
+    }
+  }
+}

@@ -1,0 +1,291 @@
+<!-- <div class="example-wrap">
+  <form class="form-row k-form row position-relative" [formGroup]="workspaces">
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ workplaceItem?.district }}</h3>
+        <div class="k-list-horizontal d-flex">
+          <kendo-formfield class="w-50">
+            <kendo-label class="input-label" [for]="department" text="Education"></kendo-label>
+            <kendo-combobox
+              [valuePrimitive]="true"
+              #department
+              [data]="departments$ | async"
+              [valueField]="'entryNumber'"
+              [textField]="'entryNumber'"
+              (selectionChange)="departmentChange($event, 'department')"
+              [formControlName]="'departmentId'"
+              [placeholder]="'Start typing or select an item'"
+            >
+            </kendo-combobox>
+          </kendo-formfield>
+          <div class="mr-3">
+            <kendo-formfield>
+              <kendo-label
+                class="input-label kendo-label"
+                [for]="departmentDescription"
+                text="Department Description"
+              ></kendo-label>
+              <kendo-textbox
+                [readonly]="true"
+                class="form-control -is-readonly"
+                formControlName="department"
+                #departmentDescription
+              ></kendo-textbox>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="priorityRegion" text="Priority Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #priorityRegion
+            formControlName="priorityRegion"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="councilType1Description" text="Council type"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #councilType1Description
+            formControlName="councilType1Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="geoRegion1Description" text="Graphical Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #geoRegion1Description
+            formControlName="geoRegion1Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <div class="k-form-field">
+          <label class="input-label" for="jobPercent">Comment</label>
+          <textarea
+            name="jobPercent"
+            id="jobPercent0"
+            formControlName="warning"
+            class="k-textarea mt-2"
+            placeholder="Add a remark or comment"
+            rows="3"
+          ></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ workplaceItem?.district2 }}</h3>
+        <div class="k-list-horizontal d-flex">
+          <kendo-formfield class="w-50">
+            <kendo-label class="input-label" [for]="department2" text="Education"></kendo-label>
+            <kendo-combobox
+              [valuePrimitive]="true"
+              #department2
+              [data]="departments$ | async"
+              [valueField]="'entryNumber'"
+              [textField]="'entryNumber'"
+              (selectionChange)="departmentChange($event, 'department2')"
+              [formControlName]="'department2Id'"
+              [placeholder]="'Start typing or select an item'"
+            >
+            </kendo-combobox>
+          </kendo-formfield>
+          <div class="mr-3">
+            <kendo-formfield>
+              <kendo-label
+                class="input-label"
+                [for]="department2Description"
+                text="Department Description"
+              ></kendo-label>
+              <kendo-textbox
+                class="form-control -is-readonly"
+                #department2Description
+                formControlName="department2"
+              ></kendo-textbox>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="priorityRegion2" text="Priority Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #priorityRegion2
+            formControlName="priorityRegion2"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="councilType2Description" text="Council type"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #councilType2Description
+            formControlName="councilType2Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="geoRegion2Description" text="Graphical Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #geoRegion2Description
+            formControlName="geoRegion2Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <div class="k-form-field">
+          <label class="input-label" for="warning2">Comment</label>
+          <textarea
+            name="warning2"
+            formControlName="warning2"
+            class="k-textarea mt-2"
+            placeholder="Add a remark or comment"
+            rows="3"
+          ></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ workplaceItem?.district3 }}</h3>
+        <div class="k-list-horizontal d-flex">
+          <kendo-formfield class="w-50">
+            <kendo-label class="input-label" [for]="department3" text="Education"></kendo-label>
+            <kendo-combobox
+              [valuePrimitive]="true"
+              #department3
+              [data]="departments$ | async"
+              [valueField]="'entryNumber'"
+              [textField]="'entryNumber'"
+              (selectionChange)="departmentChange($event, 'department3')"
+              [formControlName]="'department3Id'"
+              [placeholder]="'Start typing or select an item'"
+            >
+            </kendo-combobox>
+          </kendo-formfield>
+          <div class="mr-3">
+            <kendo-formfield>
+              <kendo-label class="input-label" [for]="department3" text="Department Description"></kendo-label>
+              <kendo-textbox
+                class="form-control -is-readonly"
+                #department3
+                formControlName="department3"
+              ></kendo-textbox>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="priorityRegion3" text="Priority Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #priorityRegion3
+            formControlName="priorityRegion3"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="councilType3Description" text="Council type"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #councilType3Description
+            formControlName="councilType3Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="geoRegion3Description" text="Graphical Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #geoRegion3Description
+            formControlName="geoRegion3Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <div class="k-form-field">
+          <label class="input-label" for="warning3">Comment</label>
+          <textarea
+            name="warning3"
+            formControlName="warning3"
+            class="k-textarea mt-2"
+            placeholder="Add a remark or comment"
+            rows="3"
+          ></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="form-col col-md-3">
+      <fieldset class="k-form-fieldset single-workspace p-4">
+        <h3>{{ workplaceItem?.district4 }}</h3>
+        <div class="k-list-horizontal d-flex">
+          <kendo-formfield class="w-50">
+            <kendo-label class="input-label" [for]="department4" text="Education"></kendo-label>
+            <kendo-combobox
+              [valuePrimitive]="true"
+              #department4
+              [data]="departments$ | async"
+              [valueField]="'entryNumber'"
+              [textField]="'entryNumber'"
+              [formControlName]="'department4Id'"
+              (selectionChange)="departmentChange($event, 'department4')"
+              [placeholder]="'Start typing or select an item'"
+            >
+            </kendo-combobox>
+          </kendo-formfield>
+          <div class="mr-3">
+            <kendo-formfield>
+              <kendo-label
+                class="input-label"
+                [for]="department4Description"
+                text="Department Description"
+              ></kendo-label>
+              <kendo-textbox
+                class="form-control -is-readonly"
+                #department4Description
+                formControlName="department4"
+              ></kendo-textbox>
+            </kendo-formfield>
+          </div>
+        </div>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="priorityRegion4" text="Priority Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #priorityRegion4
+            formControlName="priorityRegion4"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="councilType4Description" text="Council type"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #councilType4Description
+            formControlName="councilType4Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label class="input-label" [for]="geoRegion4Description" text="Graphical Region"></kendo-label>
+          <kendo-textbox
+            class="form-control -is-readonly"
+            [readonly]="true"
+            #geoRegion4Description
+            formControlName="geoRegion4Description"
+          ></kendo-textbox>
+        </kendo-formfield>
+        <div class="k-form-field">
+          <label class="input-label" for="warning4">Comment</label>
+          <textarea
+            name="warning4"
+            formControlName="warning4"
+            class="k-textarea mt-2"
+            placeholder="Add a remark or comment"
+            rows="3"
+          ></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <button class="k-button k-primary workspaces-save-btn" (click)="submitFormWorkplace()">Submit</button>
+  </form>
+</div> -->

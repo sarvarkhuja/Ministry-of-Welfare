@@ -1,0 +1,39 @@
+
+@import 'src/assets/scss/utils/functions';
+
+::ng-deep .k-tabstrip-items .k-link {
+  padding-right: 0;
+}
+
+::ng-deep .row-list__wrapper .k-state-active .single-role {
+  border-left: none;
+  background-color: transparent;
+}
+
+::ng-deep .k-tabstrip-right > .k-tabstrip-items .k-item.k-state-active {
+  border-right: 1px solid #2B437C;
+  background-color: #ECF0FA;
+}
+
+::ng-deep .row-list__wrapper .k-tabstrip-items {
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: rem(54px);
+}
+
+.w-300 {
+  width: rem(300px);
+}
+
+.h-37 {
+  height: rem(37px);
+}
+
+/**
+ * Styles for each table name in the scrolling list
+ */
+.single-table {
+  text-align: justify;
+  padding-right: rem(22px);
+}

@@ -1,0 +1,69 @@
+<grid-editable
+  [src]="data$"
+  [columns]="columns"
+  [type]="type"
+  [state]="state"
+  [component]="component"
+  [options]="{
+    isAddable: true,
+    isDeletable: false,
+    isEditable: true,
+    isExportable: true,
+    isReloadable: false,
+    isUndoable: false,
+    showSaveButton: true,
+    showDeleteButton: true,
+    showMoreButton: false,
+    showPager: true,
+    insertNewRowOnAddButtonClick: false,
+    selectBy: 'entryNumber',
+    showFilterMenu: true,
+    isDisabledToolbar: tableId === 0
+  }"
+  id="kendoGrid"
+>
+  <!-- TODO: Remove this toolbar If This page does not need Template  -->
+  <!-- <div toolbar>
+    <div class="d-flex justify-content-start">
+      <button class="secondary-button my-auto mx-1">
+        Save current state
+      </button>
+
+      <kendo-dropdownlist #dropdownlist class="my-auto width-260 mx-1" textField="name" valueField="id">
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <div class="d-flex m-1 w-100">
+            <span class="template flex-grow-1">{{ dataItem.name }}</span>
+            <img class="pr-2" src="assets/images/delete.svg" alt="" />
+          </div>
+        </ng-template>
+      </kendo-dropdownlist>
+    </div>
+  </div>
+-->
+</grid-editable>
+
+<kendo-dialog
+  [title]="'Add new field'"
+  *ngIf="isOpenedDialog"
+  (close)="closeDialog()"
+  [minWidth]="250"
+  [width]="350"
+  [height]="290"
+>
+  <div class="d-indline-grid text-right w-100">
+    <kendo-label text="Entry number" [for]="entryNumberInput"> </kendo-label>
+    <input #entryNumberInput [(ngModel)]="entryNumber" kendoTextBox class="w-100" name="entryNumber" />
+  </div>
+
+  <div class="d-indline-grid text-right w-100 mt-3">
+    <kendo-label text="Description" [for]="descriptionInput"> </kendo-label>
+    <input #descriptionInput [(ngModel)]="description" kendoTextBox class="w-100" name="description" />
+  </div>
+
+  <kendo-dialog-actions>
+    <div class="d-flex w-100 m-3">
+      <button kendoButton class="btn d-inline-flex" look="flat" (click)="closeDialog()">Cancel</button>
+      <button class="secondary-button btn" (click)="addNew()">{{ 'Create' }}</button>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog>

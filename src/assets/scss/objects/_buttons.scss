@@ -1,0 +1,174 @@
+.dark-btn {
+  background-color: $primary;
+  border: 1px solid $primary;
+  font-size: 1rem;
+  color: $bcg;
+  width: 100%;
+  border-radius: 2px;
+  font-weight: 600;
+  height: rem(37px);
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+
+  &.-is-disabled {
+    background-color: $bcg-table;
+    border-color: $bcg-table;
+    color: $text-inactive;
+    opacity: 1;
+
+    @include u-hocus {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover:not(.-is-disabled) {
+    border: 1px solid $primary;
+    background-color: $bcg;
+    color: $primary;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.light-btn {
+  background-color: $bcg;
+  border: 1px solid $primary;
+  font-size: 1rem;
+  color: $primary;
+  width: 100%;
+  border-radius: 2px;
+  font-weight: 600;
+  height: rem(37px);
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+
+  &.-medium {
+    padding: 5px 50px;
+  }
+
+  &.-is-disabled {
+    background-color: $bcg;
+    border-color: $bcg-inactive;
+    color: $text-inactive;
+
+    @include u-hocus {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover:not(.-is-disabled) {
+    border: 1px solid $primary;
+    background-color: $primary;
+    color: $bcg;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  position: absolute;
+  width: 40%;
+  overflow: hidden;
+  right: 1.5rem;
+  bottom: 1.5rem;
+}
+
+.btn--padding-lr {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.dark-btn.dark-btn--not-hover:hover {
+  background-color: $primary;
+  border: 1px solid $primary;
+  color: $bcg;
+}
+
+.primary-button {
+  background-color: $accent;
+  border: 1px solid $accent;
+  font-size: 1rem;
+  color: $bcg;
+  width: 100%;
+  border-radius: 2px;
+  font-weight: 600;
+  height: rem(37px);
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+
+  &.-is-disabled {
+    background-color: $bcg-table;
+    border-color: $bcg-table;
+    color: $text-inactive;
+    opacity: 1;
+
+    @include u-hocus {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover:not(.-is-disabled) {
+    border: 1px solid $primary;
+    background-color: $bcg;
+    color: $primary;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.secondary-button {
+  background-color: $bcg;
+  border: 1px solid $primary;
+  font-size: 1rem;
+  color: $primary;
+  border-radius: 2px;
+  font-weight: 600;
+  height: rem(37px);
+  width: rem(160px);
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+
+  &.-is-disabled {
+    background-color: $bcg;
+    border-color: $bcg-inactive;
+    color: $text-inactive;
+    opacity: 1;
+
+    @include u-hocus {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover:not(.-is-disabled) {
+    border: 1px solid $accent;
+    background-color: $accent;
+    color: $bcg;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.add-button {
+  width: rem(87px);
+}
+
+.save-button {
+  width: rem(100px);
+}

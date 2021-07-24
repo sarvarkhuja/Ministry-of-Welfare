@@ -1,0 +1,60 @@
+<div class="dual-select mb-5">
+	<div class="dual-select__left">
+
+		<ul class="dual-select__items">
+			<li
+				*ngFor="let department of unselectedDepartments"
+				(click)="togglePendingSelection( department )"
+				(dblclick)="addToselectedDepartments( department )"
+				class="dual-select__item"
+				[class.dual-select__item--selected]="pendingSelection[ department.id ]">
+					<span class="department__name">
+						{{ department.departmentName }}
+					</span>
+			</li>
+		</ul>
+
+	</div>
+	<div class="dual-select__controls">
+		<button
+      [disabled]="!districtData.isAccessibleDistrict"
+			(click)="addToselectedDepartments()"
+			class="dual-select__control btn">
+      <img class="icon" src="assets/images/chevron.svg" alt="">
+		</button>
+		<button
+      [disabled]="!districtData.isAccessibleDistrict"
+			(click)="removeFromSelectedDepartments()"
+			class="dual-select__control btn">
+      <img class="icon -is-right" src="assets/images/chevron.svg" alt="">
+		</button>
+		<button
+      [disabled]="!districtData.isAccessibleDistrict"
+			(click)="removeAllDepartments()"
+			class="dual-select__control btn">
+      <img class="icon" src="assets/images/double-left.svg" alt="">
+		</button>
+		<button
+      [disabled]="!districtData.isAccessibleDistrict"
+			(click)="addAllDepartments()"
+			class="dual-select__control btn"
+      >
+      <img class="icon" src="assets/images/double-right.svg" alt="">
+		</button>
+	</div>
+	<div class="dual-select__right">
+		<ul class="dual-select__items">
+			<li
+				*ngFor="let department of selectedDepartments"
+				(click)="togglePendingSelection( department )"
+				(dblclick)="removeFromSelectedDepartments( department )"
+				class="dual-select__item dual-select__item--new"
+				[class.dual-select__item--selected]="pendingSelection[ department.id ]">
+        <span class="department__name">
+          {{ department.departmentName }}
+        </span>
+			</li>
+		</ul>
+
+	</div>
+</div>

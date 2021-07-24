@@ -1,0 +1,563 @@
+/**
+  * You can override kendo styles and apply common styles in this file
+  */
+
+body {
+  color: $text;
+}
+
+/**
+  * Customize kendo grid style
+  */
+
+.k-grid {
+  /**
+   * Change row style for inactive employee
+   */
+  .k-alt.isInactive:not(:hover),
+  .isInactive {
+    background: $accent-bcg;
+    color: $accent;
+  }
+  /**
+    * Remove grid rows background
+    */
+  th {
+    height: rem(34px);
+  }
+
+  td {
+    height: rem(45px);
+    /**
+     * Change default kendo styles for buttons in grid
+     */
+    .button-column {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+  }
+
+  td,
+  .k-command-cell {
+    &.k-state-focused {
+      box-shadow: none;
+      border-bottom: 1px solid $bcg-inactive;
+    }
+
+    .k-checkbox {
+      margin-top: 3px;
+    }
+
+    padding: 4px 12px;
+  }
+
+  .k-grid-edit-row td {
+    padding: 0;
+
+    &.read-only-column {
+      background-color: $bcg-table-dark;
+    }
+
+    .k-dropdown-wrap {
+      background-color: $bcg;
+    }
+
+    & > .k-widget:not(.k-switch) {
+      width: 96%;
+      margin: 0 2%;
+    }
+  }
+
+  .k-alt.k-grid-edit-row {
+    background-color: $primary-focused-bcg;
+  }
+  /**
+    * Change background of read-only cells
+    */
+  td.k-state-selected,
+  tr.k-state-selected > td.read-only-column,
+  .read-only-column {
+    background-color: $bcg-table;
+  }
+  /**
+    * Override kendo button style for grid toolbar
+    */
+  .k-grid-toolbar .k-button:not(.dark-btn) {
+    border-color: transparent;
+    background-color: transparent;
+    background-image: linear-gradient(transparent, transparent);
+    /**
+     * Remove shadow on hover and focus
+     */
+    @include u-hocus {
+      box-shadow: none;
+    }
+  }
+  /**
+    * Override default size of input shown on in-cell editing
+    */
+  .k-grid-edit-row,
+  .k-grid-edit-row:hover,
+  .k-grid-edit-row.k-alt.isInactive {
+    background-color: $primary-focused-bcg;
+    font-weight: 600;
+    color: #000000;
+
+    td.gender {
+      .k-dropdown-wrap {
+        padding: 0;
+      }
+    }
+
+    .k-searchbar {
+      .k-input {
+        padding-right: rem(8px) !important;
+        padding-left: 0 !important;
+      }
+    }
+
+    span:not(.gender) {
+      padding-left: rem(12px);
+      padding-right: rem(12px);
+
+      span.k-input {
+        padding: 0;
+      }
+
+      span.k-select {
+        padding-right: 0;
+      }
+    }
+
+    span.k-dateinput-wrap {
+      padding: 0;
+    }
+
+    .k-picker-wrap {
+      padding: 0 !important;
+    }
+  }
+
+  .k-widget {
+    border: none;
+  }
+  /**
+    * Override default pager style
+    */
+  kendo-pager {
+    &-page-sizes {
+      order: 1;
+      flex-direction: row-reverse;
+      display: flex;
+      font-size: 1rem;
+
+      select {
+        width: 65px;
+        height: 32px;
+        padding: rem(4px);
+        margin-left: rem(10px);
+        background-color: $bcg;
+
+        @include u-hocus {
+          border: 1px solid $primary;
+        }
+      }
+    }
+
+    &-prev-buttons {
+      order: 2;
+
+      .k-pager-nav:not(.k-state-disabled) {
+        border: 1px solid $primary;
+      }
+
+      .k-pager-first {
+        display: none;
+      }
+    }
+
+    &-numeric-buttons {
+      order: 3;
+
+      .k-state-selected,
+      .k-state-selected:link,
+      .k-state-selected:visited {
+        border: 1px solid $primary;
+        background-color: transparent !important;
+      }
+    }
+
+    &-next-buttons {
+      order: 4;
+
+      .k-pager-nav:not(.k-state-disabled) {
+        border: 1px solid $primary;
+      }
+
+      .k-pager-last {
+        display: none;
+      }
+    }
+  }
+
+  /**
+   * Toolbar header styles
+   */
+  .k-grid-toolbar.k-header {
+    padding: 0;
+  }
+}
+
+/**
+  * Disable scrolling when sidebar opened
+  */
+.disableScrolling {
+  overflow: hidden;
+}
+
+.language {
+  .kendo-searchbar {
+    background: $bcg-table;
+  }
+
+  .k-combobox .k-select {
+    border: none;
+  }
+
+  .k-dropdown-wrap {
+    border: none !important;
+    color: black;
+
+    .k-input {
+      text-align: left;
+      padding: 10px;
+      background: $bcg-table !important;
+
+      &::placeholder {
+        color: #7e7e7c;
+      }
+    }
+  }
+
+  .k-select {
+    padding: 0;
+    margin: 0;
+    background: $bcg-table;
+    width: 0;
+  }
+}
+
+.k-state-selected,
+.k-state-selected:link,
+.k-state-selected:visited,
+.k-list > .k-state-selected,
+.k-list > .k-state-highlight,
+.k-panel > .k-state-selected,
+.k-ghost-splitbar-vertical,
+.k-ghost-splitbar-horizontal,
+.k-draghandle.k-state-selected:hover,
+.k-scheduler .k-scheduler-toolbar .k-state-selected,
+.k-scheduler .k-today.k-state-selected {
+  color: $text !important;
+  background-color: $primary-focused-bcg;
+  border-color: $primary;
+}
+
+/**
+ * Datepicker styles
+ */
+.k-datepicker {
+  .k-picker-wrap {
+    height: rem(36px);
+    background-image: none;
+    background-color: transparent;
+    border: 1px solid $bcg-inactive;
+
+    &:hover {
+      border: 1px solid $primary-hover;
+      .k-select {
+        background-image: none;
+      }
+    }
+  }
+}
+
+.k-dialog {
+  height: rem(240px);
+  width: rem(497px);
+}
+
+/**
+ * Add triangle on top right if the data cell content has been changed
+ */
+.-is-edited:after {
+  content: '';
+  border-right: 8px solid transparent;
+  border-top: 8px solid $error;
+  left: 0;
+  position: absolute;
+  flex: auto;
+}
+
+/**
+ * Flip arrow vertically when combobox or dropdown popup is opened
+ */
+[ng-reflect-popup-open='true'] ~ span.k-select,
+span[aria-expanded='true'] ~ :not(.showMore) {
+  .k-i-arrow-s::before {
+    content: url('/assets/images/Vector.svg');
+    top: 2px;
+    transform: scale(-1);
+  }
+}
+
+.k-popup .k-list .k-item {
+  padding: 15px 5px !important;
+  font-size: 14px !important;
+  line-height: 1.2em !important;
+  min-height: 3.2em !important;
+}
+
+/**
+ * Title fix
+ */
+
+.add-user-dialog kendo-dialog-titlebar {
+  margin: 24px 28px 0px;
+  padding: 0;
+}
+
+/**
+ * dialog list scrollable
+ */
+.add-user__profile-list {
+  height: 330px;
+  overflow-y: scroll;
+
+  & > div {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/**
+ * Show more grid button styles overriding
+ */
+.showMore {
+  * {
+    border: none !important;
+  }
+
+  .k-input {
+    display: none;
+  }
+
+  .k-i-arrow-s::before {
+    content: url(/assets/images/more.svg);
+  }
+
+  .k-select {
+    width: 2rem;
+  }
+}
+
+/**
+ * Kendo button styles overriding
+ */
+.k-button {
+  font-size: 1rem;
+  font-weight: 600;
+  height: rem(37px);
+
+  &.k-primary {
+    font-size: 1rem;
+    border-radius: $border-radius;
+    font-weight: 600;
+    height: rem(37px);
+  }
+}
+
+/**
+ * Selected calendar cell on hover styles
+ */
+.k-calendar {
+  .k-state-focused:hover .k-link {
+    background-color: $accent;
+    color: $bcg;
+  }
+}
+/**
+ * kendo numeric height fix
+ */
+.k-numerictextbox .k-numeric-wrap input {
+  padding: 1px;
+}
+
+#toolbar {
+  flex-direction: row;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+
+  #toolbar_buttons {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px;
+
+    button:not(#toolbar__save-button) {
+      margin-left: 8px;
+    }
+  }
+  /**
+   * Remove border of status filter dropdown
+   */
+  .top-controls__dropdown {
+    .k-dropdown-wrap {
+      border: none;
+    }
+  }
+}
+
+.k-grid[dir='rtl'] .k-grid-header .k-hierarchy-cell:first-child {
+  border-right-width: 0;
+  border-bottom: 2px solid $bcg-inactive;
+}
+
+/**
+  * Kendo dialog styles
+  */
+.k-dialog {
+  .kendo-dialog-title {
+    display: flex;
+    align-items: baseline;
+
+    h3 {
+      margin-left: 10px;
+      font-size: 19px;
+      line-height: 25px;
+    }
+  }
+}
+
+/**
+ * Kendo date-range
+ */
+.date-range {
+  border: 1px solid $bcg-inactive;
+  display: flex;
+
+  .k-widget.k-dateinput {
+    width: 7.4em;
+
+    .k-dateinput-wrap {
+      border: none;
+      height: rem(36px);
+    }
+  }
+
+  .k-select {
+    border-left: 1px solid $bcg-inactive;
+
+    .k-icon.k-i-calendar {
+      padding: rem(18px);
+    }
+  }
+}
+
+.row-list__wrapper {
+  padding: 0;
+  .single-tab {
+    padding: 0.25rem 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 10rem;
+    text-align: initial;
+    font-size: 1rem;
+    line-height: 2rem;
+    margin-top: 1rem;
+
+    &.-is-active {
+      background: $primary-focused-bcg;
+      border-right: 2px solid $primary;
+      padding: 0.25rem 1rem;
+      margin: 0.5rem 0;
+    }
+  }
+}
+.row-list__wrapper {
+  .k-tabstrip-items {
+    border: none;
+  }
+  .single-tab {
+    margin: 0 !important;
+    padding: 0.25rem 1rem !important;
+  }
+  .k-state-active {
+    .single-tab {
+      border-left: 1px solid $primary;
+      background-color: $primary-focused-bcg;
+    }
+  }
+  .k-hierarchy-cell > .k-icon {
+    padding: 12px 0;
+  }
+}
+.inner-groupAccessContent {
+  margin: 0 -12px;
+  .k-grid-header {
+    display: none;
+  }
+}
+
+.user-profiles-grid {
+  .k-grid-header {
+    display: none;
+  }
+}
+
+.popup-trigger {
+  margin-bottom: 0.2rem;
+}
+
+.footer-inner {
+  height: rem(40px);
+}
+
+.k-notification-group .k-notification{
+  margin: 1rem;
+}
+
+.k-notification .k-notification-wrap > .k-icon.k-i-success {
+  padding: 10px;
+  color:$success;
+}
+
+.k-notification-success {
+    font-size: 0.9rem;
+    backdrop-filter: blur(8px);
+    border-color: $success;
+    color: $text;
+    background-color: $success-bcg;
+    padding: 16px;
+}
+
+.outlined-dropdown{
+  .k-dropdown-wrap{
+    border: none !important;
+  }
+}
+
+.dx-checkbox-container {
+  padding-left: 1rem !important;
+}
+
+.dx-item.dx-treeview-item {
+  padding-left: 3rem !important;
+}

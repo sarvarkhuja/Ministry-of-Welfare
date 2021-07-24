@@ -1,0 +1,139 @@
+//#region CustomDropdown
+.dropdown-custom {
+  margin: 0 0.5rem;
+  .drop-down-custom__body {
+    position: absolute;
+    margin-top: rem(2px);
+    border: 1px solid $primary-hover;
+    border-radius: rem(2px);
+    background: $bcg;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      font-size: 1rem;
+      padding: 0;
+      li {
+        padding: 0.5rem 1rem;
+        color: $dark;
+        &:hover {
+          background-color: $bcg-table;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+//#endregion
+
+//#region AdditionalDialogStyles
+.dialog__body {
+  margin: 0 0.71rem;
+}
+
+.dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 0 0.4rem;
+  button {
+    width: 20%;
+  }
+}
+//#endregion
+
+//#region MostUsedStyles
+
+/**
+* Several styles which
+* are used several times
+*/
+
+.pointer {
+  cursor: pointer;
+}
+
+.justify-right {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: fit-content;
+    min-width: 10rem;
+  }
+}
+
+.ml-ltr-1 {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+.link {
+  color: $primary;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+h5.title-2 {
+  color: $text;
+  font-size: rem(19px);
+  line-height: rem(25px);
+  margin: 1rem 0 0;
+}
+
+.text-orange {
+  color: $accent;
+}
+
+.text-dark {
+  color: $text;
+}
+
+.font-size-1 {
+  font-size: 1rem;
+}
+
+//#endregion
+
+//#region Rectangles
+.rectangle-list {
+  display: flex;
+  flex-wrap: wrap;
+  .rectangle {
+    cursor: pointer;
+    border: rem(1px) solid $bcg-table-dark;
+    border-radius: rem(2px);
+    padding: 2rem 1rem;
+    width: 14rem;
+    text-align: center;
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    &.active {
+      color: $primary;
+      background: $primary-focused-bcg;
+      border-color: $primary-hover;
+      .rectangle__text::before {
+        content: url('/assets/images/success-without-bg.svg');
+      }
+    }
+  }
+}
+//#endregion
+
+//#region UploadStyles
+.upload-file-top {
+  position: fixed;
+  z-index: 2;
+  top: 6rem;
+  right: 2.3rem;
+  display: flex;
+}
+.upload-drag-drop {
+  display: flex;
+  justify-content: center;
+  padding: 3.5rem 0;
+  border: rem(1px) dashed $bcg-inactive;
+}
+
+.upload-drag-drop__file {
+  border: rem(1px) dashed $bcg-inactive;
+  padding: 1.5rem 0;
+}
+//#endregion

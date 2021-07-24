@@ -1,0 +1,72 @@
+<main class="auth">
+  <div class="container-fluid login-card">
+    <div class="row no-gutters vh-100">
+      <!-- Logo side -->
+      <div class="col-xl-6 login-card__logo">
+        <div class="logo-wrapper">
+          <img src="assets/images/logo.svg" alt="login" class="logo-img" />
+          <div class="logo-text">
+            <p class="logo-heading">משרד הרווחה</p>
+            <p>תחום ארגון מינהל וכח-אדם</p>
+            <p>ברשויות המקומיות</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form side -->
+      <div class="col-xl-6 login-card__form">
+        <sign-in></sign-in>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer-wrapper">
+  <ul class="footer-inner container-fluid">
+    <li>
+      {{ "עזרה" | translate: "Help" }}
+    </li>
+    <li kendoTooltip position="top">
+      <span title="Build version: ">
+        {{ "אודות" | translate: "About" }}
+      </span>
+    </li>
+    <li kendoTooltip position="top">
+      <!-- <kendo-dropdownlist
+        #dropdownlist
+        class="my-auto width-260 mx-1"
+        [data]="languages"
+        textField="text"
+        valueField="value"
+        [value]="currentLanguage"
+        [valuePrimitive]="true"
+        (valueChange)="selectLanguage($event)"
+      >
+        <ng-template kendoDropDownListValueTemplate let-dataItem>
+          <img class="pl-2" src="assets/images/language.svg" alt="" />
+          <span class="template-dropdown-header">{{ dataItem.text }}</span>
+        </ng-template>
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <div class="d-flex m-1 w-100">
+            <span class="template flex-grow-1">{{ dataItem.text }}</span>
+          </div>
+        </ng-template>
+      </kendo-dropdownlist> -->
+      <dx-drop-down-button
+        class="my-auto width-260 mx-1"
+        [items]="languages"
+        displayExpr="text"
+        keyExpr="value"
+        [useSelectMode]="true"
+        [selectedItemKey]="currentLanguage"
+        (onItemClick)="selectLanguage($event)"
+      >
+        <ng-template dropDownContentTemplate let-dataItem>
+          <img class="pl-2" src="assets/images/language.svg" alt="" />
+          <span class="template-dropdown-header">{{ dataItem.text }}</span>
+        </ng-template>
+      </dx-drop-down-button>
+    </li>
+  </ul>
+</footer>

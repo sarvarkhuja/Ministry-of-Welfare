@@ -1,0 +1,51 @@
+@import '../../../../assets/scss/utils/variables';
+@import '../../../../assets/scss/utils/mixins';
+@import '../../../../assets/scss/utils/functions';
+
+.nav-pills .nav-link {
+  width: 15rem;
+  &.active {
+    height: rem(45px);
+    background: $primary-focused-bcg;
+    border-left: rem(3px) solid $primary;
+    color: $primary;
+    border-radius: 0;
+  }
+}
+
+a {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/**
+  * Set height to enable scrolling
+  */
+.forms {
+  height: 80vh;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+/**
+  * Remove scrollbar
+  */
+::-webkit-scrollbar-track,
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+:host-context(.forms) div {
+  min-height: 80vh;
+}
+
+.nav-pills .nav-link {
+  border-left: rem(3px) solid white;
+  height: 2.8125rem;
+}
+
+::ng-deep .sidebar-section {
+  height: 80vh;
+}

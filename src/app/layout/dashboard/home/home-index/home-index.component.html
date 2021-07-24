@@ -1,0 +1,121 @@
+<div class="container-fluid rows">
+  <div class="single-row">
+    <!-- User Roles -->
+    <a class="single-item orange" [routerLink]="['/roles']" [hasAccessMenu]="[permissionName.ROLES]">
+      <div class="single-item__icon">
+        <img src="assets/images/settings.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">User Roles</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- System Users -->
+    <a class="single-item orange" [routerLink]="['/system-user']">
+      <div class="single-item__icon">
+        <img src="assets/images/settings.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'משתמשי המערכת' | translate: 'System Users' }}
+        </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- General Tables -->
+    <a class="single-item green" [routerLink]="['/general-tables']" [hasAccessMenu]="[permissionName.ROLES]">
+      <div class="single-item__icon">
+        <img src="assets/images/routine-operations.png" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'טבלאות כלליות' | translate: 'General Tables' }}
+        </div>
+         <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Employees List -->
+    <a class="single-item blue" [routerLink]="['/employees']" [hasAccessMenu]="[permissionName.EMPLOYEES]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'רשימת עובדים' | translate: 'Employees List' }}
+        </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+      <!-- Employees Details -->
+      <!-- TODO: remove specific national id -->
+      <a class="single-item blue" [routerLink]="['/employee-information/edit/4739']">
+        <div class="single-item__icon">
+          <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+        </div>
+        <div class="single-item__link">
+          <div class="single-item__link--title">
+            {{ 'עדכון פרטי עובדים' | translate: 'Employees Details' }}
+          </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<footer class="footer-wrapper">
+  <ul class="footer-inner container-fluid">
+    <li>
+      {{ 'עזרה' | translate: 'Help' }}
+    </li>
+    <li>
+      <span id="about">
+        {{ 'אודות' | translate: 'About' }}
+      </span>
+      <dx-tooltip target="#about" position="top" [closeOnOutsideClick]="false">
+        <dxo-animation>
+          <dxo-show type="slide" [from]="{ top: -100, opacity: 0 }" [to]="{ opacity: 1, top: 0 }"></dxo-show>
+          <dxo-hide type="pop" [from]="{ scale: 1, opacity: 1 }" [to]="{ opacity: 0, scale: 0.1 }"></dxo-hide>
+        </dxo-animation>
+        <div *dxTemplate="let data = data; of: 'content'">:Build</div>
+      </dx-tooltip>
+    </li>
+    <li>
+      <!-- TODO: add hebrew translation -->
+      <dx-select-box
+        displayExpr="name"
+        placeholder="Select theme..."
+        valueExpr="value"
+        [items]="themes"
+        (onValueChanged)="onValueChanged($event)"
+      ></dx-select-box>
+    </li>
+  </ul>
+</footer>

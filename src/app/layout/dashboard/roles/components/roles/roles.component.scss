@@ -1,0 +1,36 @@
+
+@import '../../../../../../assets/scss/utils/variables';
+@import '../../../../../../assets/scss/utils/mixins';
+
+.row-list__wrapper{
+    padding: 0;
+    .single-role {
+        padding: 0.25rem 1rem;
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 10rem;
+        text-align: initial;
+        font-size: 1rem;
+        line-height: 2rem;
+        margin-top: 1rem;
+    
+        &.-is-active {
+          background: $primary-focused-bcg;
+          border-right: 2px solid $primary;
+          padding: 0.25rem 1rem;
+          margin: 0.5rem 0;
+        }
+      }
+}
+.add-role {
+    position: absolute;
+    right: 1rem;
+    left: auto;
+    width: auto;
+    bottom: 1rem;
+    padding: 0 3rem;
+}

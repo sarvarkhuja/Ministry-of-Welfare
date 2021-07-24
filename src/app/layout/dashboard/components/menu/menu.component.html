@@ -1,0 +1,18 @@
+<div class="form">
+  <dx-tree-view
+    class="mx-auto"
+    id="simple-treeview"
+    itemTemplate="itemTemplate"
+    searchMode="contains"
+    [expandAllEnabled]="false"
+    [items]="menu"
+    [searchEnabled]="true"
+    [selectionMode]="'single'"
+    [width]="300"
+    (onItemClick)="selectItem($event)"
+  >
+    <div *dxTemplate="let menuItem of 'itemTemplate'">
+      {{ menuItem.text | translate: menuItem.textInEnglish }}
+    </div>
+  </dx-tree-view>
+</div>

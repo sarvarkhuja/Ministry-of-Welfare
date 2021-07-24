@@ -1,0 +1,131 @@
+<!-- TODO: consider extracting single-item as a separate component -->
+<div class="container-fluid rows">
+  <!-- First row -->
+  <div class="single-row">
+    <!-- Employees -->
+    <a class="single-item blue" [routerLink]="['/home/employees-menu']">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">
+          {{ 'מאגר עובדים' | translate: 'Employees' }}
+        </div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מאגר תקנים</div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">רישום עןובדים סוציאלים</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Second row -->
+  <div class="single-row">
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מערכת תקציב</div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מערכת תשלומים</div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">עיבודים חדשים</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Third row -->
+  <div class="single-row">
+    <a class="single-item green" [routerLink]="['/home/maintenance-menu']">
+      <div class="single-item__icon">
+        <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">תחזוקת טבלאות</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item orange" [routerLink]="['/home/service-plan-menu']">
+      <div class="single-item__icon">
+        <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">תוכניות שרות</div>
+
+        <div class="single-item__link--arrow">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.5 3.5L11.5 8.5L6.5 13.5"
+              stroke="#2B437C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="single-item blue" [routerLink]="[]">
+      <div class="single-item__icon">
+        <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
+      </div>
+      <div class="single-item__link">
+        <div class="single-item__link--title">מאגר בקרות</div>
+      </div>
+    </a>
+  </div>
+</div>

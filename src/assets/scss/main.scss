@@ -1,0 +1,35 @@
+/*
+* You can import styles created under scss folder here
+* Order matters; please, be careful when importing new files
+
+o-: Object that it may be used in any number of unrelated contexts to the one you can currently see it in. Making modifications to these types of class could potentially have knock-on effects in a lot of other unrelated places.
+c-: Component is a concrete, implementation-specific piece of UI. All of the changes you make to its styles should be detectable in the context you’re currently looking at. Modifying these styles should be safe and have no side effects.
+u-: Utility has a very specific role (often providing only one declaration) and should not be bound onto or changed. It can be reused and is not tied to any specific piece of UI.
+s-: Scope creates a new styling context. Similar to a Theme, but not necessarily cosmetic, these should be used sparingly—they can be open to abuse and lead to poor CSS if not used wisely.
+is-, has-: Is currently styled a certain way because of a state or condition. It tells us that the DOM currently has a temporary, optional, or short-lived style applied to it due to a certain state being invoked.
+
+
+
+
+*/
+
+@import './utils/variables';
+@import './base/reset';
+@import './base/typography';
+
+
+@import './utils/functions';
+@import './utils/helpers';
+@import './utils/mixins';
+@import './base/common_styles';
+
+@import './themes/rtl';
+@import './themes/ltr';
+@import './themes/theme';
+@import './themes/input-fields';
+@import './themes/admin';
+
+@import './objects/buttons';
+@import './objects/forms';
+@import './objects/scrollbars';
+@import './objects/panelbar';

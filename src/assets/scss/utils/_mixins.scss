@@ -1,0 +1,219 @@
+/*
+* You can add mixins to this file
+* @see https://sass-lang.com/documentation/at-rules/mixin
+*/
+
+// Example usage:
+
+// @include media-breakpoint-down(xs) { ... }
+// @include media-breakpoint-down(sm) { ... }
+// @include media-breakpoint-down(md) { ... }
+// @include media-breakpoint-down(lg) { ... }
+
+// or "Mobile first"
+
+// @include media-breakpoint-up(xs) { ... }
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-up(md) { ... }
+// @include media-breakpoint-up(lg) { ... }
+// @include media-breakpoint-up(xl) { ... }
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1366px,
+  xxl:1920px,
+  xxxl:1921px
+);
+
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+
+  @return if($next, breakpoint-min($next, $breakpoints) - 0.02px, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+
+$layout-direction: ltr !default;
+
+@mixin ltr($layout-direction:ltr) {
+    @if $layout-direction == ltr {
+      div[dir="LTR"]{
+        @content;
+      }
+
+    }
+}
+@mixin rtl( $layout-direction:rtl){
+  @if $layout-direction == rtl {
+    div[dir="RTL"]{
+      @content;
+    }
+
+  }
+}
+/// Make a context based on the screen size
+$display-wide: 1920;
+$display-narrow: 1366;
+
+@mixin fluid($property, $min, $max){
+  $x: ($max - $min)/($display-wide - $display-narrow);
+  $y: $max - $display-wide * $x;
+  #{$property}: calc(#{100*$x}vw + #{$y}px)}
+
+
+@mixin u-shown($display: block) {
+    
+    display: $display $important;
+    visibility: visible  $important;
+}
+
+@mixin u-hidden($display: none) {
+  display: $display $important;
+  visibility: hidden  $important;
+}
+//
+// Vertically-center the direct descendants of the current element.
+//
+// Centering is achieved by displaying children as inline-blocks. Any whitespace
+// between elements is nullified by redefining the font size of the container
+// and its children.
+//
+// @output `font-size`, `display`, `vertical-align`
+//
+@mixin o-vertical-center {
+  font-size: 0;
+
+  &::before {
+      display: inline-block;
+      height: 100%;
+      content: "";
+      vertical-align: middle;
+  }
+
+  > * {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1rem;
+  }
+}
+@mixin truncate-lines($n) {
+  display: -webkit-box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  -webkit-line-clamp: $n;
+  -moz-line-clamp: $n;
+  line-clamp: $n;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  overflow: hidden;
+}
+//
+// Generate `:hover` and `:focus` styles in one go.
+//
+// @link    https://github.com/inuitcss/inuitcss/blob/master/tools/_tools.mixins.scss
+// @content Wrapped in `:focus` and `:hover` pseudo-classes.
+// @output  Wraps the given content in `:focus` and `:hover` pseudo-classes.
+//
+@mixin u-hocus {
+  &:focus,
+  &:hover {
+      @content;
+  }
+}
+
+//
+// Generate `:active` and `:focus` styles in one go.
+//
+// @see     {Mixin} u-hocus
+// @content Wrapped in `:focus` and `:active` pseudo-classes.
+// @output  Wraps the given content in `:focus` and `:hover` pseudo-classes.
+//
+@mixin u-actus {
+  &:focus,
+  &:active {
+      @content;
+  }
+}
+
+//
+// Prevent text from wrapping onto multiple lines for the current element.
+//
+// An ellipsis is appended to the end of the line.
+//
+// 1. Ensure that the node has a maximum width after which truncation can occur.
+// 2. Fix for IE 8/9 if `word-wrap: break-word` is in effect on ancestor nodes.
+//
+// @param  {Number} $width [100%] - The maximum width of element.
+// @output `max-width`, `word-wrap`, `white-space`, `overflow`, `text-overflow`
+//
+@mixin u-truncate($width: 100%) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;  // [2]
+  @if $width {
+      max-width: $width; // [1]
+  }
+}
+
+$max: 20;
+$offset: 4;
+$unit: 'rem'; // Feel free to change the unit.
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    #{$className + $i} { 
+      #{$styleName}: #{$i + $unit};
+    }
+    $i: $i + $offset;
+  }
+}
+@include list-loop('.p-l-', 'padding-left');

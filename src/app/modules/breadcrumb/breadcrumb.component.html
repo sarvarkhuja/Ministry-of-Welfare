@@ -1,0 +1,12 @@
+  <span
+    *ngFor="let crumb of crumbs; let first = first; let last = last"
+    [ngClass]="{ active: last }"
+    class="d-flex breadcrumb-wrapper"
+  >
+    <a *ngIf="!last; else lastBreadcrumb" [routerLink]="crumb.route" [innerHTML]="crumb.title | translate: crumb.titleEnglish"></a>
+    <ng-template #lastBreadcrumb>
+      <a class="home-page" [routerLink]="['home']">{{ 'דף הבית' | translate:'Home'}}</a>
+      <a class="inner-page d-flex -is-active" [routerLink]="crumb.route" [innerHTML]="crumb.title | translate: crumb.titleEnglish"></a>
+    </ng-template>
+  </span>
+

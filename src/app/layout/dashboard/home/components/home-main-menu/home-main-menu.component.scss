@@ -1,0 +1,129 @@
+@import '../../../../../../assets/scss/utils/variables';
+@import '../../../../../../assets/scss/utils/mixins';
+@import '../../../../../../assets/scss/utils/functions';
+
+/**
+ * Styles for rows container
+ */
+.rows {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 86vh;
+  display: inline-grid;
+  overflow: hidden;
+  display: flex;
+  margin: auto;
+
+  /**
+   * Styles for each row
+   */
+  .single-row {
+    display: flex;
+    transition: all 0.5s;
+    width: max-content;
+    margin-bottom: rem(24px);
+
+    /**
+     * Styles for each 'box' in the row
+     */
+    .single-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: rem(372px);
+      height: rem(224px);
+      margin: 0 0.8rem;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+
+      @include media-breakpoint-down(lg) {
+        width: rem(200px);
+      }
+
+      @include media-breakpoint-down(md) {
+        width: rem(150px);
+      }
+
+      &.orange {
+        transition: all 0.5s;
+
+        &:hover {
+          transition: all 0.3s;
+          box-shadow: inset 0px 0px 0px 1px #e75d1b;
+        }
+      }
+
+      &.green {
+        transition: all 0.5s;
+        cursor: pointer;
+
+        &:hover {
+          transition: all 0.3s;
+          box-shadow: inset 0px 0px 0px 1px #009248;
+        }
+      }
+
+      &.blue {
+        transition: all 0.5s;
+        cursor: pointer;
+
+        &:hover {
+          transition: all 0.3s;
+          box-shadow: inset 0px 0px 0px 1px #1164b4;
+        }
+      }
+
+      /**
+       * Styles for image in the box
+       */
+      &__icon {
+        margin: 0 auto;
+        width: min-content;
+
+        img {
+          width: rem(63px);
+        }
+      }
+
+      /**
+       * Styles for container of page title and arrow image
+       */
+      &__link {
+        display: flex;
+        justify-content: center;
+        padding: 1.1rem 0 1rem;
+
+        /**
+         * Styles for page title
+         */
+        &--title {
+          font-size: rem(22px);
+          line-height: rem(25px);
+          text-align: right;
+          font-weight: 600;
+          color: $text;
+          padding: 0 0.4rem;
+
+          @include media-breakpoint-down(lg) {
+            font-size: rem(14px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu-header {
+  justify-content: space-between;
+  display: flex;
+
+  &__name {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .primary-button {
+    width: rem(101px);
+  }
+}

@@ -1,0 +1,61 @@
+<div class="sign-in">
+  <h3 class="sign-in-heading">
+    {{ 'כניסה' | translate: 'Login' }}
+  </h3>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()" #ngform="ngForm" autocomplete="off">
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username"
+             class="input-label"
+             [ngClass]="{ '-is-error': isFormInvalid() && ngform.submitted }">
+        {{ 'שם משתמש' | translate: 'Username' }}
+      </label>
+      <input type="text"
+             name="username"
+             id="username"
+             class="form-control"
+             formControlName="username"
+             autocomplete="off"
+             [ngClass]="{ '-is-error': isFormInvalid() && ngform.submitted }" />
+    </div>
+
+    <!-- Password -->
+    <div class="form-group password-input">
+      <label for="password"
+             class="input-label"
+             [ngClass]="{ '-is-error': isFormInvalid() && ngform.submitted }">
+        {{ 'סיסמא' | translate: 'Password' }}
+      </label>
+      <input [type]="isPasswordShown ? 'text' : 'password'"
+             name="password"
+             id="password"
+             class="form-control"
+             formControlName="password"
+             autocomplete="new-password"
+             [ngClass]="{ '-is-error': isFormInvalid() && ngform.submitted }" />
+      <img class="eye" (click)="togglePassword()" src="assets/images/eye-close.svg" />
+    </div>
+
+    <!-- Error message -->
+    <div class="error-message"
+         [ngClass]="{ '-is-error': isFormInvalid() && ngform.submitted }">
+      <p class="error-message__text">
+        <!-- TODO: Change to Hebrew (?) -->
+        Wrong username or password.
+      </p>
+    </div>
+
+    <!-- Login button -->
+    <div class="form-group d-flex">
+      <button type="submit"
+              name="login"
+              id="login"
+              class="btn btn-block primary-button"
+              [ngClass]="{ '-is-disabled': form.invalid }"
+              [disabled]="form.invalid ? 'disabled' : null">
+        {{ 'כניסה' | translate: 'Login' }}
+      </button>
+    </div>
+  </form>
+</div>

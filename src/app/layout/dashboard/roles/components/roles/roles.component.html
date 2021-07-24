@@ -1,0 +1,75 @@
+<div class="roles-screen">
+  <router-outlet></router-outlet>
+  <div class="container-fluid position-relative">
+    <ul class="row-list__wrapper">
+      <div class="d-flex justify-content-between mb-3">
+        <h3 class="m-0">
+          <!-- TODO: Change to Hebrew (?) -->
+          Roles
+        </h3>
+        <button class="btn w-auto dark-btn" (click)="saveChanges()">
+          <!-- TODO: Change to Hebrew (?) -->
+          Save
+        </button>
+      </div>
+      <kendo-tabstrip [tabPosition]="'right'" (tabSelect)="onRoleChange($event)" #tabstrip>
+        <kendo-tabstrip-tab *ngFor="let role of roles; let i=index" [selected]="role.id === defaultRoleId">
+          <ng-template kendoTabTitle>
+            <li class="single-role">
+              {{role.name}}
+              <img
+                *ngIf="role.id !=== defaultRoleId"
+                src="assets/images/delete.svg"
+                alt="trash icon"
+                (click)="removeData(i)"
+              >
+            </li>
+          </ng-template>
+          <ng-template kendoTabContent>
+            <div class="forms p-2 flex-grow-1 bd-highlight">
+              <roles-permission></roles-permission>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+      </kendo-tabstrip>
+    </ul>
+    <button class="btn add-role light-btn" (click)="open()" *ngIf="!opened">
+      <img src="assets/images/add.svg" alt="plus icon">
+      <!-- TODO: Change to Hebrew (?) -->
+      Add role
+    </button>
+  </div>
+</div>
+
+<!-- Dialog shown on plus icon (add role) click -->
+<kendo-dialog
+  title="Copy Access Settings"
+  *ngIf="opened"
+  (close)="opened = false"
+  [minWidth]="250"
+  [width]="450"
+  [height]="275"
+>
+  <p class="text-right">
+    <!-- TODO: Change to Hebrew (?) -->
+    Do you want to copy previous settings from another district active for this role
+  </p>
+  <div class="example-wrapper">
+    <p class="text-right">
+      <!-- TODO: Change to Hebrew (?) -->
+      Copy Settings From District
+    </p>
+    <kendo-dropdownlist [data]="listItems" [(ngModel)]="selectedValue">
+    </kendo-dropdownlist>
+  </div>
+  <div class="d-flex justify-content-between w-100">
+    <button class="btn mt-3 w-auto light-btn" (click)="opened = false">
+      <!-- TODO: Change to Hebrew (?) -->
+      Cancel
+    </button>
+    <button class="btn mt-3 w-auto dark-btn" (click)="sendData(selectedValue)" primary="true">
+      <!-- TODO: Change to Hebrew (?) -->
+      Copy
+    </button>
+  </div>
+</kendo-dialog>

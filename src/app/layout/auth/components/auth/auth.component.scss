@@ -1,0 +1,110 @@
+@import '../../../../../assets/scss/utils/variables';
+@import '../../../../../assets/scss/utils/mixins';
+@import '../../../../../assets/scss/utils/functions';
+
+/**
+ * General styles for elements of the component
+ */
+.auth {
+  min-height: 100vh;
+  /**
+   * Styles for login container
+   */
+  .login-card {
+    overflow: hidden;
+    padding: 0;
+    /**
+     * Styles for logo column
+     */
+    &__logo {
+      background-color: $primary;
+      display: flex;
+      align-items: center;
+      padding-bottom: 3rem;
+
+      .logo-wrapper {
+        display: inline-flex;
+        margin: 0 auto;
+
+        .logo-img {
+          width: 7rem;
+        }
+
+        .logo-text {
+          color: $bcg;
+          text-align: right;
+          font-size: 2.4rem;
+          margin: 0;
+          margin-right: 2.2rem;
+          margin-bottom: .3rem;
+
+          p {
+            margin: 0;
+            line-height: 1;
+            font-weight: 100;
+
+            &.logo-heading {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+    /**
+     * Styles for form column
+     */
+    &__form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 1.2rem;
+    }
+  }
+}
+
+/**
+ * Styles for footer
+ */
+.footer-wrapper {
+  background: $bcg-table;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /**
+   * Styles for lists of footer elements
+   */
+  .footer-inner {
+    height: rem(40px);
+    margin-bottom: 0;
+    display: flex;
+    list-style: none;
+    /**
+     * Styles for footer elements
+     */
+    li {
+      padding: 0 1rem;
+      margin: auto 0;
+      font-size: .9rem;
+      font-weight: 600;
+      color: $primary;
+      /**
+       * Adds | to footer element if it is not the last one
+       */
+      &:not(:last-child) {
+        border-left: 1px solid $primary-active;
+      }
+    }
+  }
+}
+
+::ng-deep .footer-wrapper li .k-dropdown .k-dropdown-wrap, .k-combobox .k-dropdown-wrap {
+  background: transparent;
+  border: none;
+}
+
+.template-dropdown-header {
+  color: $primary;
+  font-size: 0.9rem;
+  font-weight: 600;
+}

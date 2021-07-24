@@ -1,0 +1,38 @@
+
+@import '../../../../../../assets/scss/utils/variables';
+@import '../../../../../../assets/scss/utils/mixins';
+
+
+.employee-screen {
+  .top-controls {
+    /**
+    * Override default kendo combobox style
+    */
+    &__combobox {
+      .k-dropdown-wrap {
+        border-color: transparent;
+        color: $text;
+        background-color: $bcg;
+      }
+    }
+
+    .status {
+      .k-dropdown-wrap {
+        height: rem(36px);
+
+        &.k-state-default {
+          border-color: $primary-hover;
+        }
+
+        .k-input {
+          border-right: none;
+          height: initial;
+        }
+      }
+    }
+  }
+
+  .k-grid-toolbar {
+    padding-left: 0;
+  }
+}

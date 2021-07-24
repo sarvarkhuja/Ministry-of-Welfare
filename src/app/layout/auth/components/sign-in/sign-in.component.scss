@@ -1,0 +1,67 @@
+@import '../../../../../assets/scss/utils/variables';
+@import '../../../../../assets/scss/utils/mixins';
+@import '../../../../../assets/scss/utils/functions';
+
+/**
+ * General styles for elements of the component
+ * Min height is set not to make login form move up when errors shown
+ */
+.sign-in {
+  min-height: rem(310px);
+}
+
+/**
+ * Styles for the heading above the sign-in form
+ */
+.sign-in-heading {
+  text-align: center;
+  font-size: 2rem;
+}
+
+/**
+ * Styles for the sign-in form
+ */
+form {
+  width: rem(450px);
+  /**
+   * Styles div-s in the form that contain label and input
+   */
+  .form-group {
+    margin-bottom: 1rem;
+
+    .input-label {
+      margin-top: 0;
+    }
+    /**
+     * Used to set the eye icon relative to its parent
+     */
+    &.password-input {
+      position: relative;
+    }
+  }
+  /**
+   * Styles error message shown on Login click in case credentials invalid
+   */
+  .error-message {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    background: $error-bcg;
+    text-align: center;
+    color: $error;
+    transition: all 0.3s;
+    margin-bottom: 0rem;
+
+    &.-is-error {
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+      transition: all 0.3s;
+    }
+
+    &__text {
+      padding: 0.5rem;
+      direction: ltr;
+    }
+  }
+}

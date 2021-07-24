@@ -1,0 +1,34 @@
+@import '../../../assets/scss/utils/variables';
+
+.home-page{
+    font-weight: 600;
+    color: $primary;
+    transition: all 0.3s;
+    line-height: 1.2;
+    &:hover{
+        color: $primary-hover;
+        transition: all 0.3s;
+    }
+}
+.inner-page{
+    color: $primary;
+    font-weight: 600;
+    line-height: 1.2;
+    &:hover{
+        color: $primary-hover;
+        transition: all 0.3s;
+    }
+    &.-is-active{
+        color: $text-inactive;
+    }
+    &:before {
+        content: url('/assets/images/right.svg');
+        padding: 0 5px;
+    }
+}
+.breadcrumb-wrapper>span {
+    cursor: pointer;
+    margin: 8px 0;
+    outline: none;
+    line-height: 15px;
+}

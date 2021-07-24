@@ -1,0 +1,30 @@
+export interface SavePersonalDetail {
+    nationalId: number;
+    lastName: string;
+    firstName: string;
+    department: number;
+    birthDate: Date;
+    sex: number;
+    lastChildBirthDate: Date;
+    employeeStatus: number;
+    professionalSeniority: Date;
+    social: number;
+    degree: number;
+    education: number;
+    educationYears: number;
+    startDate: Date;
+    endDate: Date;
+    commitment: number;
+    leaveReason: number;
+    increasedWadges: string;
+    proficiencyReward: number;
+    diplomaReward: string;
+    personalRank: string;
+    generalCourse: number;
+    generalTraining: number;
+    course: number;
+    training: number;
+    wadgesAdditions: number;
+    framePercent: number;
+    expertDate: Date;
+}

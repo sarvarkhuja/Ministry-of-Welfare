@@ -1,0 +1,15 @@
+@import '../../../../../assets/scss/utils/variables';
+@import '../../../../../assets/scss/utils/mixins';
+
+//for not overlapping the footer
+.main-container {
+  overflow: hidden;
+  margin-bottom: 30px;
+  padding: 0.5rem 2rem;
+  @include media-breakpoint-down(sm) {
+    padding: 0.5rem;
+  }
+}
+.breadcrumb-wrapper {
+  margin: 0.75rem 2rem 0;
+}

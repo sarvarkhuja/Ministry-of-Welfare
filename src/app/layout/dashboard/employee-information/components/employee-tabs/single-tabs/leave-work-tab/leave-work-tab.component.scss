@@ -1,0 +1,33 @@
+@import '../../../../../../../../assets/scss/utils/variables';
+@import '../../../../../../../../assets/scss/utils/mixins';
+@import '../../../../../../../../assets/scss/utils/functions';
+
+/**
+ * Toolbar styles
+ */
+.toolbar {
+  justify-content: flex-end;
+
+  /**
+   * Styles for toolbar buttons and dropdown
+   */
+  [class*='-button'],
+  .save-layouts {
+    margin-left: 0;
+    margin-right: rem(14px);
+    height: rem(37px);
+  }
+
+  .save-layouts {
+    width: rem(140px);
+  }
+
+  .save-current-layout-button,
+  .excel-button {
+    width: rem(160px);
+  }
+
+  .add-button {
+    width: rem(90px);
+  }
+}

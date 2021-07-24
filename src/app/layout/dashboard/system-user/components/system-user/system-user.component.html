@@ -1,0 +1,95 @@
+<div class="d-flex mb-3">
+  <h3 class="m-0">
+    {{ 'משתמשי המערכת' | translate: 'System users' }}
+  </h3>
+</div>
+
+<grid-editable
+  [src]="data$"
+  [columns]="columns"
+  [type]="type"
+  [state]="state"
+  [component]="component"
+  [options]="{
+    isAddable: true,
+    isDeletable: false,
+    isEditable: true,
+    isExportable: true,
+    isReloadable: false,
+    isUndoable: false,
+    showSaveButton: true,
+    showDeleteButton: true,
+    showMoreButton: false,
+    showPager: true,
+    insertNewRowOnAddButtonClick: false,
+    selectBy: 'entryNumber',
+    showFilterMenu: true
+  }"
+  id="kendoGrid"
+>
+  <search-employee toolbar></search-employee>
+</grid-editable>
+
+<kendo-dialog
+  [title]="'Add new system user'"
+  *ngIf="isOpenedDialog"
+  (close)="closeDialog()"
+  [minWidth]="250"
+  [width]="350"
+  [height]="490"
+>
+  <div class="form-group">
+    <label for="userName" class="input-label">
+      {{ 'שם משתמש' | translate: 'User name' }}
+    </label>
+    <input id="userName" name="userName" [(ngModel)]="userName" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="mainDistrict" class="input-label">
+      <!-- TODO: localize -->
+      {{ 'Main district' | translate: 'Main district' }}
+    </label>
+    <input id="mainDistrict" name="mainDistrict" [(ngModel)]="mainDistrict" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="systemTypes" class="input-label">
+      <!-- TODO: localize -->
+      {{ 'System types' | translate: 'System types' }}
+    </label>
+    <input id="systemTypes" name="systemTypes" [(ngModel)]="systemTypes" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="privileges" class="input-label">
+      <!-- TODO: localize -->
+      {{ 'Privilages' | translate: 'Privilages' }}
+    </label>
+    <input id="privileges" name="privileges" [(ngModel)]="privileges" class="form-control" />
+  </div>
+
+  <div class="form-group password-input">
+    <label for="password" class="input-label">
+      {{ 'סיסמא' | translate: 'Password' }}
+    </label>
+    <input
+      [type]="isPasswordShown ? 'text' : 'password'"
+      name="password"
+      id="password"
+      class="form-control"
+      [(ngModel)]="password"
+      autocomplete="new-password"
+    />
+    <img class="eye" (click)="togglePassword()" src="assets/images/eye-close.svg" />
+  </div>
+
+  <kendo-dialog-actions>
+    <div class="d-flex w-100 m-3">
+      <button kendoButton class="btn d-inline-flex" look="flat" (click)="closeDialog()">
+        {{ 'ביטול' | translate: 'Cancel'}}
+      </button>
+      <button class="secondary-button btn" (click)="addNew()">{{ 'הוספה' | translate: 'Add' }}</button>
+    </div>
+  </kendo-dialog-actions>
+</kendo-dialog>

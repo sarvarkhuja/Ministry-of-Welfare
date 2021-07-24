@@ -1,0 +1,35 @@
+/*
+* You can add variables to this file
+* @see https://sass-lang.com/documentation/variables
+*/
+
+$border-radius: 2px;
+$box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+
+// colors
+$text: #1C1C1C;
+$text-inactive: #898989;
+$text-inactive-light: #B5B5B5;
+$dark: #373737;
+$bcg: #FEFEFE;
+$bcg-inactive: #D0D0D0;
+$bcg-table: #F5F5F5;
+$bcg-table-dark: #E2E2E2;
+$primary: #2B437C;
+$primary-hover: #6383CD;
+$primary-active: #B4C6EE;
+$primary-focused-bcg: #ECF0FA;
+$accent: #0088CC;
+$accent-hovered: #4DB1E2;
+$accent-border: #B3DEF3;
+$accent-bcg: #E9F6FC;
+$success: #5DC37A;
+$success-bcg: #EEF9F1;
+$success-border: #e1ffe99c;
+$error: #DD3B3B;
+$error-bcg: #FFF4F4;
+$error-border: #FFCFCF;
+
+// gradients
+$gradient: linear-gradient(#FEFEFE, #F2F6FF);
+$gradient-inverted: linear-gradient(#FEFEFE, #F2F6FF);

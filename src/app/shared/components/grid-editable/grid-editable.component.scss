@@ -1,0 +1,42 @@
+@import '../../../../assets/scss/utils/mixins';
+@import '../../../../assets/scss/utils/variables';
+
+
+.k-grid {
+  border: none;
+}
+
+::ng-deep .k-tabstrip > .k-content {
+  padding-top: 0;
+}
+
+::ng-deep  .k-grid-toolbar {
+  padding-top: 0;
+}
+
+
+::ng-deep.k-grid .k-grid-aria-root{
+  border-width: 1px;
+  border-color: #D0D0D0;
+  border-style: solid;
+}
+
+.form-control {
+  width: 88%;
+  font-size: 1rem;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.employeeGrid-height{
+
+  height: 70vh;
+  @include media-breakpoint-down(xxl){
+    height: 75vh;
+  }
+  @include media-breakpoint-down(xl){
+    height: 65vh;
+  }
+  @include media-breakpoint-down(lg){
+    height: 80vh;
+  }
+}

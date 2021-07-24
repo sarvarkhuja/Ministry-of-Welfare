@@ -1,0 +1,11 @@
+<kendo-tabstrip>
+  <kendo-tabstrip-tab *ngFor="let districtByRole of districtsByRole" [selected]= "districtByRole.districtId === defaultDistrictId">
+    <ng-template kendoTabTitle>
+      <img *ngIf="districtByRole.isAccessibleDistrict" src="assets/images/check.svg" alt="tick icon">
+      {{ districtByRole.district.name }}
+    </ng-template>
+    <ng-template kendoTabContent>
+      <roles-permission-grid (districtDataChanged)="setDistrictData($event)" [districtData]="districtByRole"></roles-permission-grid>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>

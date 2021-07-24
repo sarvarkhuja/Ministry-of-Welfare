@@ -1,0 +1,29 @@
+export class AddUpdateEmployeeModel {
+  nationalId?: number;
+  firstName?: string;
+  lastName?: string;
+  birthDate?: Date;
+  sex!: number;
+  employeeStatus!: number;
+  professionalSeniority?: Date;
+  degree!: number;
+  education!: number;
+  educationYears!: number;
+  startDate?: Date;
+  endDate?: Date;
+  commitment!: number;
+  leaveReason!: number;
+  increasedWages!: string;
+  proficiencyReward!: number;
+  diplomaReward!: string;
+  personalRank!: string;
+  generalCourse!: number;
+  generalTraining!: number;
+  course!: number;
+  training!: number;
+  wagesAdditions!: number;
+  framePercent!: number;
+  expertDate?: Date;
+  lastChildBirthDate?: Date;
+  socialWorkerTraining?: number;
+}

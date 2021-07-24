@@ -1,0 +1,246 @@
+@include ltr {
+  .single-item {
+    &__icon {
+      left: 20px;
+      right: auto;
+
+      @include media-breakpoint-down(sm) {
+        left: 5px;
+        right: auto;
+      }
+    }
+
+    &__link {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .hide-show-btn {
+    left: auto;
+    right: 10px;
+  }
+
+  .language {
+    & .k-combobox {
+      float: right;
+
+      & .k-dropdown-wrap .k-input {
+        text-align: right;
+      }
+    }
+  }
+
+  .client-info__logout {
+    top: 10px;
+    left: auto;
+    right: 20%;
+
+    @media only screen and (max-width: 1367px) {
+      left: auto;
+      right: 1%;
+    }
+
+    @include media-breakpoint-down(md) {
+      left: 140%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      right: 0;
+      width: 100%;
+      left: 0;
+      text-align: center;
+    }
+  }
+
+  .employee-searchbar {
+    padding-right: 1.5rem;
+  }
+
+  .single-row__wrapper {
+    .single-item {
+      position: relative;
+
+      &:not(:last-child) {
+        margin-right: rem(24px);
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    .single-row__wrapper {
+      .single-item {
+        position: relative;
+
+        &:not(:last-child) {
+          margin-right: rem(24px);
+        }
+
+        &:nth-child(5) {
+          margin-right: rem(24px);
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .single-row__wrapper {
+      .single-item {
+        position: relative;
+
+        &:not(:last-child) {
+          margin-right: rem(24px);
+        }
+
+        &:nth-child(5) {
+          margin-right: rem(24px);
+        }
+      }
+    }
+  }
+
+  .footer-wrapper {
+    .footer-inner {
+      li {
+        &:not(:last-child):after {
+          margin-left: 20px;
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+
+  footer {
+    & .inner-menu {
+      & .inner-menu__single {
+        &:after {
+          margin-left: 20px;
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+
+  .employee-search {
+    margin-right: 1.5rem;
+  }
+
+  .menu-inner__svg {
+    float: right;
+  }
+
+  .employee-searchbar {
+    padding-right: 1.5rem;
+  }
+
+  .input-add-wrapper img {
+    margin-left: -1px;
+  }
+
+  .employee-switch__left img {
+    transform: scaleX(1);
+  }
+
+  .employee-switch__right img {
+    transform: scaleX(1);
+  }
+
+  .k-datepicker {
+    .k-select,
+    .k-picker-wrap {
+      .k-select {
+        border-left: 1px solid $bcg-inactive;
+      }
+    }
+  }
+
+  .header-wrapper__left {
+    .customer-info {
+      margin: 0 5%;
+    }
+  }
+
+  .menu-inner__single.-is-active {
+    background: $primary-focused-bcg;
+    border-right: 3px solid $primary;
+  }
+
+  .client-info {
+    border-right: 1px solid rgba($primary-hover, $alpha: 1);
+  }
+
+  .menu-content__search {
+    margin: 10px 24px;
+    height: 36px;
+    width: -webkit-fill-available;
+    padding-left: 37px;
+    border: 1px solid;
+    background: #fefefe;
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-position: 5px 7px;
+    background-image: url(/assets/images/search.png);
+    background-repeat: no-repeat;
+  }
+
+  .menu-content {
+    .menu-title {
+      float: right;
+    }
+  }
+
+  .top-controls__textbox {
+    margin-right: 1.5rem;
+  }
+
+  .close-svg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    left: auto;
+  }
+
+  .k-combobox.k-combobox-clearable .k-input {
+    padding-right: rem(30px);
+  }
+
+  .eye {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.5rem;
+    cursor: pointer;
+  }
+
+  /**
+   * Position vertical line to left
+   */
+  .k-grid-add-row:after,
+  .-is-new:after {
+    left: 0px;
+  }
+
+  #user-profiles {
+    .subPage {
+      padding-right: 0;
+      padding-left: 1rem;
+    }
+
+    .access-modes {
+      @include media-breakpoint-up(md) {
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
+
+    .save-button {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+
+  /////////////////////////
+  //your code here for LTR
+  ////////////////////////
+}

@@ -1,0 +1,89 @@
+<header class="container-fluid" *ngIf="headerShown">
+  <div class="row header-wrapper">
+    <div class="header-wrapper__left">
+      <div class="customer-info">
+        <div class="menu-wrapper">
+          <img src="assets/images/Group 8.svg" alt="hamburger menu icon" class="menu-img" (click)="openSidebarMenu()" />
+        </div>
+
+        <div class="payroll">
+          <div class="payroll-wrapper">
+            <h4 class="payroll-wrapper__title">
+              {{ 'חודש שכר' | translate: 'Payroll month' }}
+            </h4>
+            <h3 class="payroll-wrapper__value">10/2020</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-wrapper__right">
+      <div class="client-info">
+        <img src="assets/images/user-photo.svg" alt="user photo" class="user-photo" (click)="openSidebarMenu()" />
+        <span class="customer-info__username">
+          Israel Israeli
+        </span>
+        <div class="customer-info__wrapper" (click)="toggleUserInfo()">
+          <div class="main-content" #popup>
+            <h2 id="client-info" class="client-info__name">{{ userData?.employeeName }}</h2>
+            <svg
+              class="popup-trigger"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 6L8 11L13 6"
+                stroke="#FEFEFE"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div class="full-info" [ngClass]="{ 'is-active': openUserInfoBoolean }" *ngIf="openUserInfoBoolean">
+              <svg
+                class="close-svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                (click)="toggleUserInfo()"
+              >
+                <path d="M4 4L12 12" stroke="#2B437C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M12 4L3.99998 12"
+                  stroke="#2B437C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <a href="javascript:void(0)" class="light-btn -medium" (click)="logout()">
+                {{ 'התנתקות' | translate: 'Logout' }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="menu-overlay">
+  <div class="menu-content" [ngClass]="{ 'is-active': sidebarMenuOpened }">
+    <div class="menu-title">
+      <div class="close-btn" (click)="closeSidebarMenu()">
+        <div class="close-btn__text">
+          {{ 'סגור' | translate: 'Close'}}
+        </div>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4L12 12" stroke="#2B437C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M12 4L3.99998 12" stroke="#2B437C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+    <menu [(sidebar)]="sidebarMenuOpened" class="p-0"></menu>
+  </div>
+  <div class="menu-overlay__bcg" [ngClass]="{ 'is-active': sidebarMenuOpened }" (click)="closeSidebarMenu()"></div>
+</div>

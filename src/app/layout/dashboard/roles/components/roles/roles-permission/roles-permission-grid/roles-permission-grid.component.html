@@ -1,0 +1,123 @@
+<div class="section">
+  <div class="d-flex">
+    <!-- Access to the district checkbox -->
+    <div class="d-flex m-3">
+      <input
+        #accessibleDistrict
+        type="checkbox"
+        kendoCheckBox
+        name="isAccessibleDistrict"
+        [checked]="districtData.isAccessibleDistrict"
+        (click)="setDistrictData($event.target)"
+      />
+      <!-- TODO: Change text attribute value to Hebrew -->
+      <kendo-label class="k-checkbox-label" [for]="accessibleDistrict" text="Access to this district"></kendo-label>
+    </div>
+    <!-- Main district checkbox -->
+    <div class="d-flex m-3">
+      <input
+        #mainDistrict
+        type="checkbox"
+        kendoCheckBox
+        name="isMainDistrict"
+        [checked]="districtData.isMainDistrict && accessibleDistrict.checked"
+        [disabled]="!accessibleDistrict.checked"
+        (click)="setDistrictData($event.target)"
+      />
+        <!-- TODO: Change text attribute value to Hebrew -->
+      <kendo-label class="k-checkbox-label" [for]="mainDistrict" text="This is the main district"></kendo-label>
+    </div>
+  </div>
+</div>
+<department-multiselect [districtData]='districtData'></department-multiselect>
+<!-- Permissions grid -->
+<kendo-grid [data]="(data$|async) || defaultValue" id="kendoGrid" [columnMenu]="true" #grid>
+  <!-- Page column -->
+  <kendo-grid-column field="entryCode" title="Page">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <img class="p-2" [src]="dataItem.groupAccess ? 'assets/images/folder.svg' : 'assets/images/page.svg'" alt="">
+      <span>{{dataItem.entryCode}}</span>
+    </ng-template>
+  </kendo-grid-column>
+  <!-- Group access column -->
+  <kendo-grid-column field="groupAccess" title="Group Access">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input kendoRadioButton *ngIf="dataItem.groupAccess" type="radio" />
+    </ng-template>
+  </kendo-grid-column>
+  <!-- Deny column -->
+  <kendo-grid-column field="deny" title="Deny">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input
+        type="radio"
+        kendoRadioButton
+        name="accessType-{{dataItem.id}}"
+        [value]="actionType.Deny"
+        [checked]="dataItem.actionId === actionType.Deny"
+        [disabled]="!accessibleDistrict.checked"
+        (click)="setActionType($event, dataItem)"
+      />
+    </ng-template>
+  </kendo-grid-column>
+  <!--Read only column -->
+  <kendo-grid-column field="readOnly" title="Read only">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input
+        type="radio"
+        kendoRadioButton
+        name="accessType-{{dataItem.id}}"
+        [value]="actionType.View"
+        [checked]="dataItem.actionId === actionType.View"
+        [disabled]="!accessibleDistrict.checked"
+        (click)="setActionType($event, dataItem)"
+      />
+    </ng-template>
+  </kendo-grid-column>
+  <!-- Write column -->
+  <kendo-grid-column field="readWrite" title="Read/Write">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input
+        type="radio"
+        kendoRadioButton
+        name="accessType-{{dataItem.id}}"
+        [value]="actionType.Write"
+        [checked]="dataItem.actionId === actionType.Write"
+        [disabled]="!accessibleDistrict.checked"
+        (click)="setActionType($event, dataItem)"
+      />
+    </ng-template>
+  </kendo-grid-column>
+
+  <!-- Template to use once sub-pages are added -->
+  <!-- <ng-template kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="isSubGridShown">
+    <div class="inner-groupAccessContent" *ngIf="dataItem.groupAccessContent">
+      <kendo-grid [data]="rolesData">
+        <kendo-grid-column field="roles" title="roles">
+          <ng-template kendoGridCellTemplate let-rolesData>
+            <p class="rolesData">{{rolesData.title}}</p>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="groupAccess">
+          <ng-template kendoGridCellTemplate let-rolesData>
+
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="readWrite" title="Read/Write">
+          <ng-template kendoGridCellTemplate let-rolesData>
+            <input type="radio" kendoRadioButton [name]="rolesData.name" [checked]="rolesData.readWrite" />
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="readWrite" title="Read/Write">
+          <ng-template kendoGridCellTemplate let-rolesData>
+            <input type="radio" kendoRadioButton [name]="rolesData.name" [checked]="rolesData.readWrite" />
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="readWrite" title="Read Only">
+          <ng-template kendoGridCellTemplate let-rolesData>
+            <input type="radio" kendoRadioButton [name]="rolesData.name" [checked]="rolesData.readOnly" />
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </ng-template> -->
+</kendo-grid>

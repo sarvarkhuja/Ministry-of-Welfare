@@ -1,0 +1,56 @@
+<dx-data-grid
+  id="gridContainer"
+  style="height: 80vh"
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [wordWrapEnabled]="true"
+  [showBorders]="true"
+  [rtlEnabled]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [columnMinWidth]="50"
+  [columnWidth]="'auto'"
+>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-search-panel
+    [visible]="true"
+    [width]="240"
+    placeholder="Search by code or name..."
+  >
+  </dxo-search-panel>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+  <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+  <dxo-paging [pageSize]="12"></dxo-paging>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <!-- <dxo-pager
+    [visible]="true"
+    [allowedPageSizes]="allowedPageSizes"
+    [displayMode]="displayMode"
+    [showPageSizeSelector]="showPageSizeSelector"
+    [showInfo]="showInfo"
+    [showNavigationButtons]="showNavButtons"
+  >
+  </dxo-pager> -->
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+  <dxo-summary>
+    <dxi-group-item
+      column="nationalId"
+      summaryType="count"
+    >
+    </dxi-group-item>
+
+    <dxi-total-item
+        column="nationalId"
+        summaryType="count">
+    </dxi-total-item>
+</dxo-summary>
+</dx-data-grid>
