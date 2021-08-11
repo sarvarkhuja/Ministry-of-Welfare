@@ -1,15 +1,11 @@
-import { Observable, of } from 'rxjs';
-import { LoggerService } from './../loggers/logger.service';
-import { AppModule } from './../../../../app.module';
-import { GlobalErrorHandler } from './global-error.handler';
-import { TestBed, inject } from '@angular/core/testing';
 import { ErrorHandler } from '@angular/core';
-import { configureBeforeAll } from 'src/app/core/testing.utils';
-describe('Handler: Global error', () => {
-  beforeAll(() => {
-    // configureBeforeAll();
-  });
+import { inject, TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
+import { AppModule } from './../../../../app.module';
+import { LoggerService } from './../loggers/logger.service';
+import { GlobalErrorHandler } from './global-error.handler';
 
+describe('Handler: Global error', () => {
   let errorHandler: ErrorHandler;
 
   beforeEach(async () => {

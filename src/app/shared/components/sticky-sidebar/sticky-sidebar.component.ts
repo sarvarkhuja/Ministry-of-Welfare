@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 export type StickySection = { name: string; isRequired: boolean };
 
@@ -26,8 +26,6 @@ export class StickySidebarComponent {
   set currentSection(value: string) {
     this._currentSection = value;
   }
-
-  constructor() {}
 
   /**
    *

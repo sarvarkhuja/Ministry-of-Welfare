@@ -1,9 +1,11 @@
 <div class="menu-header">
-  <span class="menu-header__name">מאגר עובדים </span>
+  <span class="menu-header__name">
+    {{ 'מאגר עובדים' | translate: 'Employees' }}
+  </span>
   <button class="primary-button" [routerLink]="['/']">&lt; Back</button>
 </div>
 
-<div class="container-fluid rows">
+<div class="container-fluid rows sub-menu">
   <!-- First row -->
   <div class="single-row">
     <a class="single-item blue" [routerLink]="['/employees']">
@@ -35,7 +37,7 @@
       </div>
       <div class="single-item__link">
         <div class="single-item__link--title">
-          {{ 'קלט עובד' | translate: 'Edit Employees List' }}
+          {{ 'קלט עובד' | translate: 'Updating Employees' }}
         </div>
 
         <div class="single-item__link--arrow">
@@ -57,7 +59,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">נתונים נוספים</div>
+        <div class="single-item__link--title">
+          {{ 'נתונים נוספים' | translate: 'Additional Data' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +85,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">דוחות קבועים</div>
+        <div class="single-item__link--title">
+          {{ 'דוחות קבועים' | translate: 'Regular Reports' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +108,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">הדרכת עובדי מינהל וזכאות</div>
+        <div class="single-item__link--title">
+          {{ 'הדרכת עובדי מינהל וזכאות' | translate: 'Admin Workers Training' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +131,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">קורסים כללים</div>
+        <div class="single-item__link--title">
+          {{ 'קורסים כללים' | translate: 'General Courses' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +157,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">השתלמות כללית</div>
+        <div class="single-item__link--title">
+          {{ 'השתלמות כללית' | translate: 'General Trainings' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +180,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">מדריכים במחלקות קטנות</div>
+        <div class="single-item__link--title">
+          {{ 'מדריכים במחלקות קטנות' | translate: 'Small Departments' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,7 +203,9 @@
         <img src="assets/images/documents.svg" alt="profile icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">מחולל דוחות ושאילתות</div>
+        <div class="single-item__link--title">
+          {{ 'מחולל דוחות ושאילתות' | translate: 'Report Generator' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

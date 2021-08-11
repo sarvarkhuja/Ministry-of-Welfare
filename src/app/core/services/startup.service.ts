@@ -1,4 +1,3 @@
-import { ResourceService } from './system/resource/resource.service';
 import { SignOut } from './../../shared/store/auth/auth.action';
 import { Router } from '@angular/router';
 import { Actions, ofActionDispatched } from '@ngxs/store';
@@ -17,8 +16,7 @@ export class StartupService {
    */
   constructor(
     private router: Router,
-    private actions: Actions,
-    private $resource: ResourceService  ) {}
+    private actions: Actions) {}
 
   /**
    * Calls all necessary functions.
@@ -26,20 +24,11 @@ export class StartupService {
    * @returns `void`
    */
   public init(): void {
-    this.configureSystem();
     this.configureAuth();
     this.configureCache();
     this.configurePermissions();
     this.configureStore();
     this.configureRtl();
-  }
-
-  /**
-   * Configures system related settings
-   * @returns `void`
-   */
-  public configureSystem(): void {
-    this.$resource.init();
   }
 
   /**

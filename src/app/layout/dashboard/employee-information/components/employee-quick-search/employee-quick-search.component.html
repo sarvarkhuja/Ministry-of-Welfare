@@ -1,36 +1,63 @@
 <div class="quick-search">
   <div class="quick-search__wrapper">
-    <div class="single-data">
-      <div class="single-data__value">
+    <div class="dx-field">
+      <div class="dx-field-label">
         {{ 'מספר זהות' | translate: 'ID Number' }}
       </div>
-      <div class="single-data__text">
-        <input
-          name="nationalId"
-          type="number"
-          class="form-control"
-        />
+      <div class="dx-field-value">
+        <dx-number-box [min]="0" [(value)]="model.nationalId" [readOnly]="!model.isNew">
+          <dx-validator>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dx-validator>
+        </dx-number-box>
       </div>
     </div>
-    <div class="single-data">
-      <div class="single-data__value">
+    <div class="dx-field">
+      <div class="dx-field-label">
         {{ 'שם פרטי' | translate: 'First Name' }}
       </div>
-      <div class="single-data__text">
-        <input name="firstName" type="text" class="form-control" />
+      <div class="dx-field-value">
+        <dx-text-box [(value)]="model.firstName">
+          <dx-validator>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+            <dxi-validation-rule type="pattern" [pattern]="namePattern"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
       </div>
     </div>
-    <div class="single-data">
-      <div class="single-data__value">
+
+    <div class="dx-field">
+      <div class="dx-field-label">
         {{ 'מספר זהות' | translate: 'Last Name' }}
       </div>
-      <div class="single-data__text">
-        <input name="lastName" type="text" class="form-control" />
+      <div class="dx-field-value">
+        <dx-text-box [(value)]="model.lastName">
+          <dx-validator>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+            <dxi-validation-rule type="pattern" [pattern]="namePattern"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
       </div>
     </div>
 
-    <div class="single-data">
-
+    <div class="dx-field" *ngIf="model.isNew">
+      <div class="dx-field-label">
+        {{ 'מחלקה' | translate: 'Department' }}
+      </div>
+      <div class="dx-field-value">
+        <dx-select-box
+          displayExpr="textField"
+          valueExpr="entryNumber"
+          [(ngModel)]="model.departmentId"
+          [dataSource]="(departments$ | async) || defaultDepartmentLookup"
+          [searchEnabled]="true"
+          [width]="'auto'"
+        >
+          <dx-validator>
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dx-validator>
+        </dx-select-box>
+      </div>
     </div>
   </div>
-</div> 
+</div>

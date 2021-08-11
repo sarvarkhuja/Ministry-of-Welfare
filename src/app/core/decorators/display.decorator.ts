@@ -28,6 +28,7 @@ export function Display(value: DisplayParam): (target: object, key: string) => v
       dataType: value.dataType,
       format: value.format,
       minWidth: value.minWidth,
+      showInColumnChooser: value.showInColumnChooser,
       validationRules: value.validationRules,
       visible: value.visible,
       width: value.width

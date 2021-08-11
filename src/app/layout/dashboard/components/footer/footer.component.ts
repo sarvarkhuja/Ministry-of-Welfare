@@ -1,8 +1,6 @@
-
-import { Component, OnInit, ElementRef, HostListener, ViewChild, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, Inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { SystemService } from 'src/app/core/services/system/system/system.service';
 import { SetUiSetting } from 'src/app/shared/store/configurations/user-info/user-info.action';
 import { UserInfoState } from 'src/app/shared/store/configurations/user-info/user-info.state';
 import { DOCUMENT } from '@angular/common';
@@ -11,17 +9,27 @@ import DxThemes from 'devextreme/ui/themes';
 @Component({
   selector: 'footer-element',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  /**
+   * List of themes to be displayed in the select-box
+   */
   themes = [
-        { name: 'Blue light', value: 'material.blue.light' },
-        { name: 'Blue dark', value: 'material.blue.dark' },
-        { name: 'Teal light', value: 'material.teal.light' },
-        { name: 'Teal dark', value: 'material.teal.dark' },
-        { name: 'Orange light', value: 'material.orange.light'},
-        { name: 'Orange dark', value: 'material.orange.dark' },
+    { name: 'Custom', value: 'material.custom.blue' },
+    { name: 'Light', value: 'generic.light' },
+    { name: 'Dark Moon', value: 'generic.darkmoon' },
+    { name: 'Blue Light', value: 'material.blue.light' },
+    { name: 'Orange Light', value: 'material.orange.light' },
+    { name: 'Blue Light Compact', value: 'material.blue.light.compact' },
+    { name: 'Teal Light Compact', value: 'material.teal.light.compact' },
   ];
+
+  /**
+   * Default theme chosen in the select box
+   */
+  theme!: string;
+
   version$!: Observable<string>;
   /**
    *
@@ -40,17 +48,10 @@ export class FooterComponent implements OnInit {
   @ViewChild('fontPopup')
   fontPopup!: ElementRef;
 
-
-
-  constructor(
-    private $system: SystemService,
-    @Inject(DOCUMENT) private document: any,
-    private renderer: Renderer2,
-    private store: Store
-    ) {
-  }
+  constructor(@Inject(DOCUMENT) private document: any, private renderer: Renderer2, private store: Store) {}
 
   ngOnInit(): void {
+    this.theme = this.themes[0].value;
     this.onValueChange(this.uiSettings?.fontSize || 0);
   }
 
@@ -59,7 +60,7 @@ export class FooterComponent implements OnInit {
    */
   title = (value: number) => {
     return this.numbers[value];
-  }
+  };
 
   onValueChange(value: number): void {
     this.store.dispatch(new SetUiSetting({ fontSize: value }));
@@ -69,7 +70,12 @@ export class FooterComponent implements OnInit {
   toggleFontInfo(): void {
     this.changeFontBoolean = !this.changeFontBoolean;
   }
-  onValueChanged(e: any): void {
-    DxThemes.current(e.value);
+
+  /**
+   * Called when theme is changed in select box
+   * @param event event emitted on theme value change
+   */
+  onThemeValueChanged(event: any): void {
+    DxThemes.current(event.value);
   }
 }

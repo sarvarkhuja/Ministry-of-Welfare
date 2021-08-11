@@ -1,8 +1,7 @@
-import { Storage } from './../../../core/helpers/storage.helper';
-import { RemoveLookup, SetLookup } from './lookups.action';
-import { State, Action, StateContext, Selector, createSelector } from '@ngxs/store';
 import { Injectable } from '@angular/core';
+import { Action, createSelector, Selector, State, StateContext } from '@ngxs/store';
 import { LookupsStateModel } from './lookups-state.model';
+import { RemoveLookup, SetLookup } from './lookups.action';
 
 @State({
   name: 'lookups',

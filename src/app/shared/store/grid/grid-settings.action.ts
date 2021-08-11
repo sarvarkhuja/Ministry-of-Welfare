@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-import { GridResult } from 'src/app/core/configs/grid-result';
 import { ColumnSetting } from './../../../core/configs/column-settings';
 /**
  *

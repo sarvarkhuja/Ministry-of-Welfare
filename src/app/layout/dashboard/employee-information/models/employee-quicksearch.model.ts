@@ -17,5 +17,10 @@ export class EmployeeQuickSearch {
   /**
    *
    */
+  departmentId?: number;
+
+  /**
+   *
+   */
   isNew = true;
 }

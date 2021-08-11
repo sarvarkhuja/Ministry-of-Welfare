@@ -1,16 +1,15 @@
-import { UrlString } from './../../../../core/enums/url.enum';
-import { ClearToken } from './../../../../shared/store/auth/auth.action';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
-import { finalize } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize, takeUntil } from 'rxjs/operators';
 import { SignIn } from 'src/app/shared/store/auth/auth.action';
 import { AuthHelper } from '../../services/auth.helper';
-import { Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
-import { takeUntil, catchError } from 'rxjs/operators';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UrlString } from './../../../../core/enums/url.enum';
+import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
+import { ClearToken } from './../../../../shared/store/auth/auth.action';
 
 @Component({
   selector: 'sign-in',
@@ -113,5 +112,5 @@ export class SignInComponent implements OnInit {
    * Redirects to home page
    * @returns `void`
    */
-  private redirect = (): void => { this.router.navigate([UrlString.EMPLOYEES]); };
+  private redirect = (): void => { this.router.navigate([UrlString.HOME]); };
 }

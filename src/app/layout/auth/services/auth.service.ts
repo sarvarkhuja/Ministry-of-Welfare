@@ -1,14 +1,13 @@
-import { Store } from '@ngxs/store';
-import { SignOutModel } from './../models/sign-out.model';
-import { SignInResponseModel } from './../models/sign-in-response.model';
-import { EndpointSettings } from '../../../core/configs/endpoint.settings';
-import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { DITokens } from '../../../core/configs/di-tokens';
-import { Injectable, Inject } from '@angular/core';
-import { SignInModel } from '../models/sign-in.model';
+import { Inject, Injectable } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
 import { UserInfoState } from 'src/app/shared/store/configurations/user-info/user-info.state';
-import { nameof } from 'src/app/core/utils';
+import { DITokens } from '../../../core/configs/di-tokens';
+import { EndpointSettings } from '../../../core/configs/endpoint.settings';
+import { SignInModel } from '../models/sign-in.model';
+import { SignInResponseModel } from './../models/sign-in-response.model';
+import { SignOutModel } from './../models/sign-out.model';
 
 @Injectable({
   providedIn: 'root',

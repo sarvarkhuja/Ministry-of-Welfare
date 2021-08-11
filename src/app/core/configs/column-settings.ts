@@ -16,6 +16,7 @@ export interface ColumnSetting {
   dataType: ColumnType;
   format?: string;
   minWidth?: number;
+  showInColumnChooser?: boolean;
   validationRules?: any[];
   visible?: boolean;
   width?: number;

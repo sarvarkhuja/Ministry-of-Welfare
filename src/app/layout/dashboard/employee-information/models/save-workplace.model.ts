@@ -1,5 +1,6 @@
 export interface SaveWorkplace {
     nationalId: number;
+    district: number;
     department: number;
     priorityRegion1: string;
     councilType1: number;

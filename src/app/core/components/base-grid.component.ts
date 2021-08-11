@@ -1,15 +1,18 @@
-import { ColumnSetting } from './../configs/column-settings';
-import { DecoratorMetadata } from './../decorators/decorator.metadata';
-import { Store } from '@ngxs/store';
-import { AuthState } from './../../shared/store/auth/auth.state';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SettingsHelper } from '@core/helpers/settings.helper';
-import { FilterType } from './../enums/filter-type.enums';
-import { OnInit, Component, ViewChild } from '@angular/core';
+import { Parameter } from '@core/models/parameter.model';
+import { Store } from '@ngxs/store';
 import { DxDataGridComponent } from 'devextreme-angular';
 import * as AspNetData from 'devextreme-aspnet-data-nojquery';
-import * as ExcelJS from 'exceljs';
 import { exportDataGrid } from 'devextreme/excel_exporter';
+import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
+import { ToolbarOptionLocation, ToolbarWidget } from '../enums/toolbar-option.enums';
+import { AuthState } from './../../shared/store/auth/auth.state';
+import { ColumnSetting } from './../configs/column-settings';
+import { DecoratorMetadata } from './../decorators/decorator.metadata';
+import { FilterType } from './../enums/filter-type.enums';
+import { LanguageHelper } from './../helpers/language.helper';
 
 @Component({
   selector: 'base-grid-component',
@@ -26,6 +29,8 @@ export class BaseGridComponent implements OnInit {
    * Data to be displayed in the grid
    */
   dataSource!: any;
+
+  parameters: Parameter[] = [];
 
   /**
    * Describes column settings in a grid.
@@ -45,6 +50,11 @@ export class BaseGridComponent implements OnInit {
   columnWidth = 'auto';
 
   /**
+   * Grid Settings
+   */
+  gridHeight = '84vh';
+
+  /**
    * Filtration Settings
    */
   applyFilterTypes = [FilterType.AUTO, FilterType.ON_BUTTON_CLICK];
@@ -62,6 +72,11 @@ export class BaseGridComponent implements OnInit {
   showInfo = true;
   showNavButtons = true;
 
+  /**
+   * Used to check the currently chosen language
+   */
+  isHebrew!: boolean;
+
   constructor(private store: Store) {}
 
   /**
@@ -73,6 +88,7 @@ export class BaseGridComponent implements OnInit {
    * @returns `void`
    */
   ngOnInit(): void {
+    this.isHebrew = LanguageHelper.isHebrew();
     this.configureColumnSettings();
   }
 
@@ -99,15 +115,64 @@ export class BaseGridComponent implements OnInit {
     this.dataSource = AspNetData.createStore({
       key: keyValue,
       loadUrl: `${SettingsHelper.settings.endpoint}${api}`,
-
       onBeforeSend: (method, options) => {
+        this.prepareParameters(options);
         if (!options.headers) {
           options.headers = {};
         }
         options.headers['Authorization'] = `Bearer ${this.store.selectSnapshot(AuthState.token)}`;
       },
-      onLoaded: (res) => {},
     });
+  }
+
+  prepareParameters(options: any): void {
+    if (this.parameters) {
+      this.parameters.forEach((parameter) => {
+        options.data[parameter?.name] = parameter?.value;
+      });
+    }
+  }
+
+  /**
+   * Creates toolbar to be displayed above the grid
+   * @param event emitted on grid load (onToolbarPreparing)
+   * TODO: add hebrew translation
+   */
+  onToolbarPreparing(event: any) {
+    event.toolbarOptions.items.unshift(
+      {
+        location: ToolbarOptionLocation.AFTER,
+        widget: ToolbarWidget.BUTTON,
+        options: {
+          width: 'auto',
+          text: 'Add employee',
+          onClick: this.add.bind(this),
+        },
+      },
+      {
+        location: ToolbarOptionLocation.AFTER,
+        widget: ToolbarWidget.BUTTON,
+        options: {
+          icon: 'filter',
+          onClick: this.showFilterBuilder.bind(this),
+        },
+      }
+    );
+  }
+
+  /**
+   * Called on add button click in grid toolbar
+   * Override if custom behavior is required
+   */
+  add(): void {
+    // TODO: add default add logic
+  }
+
+  /**
+   * Shows filter panel on filter icon click in grid toolbar
+   */
+  showFilterBuilder() {
+    this.dataGrid.instance.option('filterBuilderPopup.visible', true);
   }
 
   /**

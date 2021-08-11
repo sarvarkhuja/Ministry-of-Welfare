@@ -1,4 +1,3 @@
-import { CamelCasePipe } from './pipes/camel-case/camel-case.pipe';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,17 +7,20 @@ import {
   DxButtonModule,
   DxCheckBoxModule,
   DxDataGridModule,
+  DxDrawerModule,
   DxDropDownButtonModule,
   DxFormModule,
+  DxListModule,
+  DxNumberBoxModule,
   DxSelectBoxModule,
   DxTabPanelModule,
   DxTemplateModule,
+  DxTextBoxModule,
   DxToolbarModule,
   DxTooltipModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
-
 import { PermissionGuard } from './../core/guards/permission.guard';
-import { SearchEmployeeComponent } from './components/search-employee/search-employee.component';
 import { StickySidebarComponent } from './components/sticky-sidebar/sticky-sidebar.component';
 import { AccordionDirective } from './directives/accordion.directive';
 import { HasAccessMenuDirective } from './directives/has-access-menu.directive';
@@ -26,6 +28,7 @@ import { HasAccessDirective } from './directives/has-access.directive';
 import { HasPreferenceDirective } from './directives/has-preference.directive';
 import { NumbersDirective } from './directives/numbers.directive';
 import { ScrollSpyDirective } from './directives/scroll-spy.directive';
+import { CamelCasePipe } from './pipes/camel-case/camel-case.pipe';
 import { DotsPipe } from './pipes/dotsPipe/dots.pipe';
 import { PadEndPipe } from './pipes/pad-end-pipe/pad-end.pipe';
 import { PadStartPipe } from './pipes/pad-start-pipe/pad-start.pipe';
@@ -52,12 +55,16 @@ import { TranslateModule } from './translate.module';
     DxCheckBoxModule,
     DxTabPanelModule,
     DxFormModule,
-    DxButtonModule
+    DxButtonModule,
+    DxNumberBoxModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    DxDrawerModule,
+    DxListModule,
   ],
   declarations: [
     HasAccessDirective,
     NumbersDirective,
-    SearchEmployeeComponent,
     DotsPipe,
     AccordionDirective,
     ScrollSpyDirective,
@@ -75,7 +82,6 @@ import { TranslateModule } from './translate.module';
     ReactiveFormsModule,
     HasAccessDirective,
     NumbersDirective,
-    SearchEmployeeComponent,
     DotsPipe,
     AccordionDirective,
     ScrollSpyDirective,
@@ -96,6 +102,11 @@ import { TranslateModule } from './translate.module';
     CamelCasePipe,
     DxTabPanelModule,
     DxButtonModule,
+    DxNumberBoxModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    DxDrawerModule,
+    DxListModule,
   ],
   providers: [PermissionGuard],
 })

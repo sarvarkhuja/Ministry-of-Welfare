@@ -1,20 +1,16 @@
-import { AddEmployeeModel } from '../../employee-information/models/add-employee.model';
-import { SaveTemplate } from './../models/save-template.model';
-import { Template } from './../models/get-templates';
-
-import { nameof } from './../../../../core/utils';
-import { EmployeesListQuery } from './../models/queries/employees-list.query';
-import { TemplateColumn } from './../models/get-template-columns';
-import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
-import { EntityService } from './../../../../core/services/base/entity.service';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Actions, ofActionDispatched } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
-import { Actions, ofActionDispatched } from '@ngxs/store';
+import { LookupModel } from 'src/app/core/models/lookup.model';
 import { SetChosenEmloyeeCode } from 'src/app/shared/store/configurations/user-info/user-info.action';
 import { PersonalDetail } from '../../employee-information/models/personal-detail.model';
-import { LookupModel } from 'src/app/core/models/lookup.model';
+import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
+import { EntityService } from './../../../../core/services/base/entity.service';
+import { TemplateColumn } from './../models/get-template-columns';
+import { Template } from './../models/get-templates';
+import { SaveTemplate } from './../models/save-template.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +25,6 @@ export class EmployeeService extends EntityService {
   orderDirection = new BehaviorSubject<number>(1);
 
   department = new BehaviorSubject<number>(0);
-
 
   statusValue!: number;
 
@@ -63,34 +58,11 @@ export class EmployeeService extends EntityService {
     this.department.next(departmentNo);
   }
 
-  public browseGrid(url: string, query?: EmployeesListQuery): Observable<any> {
-    const params = query ? this.getBrowseAllParameters(query) : new HttpParams();
-
-    return this.http
-      .get<any>(this.baseUrl + url, { params })
-      .pipe(map((res) => res));
-  }
-
-  public addEmployee(query: AddEmployeeModel): Observable<any> {
-    return this.http
-      .post<AddEmployeeModel>(this.baseUrl + EndpointSettings.ADD_EMPLOYEE, query)
-      .pipe(map((res) => res));
-  }
-
   /**
    *
    */
   public chosenEmployeeChanged(): Observable<any> {
     return this.actions.pipe(ofActionDispatched(SetChosenEmloyeeCode));
-  }
-
-  /**
-   * Returns parameters to be sent to back-end for getting employees
-   */
-  private getBrowseAllParameters(query: EmployeesListQuery): HttpParams {
-    const params = new HttpParams().set(nameof<EmployeesListQuery>('request'), query?.request);
-
-    return params;
   }
 
   /**
@@ -184,15 +156,13 @@ export class EmployeeService extends EntityService {
     return this.http.get<LookupModel[]>(this.baseUrl + EndpointSettings.GET_WAGES_ADDITIONS);
   }
 
-
   /**
    * Returns parameters of the personal details
    */
   public getPersonalDetails(nationalId: number): Observable<PersonalDetail> {
     const params = new HttpParams().append('nationalId', nationalId.toString());
 
-    return this.http
-      .get<PersonalDetail>(this.baseUrl + EndpointSettings.GET_PERSONAL_DETAILS, { params });
+    return this.http.get<PersonalDetail>(this.baseUrl + EndpointSettings.GET_PERSONAL_DETAILS, { params });
   }
   public getTemplatePart(pageId: number): Observable<Array<Template>> {
     const params = new HttpParams().append('pageId', pageId.toString());
@@ -211,12 +181,10 @@ export class EmployeeService extends EntityService {
   }
 
   public saveTemplate(data: SaveTemplate): Observable<any> {
-    return this.http
-      .post<any>(this.baseUrl + EndpointSettings.SAVE_TEMPLATE_COLUMNS, data);
+    return this.http.post<any>(this.baseUrl + EndpointSettings.SAVE_TEMPLATE_COLUMNS, data);
   }
 
   public deleteTemplate(templateId: number): Observable<any> {
-    return this.http
-      .post<any>(this.baseUrl + EndpointSettings.DELETE_TEMPLATE_COLUMNS, { templateId });
+    return this.http.post<any>(this.baseUrl + EndpointSettings.DELETE_TEMPLATE_COLUMNS, { templateId });
   }
 }

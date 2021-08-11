@@ -108,7 +108,7 @@ $display-narrow: 1366;
 
 
 @mixin u-shown($display: block) {
-    
+
     display: $display $important;
     visibility: visible  $important;
 }
@@ -144,15 +144,11 @@ $display-narrow: 1366;
 }
 @mixin truncate-lines($n) {
   display: -webkit-box;
-  display: -webkit-box;
   display: -moz-box;
   display: box;
   -webkit-line-clamp: $n;
   -moz-line-clamp: $n;
   line-clamp: $n;
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  box-orient: vertical;
   overflow: hidden;
 }
 //
@@ -210,7 +206,7 @@ $unit: 'rem'; // Feel free to change the unit.
 @mixin list-loop($className, $styleName) {
   $i: 0;
   @while $i <= $max {
-    #{$className + $i} { 
+    #{$className + $i} {
       #{$styleName}: #{$i + $unit};
     }
     $i: $i + $offset;

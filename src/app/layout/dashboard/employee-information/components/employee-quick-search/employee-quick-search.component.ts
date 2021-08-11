@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { selectMap } from 'src/app/core/configs/rxjs.settings';
 import { LookupModel } from 'src/app/core/models/lookup.model';
-import { EmployeeService } from '../../../employee/services/employee.service';
+import { RegExpConst } from './../../../../../shared/configs/regexp.const';
 import { EmployeeQuickSearch } from './../../models/employee-quicksearch.model';
+import { EmployeeInformationService } from './../../services/employee-information.service';
 
 @Component({
   selector: 'app-employee-quick-search',
@@ -13,54 +13,57 @@ import { EmployeeQuickSearch } from './../../models/employee-quicksearch.model';
 })
 export class EmployeeQuickSearchComponent implements OnInit {
   /**
-   *
+   * Employee data passed in employee-tabs.component
    */
   @Input()
   model!: EmployeeQuickSearch;
 
   /**
-   * Filtered departments
+   * Departments list to be displayed in the select box
    */
   departments$!: Observable<LookupModel[]>;
 
   /**
-   * All departments
+   * Default lookup to be shown if departments$ | async is null
    */
-  departmentsSourceData$!: Observable<LookupModel[]>;
+  defaultDepartmentLookup!: any[];
+
+  /**
+   * Validation patterns
+   */
+  namePattern!: string;
+
+  /**
+   * Regular expressions to be used in validation
+   */
+  get regularExpressions(): typeof RegExpConst {
+    return RegExpConst;
+  }
 
   /**
    *
    */
-  constructor(private $data: EmployeeService) {}
+  constructor(private $data: EmployeeInformationService) {}
 
   /**
    *
    */
   ngOnInit(): void {
+    this.setValidationPatterns();
     this.loadDepartment();
   }
 
   /**
-   *
+   * Gets departments list from back
    */
   loadDepartment(): void {
     this.departments$ = this.$data.getEmployeeDepartments().pipe(selectMap);
-    this.departmentsSourceData$ = this.departments$;
   }
 
   /**
-   * Filters departments by code or name
+   * Sets patterns to validators of type 'pattern'
    */
-  handleDepartmentFilter(key: any): void {
-    if (key) {
-      this.departments$ = this.departmentsSourceData$.pipe(
-        map((lookups) =>
-          lookups.filter((lookup) => lookup.entryNumber.toString().includes(key) || lookup.description.includes(key))
-        )
-      );
-      return;
-    }
-
-    this.departments$ = this.departmentsSourceData$;
+  setValidationPatterns(): void {
+    this.namePattern = this.regularExpressions.PERSON_NAME;
   }
 }

@@ -23,7 +23,7 @@ export class EndpointSettings {
   public static readonly GET_SEARCH_JOB = 'employee/Employees/SearchJobsByMatchingJobNumber';
 
   // Employee Lookups
-  public static readonly GET_EMPLOYEE_DEPARTMENTS = 'employeeLookups/employeeLookups/getAllDepartments';
+  public static readonly GET_EMPLOYEE_DEPARTMENTS = 'employeeLookups/EmployeeLookups/GetAllDepartments';
   public static readonly GET_EMPLOYEE_STATUSES = 'employeeLookups/employeeLookups/getAllEmployeeStatuses';
   public static readonly GET_SOCIAL_TRAININGS = 'employeeLookups/employeeLookups/getAllSocialTrainings';
   public static readonly GET_EDUCATION_DEGREES = 'employeeLookups/employeeLookups/getAllEducationDegrees';
@@ -64,4 +64,16 @@ export class EndpointSettings {
   public static readonly UPDATE_EMPLOYEE_JOBS = 'employeeTabs/EmployeeTabs/UpdateEmployeeJobs';
   public static readonly DELETE_EMPLOYEE_JOBS = 'employeeTabs​/EmployeeTabs​/DeleteEmployeeJobs';
   public static readonly ADD_EMPLOYEE_JOBS = 'employeeTabs/EmployeeTabs/AddEmployeeJobs';
+
+  // Proficiency Rewards tab
+  public static readonly GET_EMPLOYEE_PROFICIENCY_REWARDS = 'employeeTabs/EmployeeTabs/GetEmployeeProficiencyRewards';
+
+  // Obligations tab
+  public static readonly GET_EMPLOYEE_OBLIGATIONS = 'employeeTabs/EmployeeTabs/GetEmployeeObligations';
+
+  // Leave Works tab
+  public static readonly GET_EMPLOYEE_LEAVE_WORKS = 'employeeTabs/EmployeeTabs/GetEmployeeLeaveReasons';
+
+  // Personal Payments tab
+  public static readonly GET_EMPLOYEE_PERSONAL_PAYMENTS = 'employeeTabs/EmployeeTabs/GetEmployeePersonalPayments';
 }

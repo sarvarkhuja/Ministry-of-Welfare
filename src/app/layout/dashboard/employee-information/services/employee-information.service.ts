@@ -1,61 +1,49 @@
-import { SaveEmployeeRole } from './../models/save-employee-role.model';
-import { SaveTemplate } from './../../employee/models/save-template.model';
-import { SearchJob } from '../models/search-job.model';
-import { SaveWorkplace } from './../models/save-workplace.model';
-import { SaveEmployeeModel } from './../models/save-employee.model';
-
-import { PersonalDetail } from '../models/personal-detail.model';
-import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
-import { EntityService } from './../../../../core/services/base/entity.service';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { JsonHelper } from './../../../../core/helpers/json.helper';
 import { HttpParams } from '@angular/common/http';
-import { Actions, ofActionDispatched } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import { AddUpdateEmployeeModel } from '@layout/dashboard/employee-information/models/add-update-employee.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LookupModel } from 'src/app/core/models/lookup.model';
-import { UpdateEmployeeModel } from '../models/update-employee.model';
 import { GetEmployeeRole } from '../models/get-employee-role.model';
 import { GetWorkplace } from '../models/get-workplace.model';
-import { Employee } from '../models/dumb-data.model';
+import { PersonalDetail } from '../models/personal-detail.model';
+import { SearchJob } from '../models/search-job.model';
+import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
+import { EntityService } from './../../../../core/services/base/entity.service';
+import { SaveTemplate } from './../../employee/models/save-template.model';
+import { EmployeeQuickSearch } from './../models/employee-quicksearch.model';
+import { SaveEmployeeRole } from './../models/save-employee-role.model';
+import { SaveEmployeeModel } from './../models/save-employee.model';
+import { SaveWorkplace } from './../models/save-workplace.model';
 
 @Injectable({
   providedIn: 'root',
 })
-
-
-
 export class EmployeeInformationService extends EntityService {
-  status = new BehaviorSubject<number>(1);
+  /**
+   * Employee national id
+   */
+  nationalId!: number;
 
-  orderBy = new BehaviorSubject<string>('');
+  /**
+   * Employee personal details
+   */
+  personalDetails!: Observable<PersonalDetail>;
 
-  orderDirection = new BehaviorSubject<number>(1);
+  /**
+   * Employee data from box above the tabs
+   */
+  employeeQuickSearchData!: EmployeeQuickSearch;
+
   constructor() {
     super();
   }
 
-  employee: any = {
-    ID: 1,
-    FirstName: "John",
-    LastName: "Heart",
-    CompanyName: "Super Mart of the West",
-    Position: "CEO",
-    OfficeNo: "901",
-    BirthDate: new Date(1964, 2, 16),
-    HireDate: new Date(1995, 0, 15),
-    Address: "351 S Hill St.",
-    City: "Los Angeles",
-    State: "CA",
-    Zipcode: "90013",
-    Phone: "+1(213) 555-9392",
-    Email: "jheart@dx-email.com",
-    Skype: "jheart_DX_skype"
-  };
- public getEmployee() : Observable<Employee> {
-    
-    return this.employee;
-}
+  /**
+   * Sets current employee national id
+   * @param id national id
+   */
+  setNationalId = (id: number) => (this.nationalId = id);
 
   /**
    * Returns lists of departments
@@ -116,28 +104,28 @@ export class EmployeeInformationService extends EntityService {
   /**
    * Returns lists of general courses
    */
-  public getCycleCourses(): Observable<LookupModel[]> {
+  public getSpecialCourses(): Observable<LookupModel[]> {
     return this.http.get<LookupModel[]>(this.baseUrl + EndpointSettings.GET_GENERAL_COURSES);
   }
 
   /**
    * Returns lists of general trainings
    */
-  public getCycleTrainings(): Observable<LookupModel[]> {
+  public getSpecialTrainings(): Observable<LookupModel[]> {
     return this.http.get<LookupModel[]>(this.baseUrl + EndpointSettings.GET_GENERAL_TRAININGS);
   }
 
   /**
-   * Returns lists of special courses
+   * Returns lists of courses cycles
    */
-  public getSpecialCourses(): Observable<LookupModel[]> {
+  public getCourseCycles(): Observable<LookupModel[]> {
     return this.http.get<LookupModel[]>(this.baseUrl + EndpointSettings.GET_COURSE_CYCLES);
   }
 
   /**
-   * Returns lists of special trainings
+   * Returns lists of trainings cycles
    */
-  public getSpecialTrainings(): Observable<LookupModel[]> {
+  public getTrainingsCycles(): Observable<LookupModel[]> {
     return this.http.get<LookupModel[]>(this.baseUrl + EndpointSettings.GET_TRAINING_CYCLES);
   }
 
@@ -167,8 +155,14 @@ export class EmployeeInformationService extends EntityService {
     return this.http.post<SaveTemplate>(this.baseUrl + EndpointSettings.SAVE_TEMPLATE_COLUMNS, data);
   }
 
-  public updateEmployee(query: UpdateEmployeeModel): Observable<any> {
-    return this.http.post<UpdateEmployeeModel>(this.baseUrl + EndpointSettings.UPDATE_PERSONAL_DETAILS, query);
+  public addEmployee(query: AddUpdateEmployeeModel): Observable<any> {
+    return this.http
+      .post<AddUpdateEmployeeModel>(this.baseUrl + EndpointSettings.ADD_EMPLOYEE, query)
+      .pipe(map((res) => res));
+  }
+
+  public updateEmployee(query: AddUpdateEmployeeModel): Observable<any> {
+    return this.http.post<AddUpdateEmployeeModel>(this.baseUrl + EndpointSettings.UPDATE_PERSONAL_DETAILS, query);
   }
 
   public updateWorkplace(query: SaveWorkplace): Observable<SaveWorkplace> {
@@ -183,17 +177,6 @@ export class EmployeeInformationService extends EntityService {
 
     return this.http.get<GetEmployeeRole>(this.baseUrl + EndpointSettings.GET_EMPLOYEE_ROLES, { params });
   }
-
-  /**
-   * Gets leave reasons of employee
-   * @param nationalId id of employee the data is provided about
-   * @returns leave reasons data to be displayed in grid
-   */
-  // public getLeaveReasonsGridData(nationalId: number): Observable<GridDataResult> {
-  //   const params = new HttpParams().append('nationalId', nationalId.toString());
-
-  //   return this.http.get<GridDataResult>(this.baseUrl + EndpointSettings.GET_EMPLOYEE_LEAVE_REASONS, { params });
-  // }
 
   /**
    *

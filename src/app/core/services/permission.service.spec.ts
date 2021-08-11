@@ -1,13 +1,8 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { PermissionService } from './permission.service';
-import { configureBeforeAll } from '../testing.utils';
+import { inject, TestBed } from '@angular/core/testing';
 import { ENDPOINT_PROVIDER } from '../configs/providers.settings';
+import { PermissionService } from './permission.service';
 
 describe('Service: Permission', () => {
-  beforeAll(() => {
-    // configureBeforeAll();
-  });
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [PermissionService, ENDPOINT_PROVIDER],

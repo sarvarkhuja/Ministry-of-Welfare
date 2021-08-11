@@ -1,9 +1,11 @@
 <div class="menu-header">
-  <span class="menu-header__name">תוכניות שרות</span>
+  <span class="menu-header__name">
+    {{ 'תוכניות שרות' | translate: 'Service Programs' }}
+  </span>
   <button class="primary-button" [routerLink]="['/']">&lt; Back</button>
 </div>
 
-<div class="container-fluid rows">
+<div class="container-fluid rows sub-menu">
   <!-- First row -->
   <div class="single-row">
     <a class="single-item orange" [routerLink]="[]">
@@ -11,7 +13,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">פרטי החברה</div>
+        <div class="single-item__link--title">
+          {{ 'פרטי החברה' | translate: 'Companies Details' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +36,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">הרשאות משתמשי המערכת</div>
+        <div class="single-item__link--title">
+          {{ 'הרשאות משתמשי המערכת' | translate: 'Users Privileges' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +59,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">גיבוי נתוני המערכת</div>
+        <div class="single-item__link--title">
+          {{ 'גיבוי נתוני המערכת' | translate: 'Backing-Up System's Data' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +85,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">שיחזור נתוני המערכת</div>
+        <div class="single-item__link--title">
+          {{ 'שיחזור נתוני המערכת' | translate: 'Restoring System's Data' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +108,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">החנת / הצגת הודעות לתזכורת</div>
+        <div class="single-item__link--title">
+          {{ 'החנת / הצגת הודעות לתזכורת' | translate: 'Messages for Alerts' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +131,9 @@
         <img src="assets/images/settings.svg" alt="gear icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">משתמשים פעילים עכשיב ברשת</div>
+        <div class="single-item__link--title">
+          {{ 'Currently Active Users' | translate: 'משתמשים פעילים עכשיב ברשת' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

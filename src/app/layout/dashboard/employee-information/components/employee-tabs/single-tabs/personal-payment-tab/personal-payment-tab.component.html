@@ -1,79 +1,55 @@
-aasdasd
-<!-- <div class="example-wrap">
-  <form class="k-form" [formGroup]="registerForm">
-    <fieldset class="k-form-fieldset">
-      <legend class="k-form-legend">User Details</legend>
-      <kendo-formfield>
-        <kendo-label [for]="firstName" text="First Name"></kendo-label>
-        <input
-          formControlName="firstName"
-          kendoTextBox
-          #firstName
-          required
-        />
-        <kendo-formhint>Your first name</kendo-formhint>
-        <kendo-formerror>Error: First name is required</kendo-formerror>
-      </kendo-formfield>
-      <kendo-formfield>
-        <kendo-label [for]="lastName" text="Last Name"></kendo-label>
-        <input formControlName="lastName" kendoTextBox #lastName required />
+<dx-data-grid
+  id="gridContainer"
+  [style.max-height] = "gridHeight"
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [columnMinWidth]="columnMinWidth"
+  [columnWidth]="columnWidth"
+  [rowAlternationEnabled]="true"
+  [showBorders]="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+>
 
-        <kendo-formhint>Your last name</kendo-formhint>
-        <kendo-formerror>Error: Last name is required</kendo-formerror>
-      </kendo-formfield>
+<ng-template ngFor let-column [ngForOf]="columns">
+  <dxi-column
+    caption="{{ isHebrew ? column.caption : column.captionInEnglish }}"
+    dataField="{{ column.dataField }}"
+    dataType="{{ column.dataType }}"
+    format="{{ column.format }}"
+  >
+  </dxi-column>
+</ng-template>
 
-      <kendo-formfield>
-        <kendo-label
-          [for]="birthDate"
-          [optional]="true"
-          text="Birth Date"
-        ></kendo-label>
-        <kendo-datepicker
-          #birthDate
-          formControlName="birthDate"
-          [min]="min"
-          [max]="max"
-        >
-        </kendo-datepicker>
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
 
-        <kendo-formhint>Your birth date</kendo-formhint>
-      </kendo-formfield>
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
 
-      <kendo-formfield>
-        <kendo-label [for]="email" text="Email"></kendo-label>
-        <input formControlName="email" kendoTextBox #email required />
+  <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
-        <kendo-formhint>Your active email</kendo-formhint>
-        <kendo-formerror>Error: Not valid email format</kendo-formerror>
-      </kendo-formfield>
+  <dxo-paging [pageSize]="pageSize"></dxo-paging>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-pager
+    [visible]="true"
+    [allowedPageSizes]="allowedPageSizes"
+    [displayMode]="displayMode"
+    [showPageSizeSelector]="showPageSizeSelector"
+    [showInfo]="showInfo"
+    [showNavigationButtons]="showNavButtons"
+  >
+  </dxo-pager>
 
-      <kendo-formfield>
-        <div class="k-checkbox-wrap">
-          <input
-            #acceptNews
-            type="checkbox"
-            kendoCheckBox
-            formControlName="acceptNews"
-          />
-          <kendo-label
-            [for]="acceptNews"
-            class="k-checkbox-label"
-            text="I want to receive notifications"
-          ></kendo-label>
-        </div>
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 
-        <kendo-formhint
-          >You will receive our latest updates and promotions on your
-          email</kendo-formhint
-        >
-      </kendo-formfield>
+  <dxo-export [enabled]="true" [excelFilterEnabled]="true" fileName="Personal payments"></dxo-export>
 
-      <div class="k-form-buttons">
-        <button class="k-button k-primary" (click)="submitForm()">
-          Submit
-        </button>
-        <button class="k-button" (click)="clearForm()">Clear</button>
-      </div>
-    </fieldset>
-  </form>
-</div> -->
+  <dxo-summary>
+    <dxi-group-item column="nationalId" summaryType="count"> </dxi-group-item>
+    <dxi-total-item column="nationalId" summaryType="count"> </dxi-total-item>
+  </dxo-summary>
+</dx-data-grid>

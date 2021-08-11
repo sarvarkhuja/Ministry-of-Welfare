@@ -1,7 +1,5 @@
-import { ResourceResponse } from './../resource.model';
-import { CompanyPreference } from './company-preference.model';
-import { PermissionModel } from './../permission.model';
 import { CompanyParams } from './company-params.model';
+import { CompanyPreference } from './company-preference.model';
 export class CompanyInfoResponse {
   // TODO: open one by one once it is required
   // compDbName!: string;

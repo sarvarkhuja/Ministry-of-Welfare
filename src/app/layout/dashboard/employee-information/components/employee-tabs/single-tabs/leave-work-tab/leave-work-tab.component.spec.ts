@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LeaveWorkTabComponent } from './leave-work-tab.component';
 
@@ -6,7 +6,7 @@ describe('LeaveWorkTabComponent', () => {
   let component: LeaveWorkTabComponent;
   let fixture: ComponentFixture<LeaveWorkTabComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LeaveWorkTabComponent ]
     })

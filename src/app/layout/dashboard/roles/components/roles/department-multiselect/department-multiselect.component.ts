@@ -2,7 +2,6 @@ import { RolesService } from './../../../services/roles.service';
 import { DepartmentModel } from './../../../models/department.model';
 import { Component, Input, OnInit } from '@angular/core';
 
-
 interface PendingSelection {
   [key: number]: boolean;
 }
@@ -44,9 +43,7 @@ export class DepartmentMultiselectComponent implements OnInit {
   @Input()
   districtData!: any;
 
-  constructor(public $data: RolesService) {
-
-  }
+  constructor(public $data: RolesService) {}
 
   /**
    *
@@ -90,7 +87,9 @@ export class DepartmentMultiselectComponent implements OnInit {
 
     // Remove each pending department from the selected departments collection.
     this.selectedDepartments = this.removeDepartmentsFromCollection(this.selectedDepartments, changedDepartments);
-    this.unselectedDepartments = changedDepartments.concat(this.unselectedDepartments).sort(this.sortDepartmentOperator);
+    this.unselectedDepartments = changedDepartments
+      .concat(this.unselectedDepartments)
+      .sort(this.sortDepartmentOperator);
 
     this.setUpdatedDepartmentsList(changedDepartments);
   }
@@ -116,20 +115,14 @@ export class DepartmentMultiselectComponent implements OnInit {
    *   private methods
    */
   private getPendingSelectionFromCollection(collection: DepartmentModel[]): DepartmentModel[] {
-    const selectionFromCollection = collection.filter(
-      (department) =>  department.id in this.pendingSelection);
-
-    return selectionFromCollection;
+    return collection.filter((department) => department.id in this.pendingSelection);
   }
 
   private removeDepartmentsFromCollection(
     collection: DepartmentModel[],
     departmentsToRemove: DepartmentModel[]
   ): DepartmentModel[] {
-    const collectionWithoutDepartments =
-    collection.filter((department) => !departmentsToRemove.includes(department));
-
-    return collectionWithoutDepartments;
+    return collection.filter((department) => !departmentsToRemove.includes(department));
   }
 
   private sortDepartmentOperator(a: DepartmentModel, b: DepartmentModel): number {
@@ -143,10 +136,10 @@ export class DepartmentMultiselectComponent implements OnInit {
     const roleId = this.districtData.roleId;
     const districtId = this.districtData.districtId;
 
-    this.$data.getDepartmentsByDistrict(roleId, districtId).subscribe(data => {
+    this.$data.getDepartmentsByDistrict(roleId, districtId).subscribe((data) => {
       this.departments = data;
-      this.unselectedDepartments = this.departments.filter(department => !department.isSelectedDepartment);
-      this.selectedDepartments = this.departments.filter(department => department.isSelectedDepartment);
+      this.unselectedDepartments = this.departments.filter((department) => !department.isSelectedDepartment);
+      this.selectedDepartments = this.departments.filter((department) => department.isSelectedDepartment);
     });
   }
 
@@ -157,8 +150,8 @@ export class DepartmentMultiselectComponent implements OnInit {
   private setUpdatedDepartmentsList(departments: DepartmentModel[]): void {
     const changedDepartments = this.mapChangedDepartments(departments);
     this.updatedDepartments = this.updatedDepartments
-                                .filter(updatedDeparment => !changedDepartments.includes(updatedDeparment))
-                                .concat(changedDepartments);
+      .filter((updatedDeparment) => !changedDepartments.includes(updatedDeparment))
+      .concat(changedDepartments);
   }
 
   /**

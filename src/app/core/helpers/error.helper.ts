@@ -9,10 +9,6 @@ import { HttpResponseStatusCode } from '@core/configs/http-response-code';
  */
 export class ErrorHelper {
   /**
-   *
-   */
-  constructor() {}
-  /**
    * Get an error message from Http error properties
    * @param error Http Error
    */

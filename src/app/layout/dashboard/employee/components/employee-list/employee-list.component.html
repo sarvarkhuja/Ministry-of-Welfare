@@ -3,24 +3,25 @@
   style="height: 84vh"
   [dataSource]="dataSource"
   [remoteOperations]="true"
-  [wordWrapEnabled]="true"
-  [showBorders]="true"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
   [columnAutoWidth]="true"
   [columnMinWidth]="columnMinWidth"
   [columnWidth]="columnWidth"
+  [rowAlternationEnabled]="true"
+  [showBorders]="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
   (onToolbarPreparing)="onToolbarPreparing($event)"
 >
-<dxi-column type="buttons" [width]="100">
-  <dxi-button hint="Edit" icon="edit" [onClick]="edit">
-  </dxi-button>
-</dxi-column>
+  <dxi-column type="buttons" [showInColumnChooser]="false" [width]="100">
+    <dxi-button hint="Edit" icon="edit" [onClick]="edit"> </dxi-button>
+  </dxi-column>
 
   <ng-template ngFor let-column [ngForOf]="columns">
     <dxi-column
       allowSearch="{{ column.allowSearch }}"
-      caption="{{ column.captionInEnglish }}"
+      caption="{{ isHebrew ? column.caption : column.captionInEnglish }}"
       dataField="{{ column.dataField }}"
       dataType="{{ column.dataType }}"
       format="{{ column.format }}"
@@ -35,7 +36,6 @@
   <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
 
   <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
-  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
   <dxo-paging [pageSize]="pageSize"></dxo-paging>
   <dxo-sorting mode="multiple"></dxo-sorting>

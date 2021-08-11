@@ -1,13 +1,12 @@
-import { PermissionState } from './../../shared/store/permission/permission.state';
-import { Store } from '@ngxs/store';
-import { Injectable, Inject } from '@angular/core';
-import { Init } from './interfaces/init';
+import { Injectable } from '@angular/core';
 import { ActionType } from '@layout/dashboard/roles/models/action-type.enum';
+import { Store } from '@ngxs/store';
+import { PermissionState } from './../../shared/store/permission/permission.state';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionService implements Init {
+export class PermissionService {
   /**
    * Constructor
    * @param endpoint Backend base url
@@ -15,12 +14,6 @@ export class PermissionService implements Init {
    * @param store Global storage
    */
   constructor(private store: Store) {}
-
-  /**
-   * Initializes necessary properties, calls necessary functions
-   * @returns `void`
-   */
-  init(): void {}
 
   /**
    * Checks whether given permission `code` exists in storage in a browser
@@ -34,6 +27,6 @@ export class PermissionService implements Init {
   hasAccessToMenu(code: string): boolean {
     const entries = this.store.selectSnapshot(PermissionState.entriesByCode(code));
 
-    return entries.some(entry => entry.actionId !== ActionType.Deny);
+    return entries.some((entry) => entry.actionId !== ActionType.Deny);
   }
 }

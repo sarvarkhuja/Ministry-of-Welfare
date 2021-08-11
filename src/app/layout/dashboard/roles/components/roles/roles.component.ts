@@ -3,8 +3,7 @@ import { DistrictModel } from './../../models/district.model';
 import { RolesPermissionComponent } from './roles-permission/roles-permission.component';
 import { RolesService } from './../../services/roles.service';
 import { ActivatedRoute } from '@angular/router';
-import { ViewChild, OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { ViewChild, OnInit, Component } from '@angular/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { DepartmentModel } from '../../models/department.model';
 

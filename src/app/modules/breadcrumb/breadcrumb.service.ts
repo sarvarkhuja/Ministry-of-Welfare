@@ -1,7 +1,7 @@
 import { BreadcrumbResolver } from './breadcrumb.resolver';
 import { filter, mergeMap, toArray, concatMap, distinct, first, tap } from 'rxjs/operators';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { Injectable, Inject, Injector, OnDestroy, Type } from '@angular/core';
+import { Injectable, Injector, OnDestroy, Type } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subscription, concat, isObservable, from } from 'rxjs';
 import { Breadcrumb } from './breadcrumb';
 

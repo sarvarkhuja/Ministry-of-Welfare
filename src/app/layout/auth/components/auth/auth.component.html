@@ -25,48 +25,27 @@
 <footer class="footer-wrapper">
   <ul class="footer-inner container-fluid">
     <li>
-      {{ "עזרה" | translate: "Help" }}
+      {{ 'עזרה' | translate: 'Help' }}
     </li>
     <li kendoTooltip position="top">
       <span title="Build version: ">
-        {{ "אודות" | translate: "About" }}
+        {{ 'אודות' | translate: 'About' }}
       </span>
     </li>
     <li kendoTooltip position="top">
-      <!-- <kendo-dropdownlist
-        #dropdownlist
-        class="my-auto width-260 mx-1"
-        [data]="languages"
-        textField="text"
-        valueField="value"
-        [value]="currentLanguage"
-        [valuePrimitive]="true"
-        (valueChange)="selectLanguage($event)"
-      >
-        <ng-template kendoDropDownListValueTemplate let-dataItem>
-          <img class="pl-2" src="assets/images/language.svg" alt="" />
-          <span class="template-dropdown-header">{{ dataItem.text }}</span>
-        </ng-template>
-        <ng-template kendoDropDownListItemTemplate let-dataItem>
-          <div class="d-flex m-1 w-100">
-            <span class="template flex-grow-1">{{ dataItem.text }}</span>
-          </div>
-        </ng-template>
-      </kendo-dropdownlist> -->
       <dx-drop-down-button
-        class="my-auto width-260 mx-1"
-        [items]="languages"
+        class="language-dropdown"
         displayExpr="text"
+        icon="assets/images/language.svg"
         keyExpr="value"
+        [activeStateEnabled]="false"
+        [focusStateEnabled]="false"
+        [hoverStateEnabled]="false"
+        [items]="languages"
         [useSelectMode]="true"
         [selectedItemKey]="currentLanguage"
         (onItemClick)="selectLanguage($event)"
-      >
-        <ng-template dropDownContentTemplate let-dataItem>
-          <img class="pl-2" src="assets/images/language.svg" alt="" />
-          <span class="template-dropdown-header">{{ dataItem.text }}</span>
-        </ng-template>
-      </dx-drop-down-button>
+      ></dx-drop-down-button>
     </li>
   </ul>
 </footer>

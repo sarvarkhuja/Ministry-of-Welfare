@@ -8,10 +8,10 @@ export class PersonalDetail {
   department?: any;
   birthDate!: Date;
   sex!: string;
-  lastChildBirthDate?: any;
+  youngestChildBirthDate!: Date;
   employeeStatusId?: any;
   employeeStatus?: any;
-  professionalSeniority!: Date;
+  professionalSeniority?: Date;
   socialTrainingId?: any;
   socialTraining?: any;
   degreeId?: any;

@@ -4,7 +4,6 @@ import { AuthState } from './auth/auth.state';
 import { UserInfoState } from './configurations/user-info/user-info.state';
 import { LookupsState } from './lookups/lookups.state';
 import { SystemConfigState } from './configurations/system-config/system-config.state';
-import { ResourcesState } from './translations/resource.state';
 import { GridSettingsState } from './grid/grid-settings.state';
 
 /**
@@ -12,7 +11,6 @@ import { GridSettingsState } from './grid/grid-settings.state';
  */
 export const StateList = [
   GridSettingsState,
-  ResourcesState,
   SystemConfigState,
   UserInfoState,
   LookupsState,
@@ -26,7 +24,6 @@ export const StateList = [
  */
 export const StorageStateList = [
   GridSettingsState,
-  ResourcesState,
   SystemConfigState,
   LookupsState,
   UserInfoState,

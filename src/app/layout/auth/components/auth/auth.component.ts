@@ -1,7 +1,9 @@
-import { AuthHelper } from './../../services/auth.helper';
 import { Component, OnInit } from '@angular/core';
-import { Storage } from 'src/app/core/helpers/storage.helper';
 import { LANGUAGE, LANGUAGES } from 'src/app/core/configs/language.settings';
+import { Storage } from 'src/app/core/helpers/storage.helper';
+import { LanguageHelper } from './../../../../core/helpers/language.helper';
+import { AuthHelper } from './../../services/auth.helper';
+
 @Component({
   selector: 'auth',
   templateUrl: './auth.component.html',
@@ -9,12 +11,12 @@ import { LANGUAGE, LANGUAGES } from 'src/app/core/configs/language.settings';
 })
 export class AuthComponent implements OnInit {
   /**
-   *
+   * List of languages shown in dropdown
    */
   languages = LANGUAGES;
 
   /**
-   *
+   * Currently chosen language
    */
   currentLanguage!: string;
 
@@ -27,23 +29,17 @@ export class AuthComponent implements OnInit {
   }
 
   /**
-   *
+   * Loads the current language (hebrew is set by default)
    */
-  loadLanguage(): void {
-    const currentLanguage = Storage.getLocal(LANGUAGE);
-    if (!currentLanguage) {
-      Storage.setLocal(LANGUAGE, LANGUAGES[0].value);
-      this.currentLanguage = LANGUAGES[0].value;
-      return;
-    }
-    this.currentLanguage = currentLanguage;
-  }
+  loadLanguage = () => (this.currentLanguage = LanguageHelper.getCurrentLanguage());
 
   /**
-   *
+   * Called when language is selected in dropdown
+   * Changes the current language to the selected option
+   * @param event event emitted on language option click
    */
-  selectLanguage(languageCode: string): void {
-    this.currentLanguage = languageCode;
+  selectLanguage(event: any): void {
+    this.currentLanguage = event.itemData.value;
     Storage.setLocal(LANGUAGE, this.currentLanguage);
   }
 }

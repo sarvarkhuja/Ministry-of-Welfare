@@ -1,20 +1,21 @@
-import { UrlString } from './../../../../../core/enums/url.enum';
-import { UrlHelper } from './../../../../../core/helpers/url.helper';
-import { BaseGridComponent } from 'src/app/core/components/base-grid.component';
-import { EndpointSettings } from './../../../../../core/configs/endpoint.settings';
-import { ColumnSetting } from './../../../../../core/configs/column-settings';
+import { Tabs } from './../../../employee-information/models/tab-navigation.helper';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Template } from './../../models/get-templates';
-import { EmployeesListQuery } from './../../models/queries/employees-list.query';
-import { map } from 'rxjs/operators';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { EmployeeService } from './../../services/employee.service';
-import { TemplateColumn } from './../../models/get-template-columns';
-import { EmployeeModel } from './../../models/employee.model';
+import { UrlString } from '@core/enums/url.enum';
 import { Store } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { SaveTemplate } from '../../models/save-template.model';
+import { map } from 'rxjs/operators';
+import { BaseGridComponent } from 'src/app/core/components/base-grid.component';
 import { ColumnType } from 'src/app/core/configs/column-settings';
+import { SaveTemplate } from '../../models/save-template.model';
+import { ColumnSetting } from './../../../../../core/configs/column-settings';
+import { EndpointSettings } from './../../../../../core/configs/endpoint.settings';
+import { LanguageHelper } from './../../../../../core/helpers/language.helper';
+import { EmployeeModel } from './../../models/employee.model';
+import { TemplateColumn } from './../../models/get-template-columns';
+import { Template } from './../../models/get-templates';
+import { EmployeesListQuery } from './../../models/queries/employees-list.query';
+import { EmployeeService } from './../../services/employee.service';
 
 enum STATUS {
   initial = -1,
@@ -37,7 +38,7 @@ const SKIPPING_COLUMNS_NUMBER = 1;
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss'],
 })
-export class EmployeeListComponent extends BaseGridComponent {
+export class EmployeeListComponent extends BaseGridComponent implements OnInit {
   public firstName: string | undefined;
   public isSaved = false;
   public listItems!: Template[];
@@ -141,6 +142,11 @@ export class EmployeeListComponent extends BaseGridComponent {
   data$!: Observable<any>;
 
   /**
+   * Used to check the currently chosen language
+   */
+  isHebrew!: boolean;
+
+  /**
    *
    */
   constructor(
@@ -157,10 +163,10 @@ export class EmployeeListComponent extends BaseGridComponent {
   /**
    *
    */
-  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit(): void {
     super.ngOnInit();
     this.loadData();
+    this.isHebrew = LanguageHelper.isHebrew();
   }
 
   /**
@@ -171,27 +177,10 @@ export class EmployeeListComponent extends BaseGridComponent {
   }
 
   /**
-   * Creates toolbar to be displayed above the grid
-   * @param event emitted on grid load (onToolbarPreparing)
-   * TODO: add hebrew translation
-   */
-  onToolbarPreparing(event: any) {
-    event.toolbarOptions.items.unshift({
-      location: 'after',
-      widget: 'dxButton',
-      options: {
-        width: 100,
-        text: 'Add',
-        onClick: this.add.bind(this),
-      },
-    });
-  }
-
-  /**
    * Redirects to personal details tab in add mode
    */
   add(): void {
-    this.router.navigate([UrlString.EMPLOYEE_INFORMATION]);
+    this.router.navigate([UrlString.EMPLOYEE_INFORMATION, 'add']);
   }
 
   /**
@@ -200,7 +189,7 @@ export class EmployeeListComponent extends BaseGridComponent {
    */
   edit(event: any): void {
     const data = event.row.data;
-    this.router.navigate([UrlString.EMPLOYEE_INFORMATION, 'edit', data.nationalId]);
+    this.router.navigate([UrlString.EMPLOYEE_INFORMATION, data.nationalId, Tabs.PERSONAL_DETAILS]);
   }
 
   // TODO: old logic, remove once rewritten or checked

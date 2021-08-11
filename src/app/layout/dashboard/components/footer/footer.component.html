@@ -16,13 +16,16 @@
       </dx-tooltip>
     </li>
     <li>
-      <!-- TODO: add hebrew translation -->
       <dx-select-box
         displayExpr="name"
-        placeholder="Select theme..."
         valueExpr="value"
+        width="auto"
+        [activeStateEnabled]="false"
+        [focusStateEnabled]="false"
+        [hoverStateEnabled]="false"
         [items]="themes"
-        (onValueChanged)="onValueChanged($event)"
+        [(value)]="theme"
+        (onValueChanged)="onThemeValueChanged($event)"
       ></dx-select-box>
     </li>
   </ul>

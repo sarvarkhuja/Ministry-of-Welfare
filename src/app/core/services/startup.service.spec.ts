@@ -1,14 +1,9 @@
-import { AppModule } from './../../app.module';
-import { TestBed, async, inject } from '@angular/core/testing';
-import { StartupService } from './startup.service';
-import { configureBeforeAll } from '../testing.utils';
+import { inject, TestBed } from '@angular/core/testing';
 import { ENDPOINT_PROVIDER } from '../configs/providers.settings';
+import { AppModule } from './../../app.module';
+import { StartupService } from './startup.service';
 
 describe('Service: Startup', () => {
-  beforeAll(() => {
-    // configureBeforeAll();
-  });
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule],

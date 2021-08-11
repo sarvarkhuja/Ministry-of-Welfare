@@ -1,13 +1,13 @@
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
-import { takeUntil, delay } from 'rxjs/operators';
-import { AuthService } from './../../../auth/services/auth.service';
-import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
-import { SetChosenEmloyeeCode, SetUserData } from 'src/app/shared/store/configurations/user-info/user-info.action';
-import { SignOut } from 'src/app/shared/store/auth/auth.action';
-import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Store } from '@ngxs/store';
+import { of } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
+import { SignOut } from 'src/app/shared/store/auth/auth.action';
+import { SetChosenEmloyeeCode } from 'src/app/shared/store/configurations/user-info/user-info.action';
+import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
+import { AuthService } from './../../../auth/services/auth.service';
 
 export interface ColumnSettings {
   field: string;

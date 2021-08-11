@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'general-courses-tab',
   templateUrl: './general-courses-tab.component.html',
-  styleUrls: ['./general-courses-tab.component.scss']
+  styleUrls: ['./general-courses-tab.component.scss'],
 })
-export class GeneralCoursesTabComponent {
-
-  constructor() { }
-}
+export class GeneralCoursesTabComponent {}

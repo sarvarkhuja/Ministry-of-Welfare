@@ -1,19 +1,16 @@
-import { selectMap } from './../../../../../../../core/configs/rxjs.settings';
-import { LookupModel } from 'src/app/core/models/lookup.model';
-import { EmployeeRadioButton } from './../../../../models/employee-radio-button.enum';
-import { Gender } from './../../../../models/gender.enum';
-import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { UrlString } from '@core/enums/url.enum';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AddUpdateEmployeeModel } from '@layout/dashboard/employee-information/models/add-update-employee.model';
+import { EmployeeQuickSearch } from '@layout/dashboard/employee-information/models/employee-quicksearch.model';
+import { DxFormComponent } from 'devextreme-angular';
 import { Observable } from 'rxjs';
-import { UpdateEmployeeModel } from '../../../../models/update-employee.model';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DateHelper } from 'src/app/core/helpers/date.helper';
+import { LookupModel } from 'src/app/core/models/lookup.model';
 import { PersonalDetail } from '../../../../models/personal-detail.model';
 import { EmployeeInformationService } from '../../../../services/employee-information.service';
-import { AddEmployeeModel } from '../../../../models/add-employee.model';
-import { calculateWithoutTimeOffset } from 'src/app/core/utils';
-import { event } from 'devextreme/events';
-
+import { selectMap } from './../../../../../../../core/configs/rxjs.settings';
+import { Gender } from './../../../../models/gender.enum';
 
 @Component({
   selector: 'personal-details-tab',
@@ -22,39 +19,15 @@ import { event } from 'devextreme/events';
 })
 export class PersonalDetailsTabComponent implements OnInit {
   /**
-   * Employee form
+   * DevExtreme form
    */
-  form!: FormGroup;
+  @ViewChild(DxFormComponent, { static: false })
+  form!: DxFormComponent;
 
   /**
-   * TODO: logic should be clarified
+   * Employee personal details
    */
-  jobsConnection = 'ל';
-
-
-  priorities: string[]= [
-    "Low", 
-    "Normal", 
-    "Urgent", 
-    "High"
-];
-  /**
-   *
-   */
-  @Input()
-  personalDetail!: PersonalDetail;
-
-  /**
-   *
-   */
-  @Output()
-  update = new EventEmitter<UpdateEmployeeModel>();
-
-  /**
-   *
-   */
-  @Output()
-  add = new EventEmitter<AddEmployeeModel>();
+  personalDetails!: Observable<PersonalDetail>;
 
   /**
    * Lookups
@@ -69,51 +42,58 @@ export class PersonalDetailsTabComponent implements OnInit {
   proficiencyRewards$!: Observable<LookupModel[]>;
   generalCourses$!: Observable<LookupModel[]>;
   generalTrainings$!: Observable<LookupModel[]>;
-  specialCourses$!: Observable<LookupModel[]>;
-  specialTrainings$!: Observable<LookupModel[]>;
+  courseCycles$!: Observable<LookupModel[]>;
+  trainingsCycles$!: Observable<LookupModel[]>;
   wagesAdditions$!: Observable<LookupModel[]>;
 
   /**
-   * Default lookup values
+   * Text-value of gender radio button
    */
-  defaultStatus!: LookupModel;
-  defaultSocialTraining!: LookupModel;
-  defaultEducationDegree!: LookupModel;
-  defaultEducationLevel!: LookupModel;
-  defaultLeaveReason!: LookupModel;
-  defaultCommitment!: LookupModel;
-  defaultCourseCycle!: LookupModel;
-  defaultTrainingCycle!: LookupModel;
-  defaultGeneralCourse!: LookupModel;
-  defaultGeneralTraining!: LookupModel;
-  defaultPersonalRank!: LookupModel;
-  defaultProficiencyReward!: LookupModel;
-  defaultWageAdditions!: LookupModel;
-
-
-truefalse = [
-    { text: 'Yes', value: true },
-    { text: 'No', value: false }
+  genderSelection = [
+    { text: 'זכר', value: 1 },
+    { text: 'נקבה', value: 2 },
   ];
+
   /**
-   * Default education years value to be displayed in the form
+   * Text-value of other radio buttons
    */
+  radioButtonOptions = [
+    { text: 'Yes', value: 'כ' },
+    { text: 'No', value: 'ל' },
+  ];
+
+  /**
+   * Default values to be displayed in the form
+   */
+  defaultRadioButtonValue = this.radioButtonOptions[1].value;
+  defaultEmployeeStatus = 1; // Active
+  defaultStartDate = new Date();
   defaultEducationYears = 0;
-
-  /**
-   * Default frame percent value to be displayed in the form
-   */
   defaultFramePercent = 100;
+  defaultJobsPercent = 100;
+  defaultLeaveReason = 0;
 
   /**
-   * Default jobs percent value to be displayed in the form
+   * Properties used to validate the form
    */
-  defaultJobsPercent = 100.0;
-
-  /**
-   * Data of specific employee retrieved from back
-   */
-  employeeData!: any;
+  minBirthDate!: Date;
+  maxBirthDate!: Date;
+  minChildBirthDate!: Date;
+  maxChildBirthDate!: Date;
+  minProfessionalSeniority!: Date;
+  maxProfessionalSeniority!: Date;
+  minStartDate!: Date;
+  maxStartDate!: Date;
+  minExpertDate!: Date;
+  maxExpertDate!: Date;
+  minAge = 18;
+  maxAge = 67;
+  minChildAge = 1;
+  maxChildAge = 17;
+  minProfessionalSeniorityYears = 0;
+  maxProfessionalSeniorityYears = 50;
+  minStartYear = 5;
+  minExpertYear = 50;
 
   /**
    * Value to be passed to datepickers [format] attribute
@@ -123,277 +103,164 @@ truefalse = [
   }
 
   /**
-   * Form fields
-   */
-  get fields(): any {
-    return this.form.controls;
-  }
-
-  /**
    * Gender enum
    */
   get gender(): typeof Gender {
     return Gender;
   }
 
-  /**
-   * Radio button enum
-   */
-  get radioButton(): typeof EmployeeRadioButton {
-    return EmployeeRadioButton;
-  }
-  constructor(
-    private $data: EmployeeInformationService,
-    
-    // public intl: IntlService,
-    // private notificationService: NotificationService
-  ) {
-    
-  }
+  constructor(private $data: EmployeeInformationService, private router: Router) {}
 
-  employee!:Observable<PersonalDetail> 
   /**
    *
    */
   ngOnInit(): void {
+    this.getPersonalDetails();
     this.getLookups();
-    //this.createFormGroup();
-    //this.getEmployeePersonalDetails();
-    this.employee=this.$data.getPersonalDetails(4739)
-
-    console.log(this.employee);
-    
-
-    
-  }
-  onFormSubmit = function(e:Event):any {
-    console.log("dasd");
-    
-    
-    e.preventDefault();
-}
-  public modelToForm(model: PersonalDetail): void {
-    this.form.patchValue(model);
-    this.employeeData = model;
+    this.setValidators();
   }
 
   /**
-   * Form controls for adding employee
+   * Called on Save button click
+   * @param event emitted on form submit
    */
-  public createFormGroup(): void {
-    this.form = new FormGroup({
-      birthDate: new FormControl(),
-      sexId: new FormControl(this.gender.FEMALE),
-      lastChildBirthDate: new FormControl(),
-      employeeStatusId: new FormControl(),
-      professionalSeniority: new FormControl(),
-      socialWorkerTraining: new FormControl(),
-      socialTrainingId: new FormControl(),
-      degree: new FormControl(),
-      degreeId: new FormControl(),
-      education: new FormControl(),
-      educationLevelId: new FormControl(),
-      educationYears: new FormControl(this.defaultEducationYears),
-      startDate: new FormControl(new Date()),
-      endDate: new FormControl(),
-      leaveReason: new FormControl(),
-      leaveReasonId: new FormControl(),
-      commitment: new FormControl(),
-      commitmentId: new FormControl(),
-      increasedWages: new FormControl(this.radioButton.NO),
-      proficiencyReward: new FormControl(),
-      proficiencyRewardId: new FormControl(),
-      diplomaReward: new FormControl(this.radioButton.NO),
-      personalRank: new FormControl(this.radioButton.NO),
-      generalCourse: new FormControl(),
-      generalCourseId: new FormControl(),
-      generalTraining: new FormControl(),
-      generalTrainingId: new FormControl(),
-      course: new FormControl(),
-      courseCycleId: new FormControl(),
-      training: new FormControl(),
-      trainingId: new FormControl(),
-      wagesAdditions: new FormControl(),
-      wagesAdditionsId: new FormControl(),
-      framePercent: new FormControl(this.defaultFramePercent),
-      expertDate: new FormControl(),
+  public onFormSubmit = (event: any): any => {
+    event.preventDefault();
+    this.saveEmployee();
+  };
+
+  /**
+   * Adds new employee if in add mode
+   * Updates existing employee data if in udpate mode
+   */
+  private saveEmployee = () => {
+    const data = this.getEmployeeFormValues();
+    this.personalDetails ? this.updateEmployee(data) : this.addEmployee(data);
+  };
+
+  /**
+   * Sends request to add new employee
+   * @param employeeData data from personal details tab
+   */
+  private addEmployee(employeeData: AddUpdateEmployeeModel): void {
+    const query = this.prepareQuery(employeeData);
+    this.$data.addEmployee(query).subscribe(() => {
+      this.router.navigate([UrlString.EMPLOYEES]);
     });
   }
 
   /**
-   * Sends new employee data to back
-   * Called on add button click
+   * Sends request to update existing employee
+   * @param employeeData data from personal details tab
    */
-  public saveEmployee(): void {
-    if (this.personalDetail.nationalId) {
-      this.update.emit(this.bodyForEdit());
-      return;
-    }
-    this.add.emit(this.bodyForAdd());
+  private updateEmployee(employeeData: AddUpdateEmployeeModel): void {
+    const query = this.prepareQuery(employeeData);
+    this.$data.updateEmployee(query).subscribe();
   }
 
   /**
-   * Navigates back to employees screen on Close click
+   * Prepares query to add or update employee
+   * @param employeeData data from personal details tab
+   * @returns query
    */
-  public closeEmployeeForm(): void {
-    // this.notificationService.show({
-    //   content: 'Your data has been saved. Time for tea',
-    //   cssClass: 'button-notification',
-    //   animation: { type: 'fade', duration: 400 },
-    //   position: { horizontal: 'left', vertical: 'top' },
-    //   type: { style: 'success', icon: true },
-    //   closable: true,
-    //   hideAfter: 2000,
-    // });
-  }
+  private prepareQuery = (employeeData: AddUpdateEmployeeModel) => {
+    const employeeQuickSearch = this.$data.employeeQuickSearchData ?? new EmployeeQuickSearch();
 
-  bodyForEdit(): UpdateEmployeeModel {
     return {
-      birthDate: this.getDate(this.fields.birthDate?.value),
-      sex: this.fields.sexId.value,
-      lastChildBirthDate: this.getDate(this.fields.lastChildBirthDate?.value),
-      employeeStatus: this.fields.employeeStatusId.value,
-      professionalSeniority: this.getDate(this.fields.professionalSeniority.value),
-      degree: this.fields.degreeId.value || this.defaultEducationDegree.entryNumber,
-      education: this.fields.educationLevelId.value || this.defaultEducationLevel.entryNumber,
-      educationYears: this.fields.educationYears.value,
-      startDate: this.getDate(this.fields.startDate?.value),
-      endDate: this.getDate(this.fields.endDate?.value),
-      commitment: this.fields.commitmentId.value || this.defaultCommitment.entryNumber,
-      leaveReason: this.fields.leaveReasonId.value || this.defaultLeaveReason.entryNumber,
-      increasedWages: this.fields.increasedWages.value || this.radioButton.NO,
-      proficiencyReward: this.fields.proficiencyRewardId.value || this.defaultProficiencyReward.entryNumber,
-      diplomaReward: this.fields.diplomaReward.value || this.radioButton.NO,
-      personalRank: this.fields.personalRank.value || this.radioButton.NO,
-      generalCourse: this.fields.generalCourseId.value || this.defaultGeneralCourse.entryNumber,
-      generalTraining: this.fields.generalTrainingId.value || this.defaultGeneralTraining.entryNumber,
-      course: this.fields.courseCycleId.value || this.defaultCourseCycle.entryNumber,
-      training: this.fields.trainingId.value,
-      wagesAdditions: this.fields.wagesAdditionsId.value || this.defaultWageAdditions.entryNumber,
-      framePercent: this.fields.framePercent.value,
-      expertDate: this.getDate(this.fields.expertDate?.value),
-      socialWorkerTraining: this.fields.socialTrainingId.value || this.defaultSocialTraining.entryNumber,
+      firstName: employeeQuickSearch.firstName,
+      lastName: employeeQuickSearch.lastName,
+      nationalId: employeeQuickSearch.nationalId,
+      department: employeeQuickSearch.departmentId,
+      ...employeeData,
     };
-  }
+  };
 
   /**
    *
    */
-  bodyForAdd(): AddEmployeeModel {
+  private getEmployeeFormValues(): AddUpdateEmployeeModel {
+    const optionName = 'formData';
+
     return {
-      birthDate: this.getDate(this.fields.birthDate?.value),
-      sex: this.fields.sexId.value,
-      employeeStatus: this.fields.employeeStatusId.value || this.defaultStatus?.entryNumber,
-      professionalSeniority: this.getDate(this.fields.professionalSeniority.value),
-      degree: this.fields.degreeId.value || this.defaultEducationDegree?.entryNumber,
-      education: this.fields.educationLevelId.value || this.defaultEducationLevel?.entryNumber,
-      educationYears: this.fields.educationYears.value,
-      startDate: this.getDate(this.fields.startDate?.value),
-      endDate: this.getDate(this.fields.endDate?.value),
-      commitment: this.fields.commitmentId.value,
-      leaveReason: this.fields.leaveReasonId.value || this.defaultLeaveReason?.entryNumber,
-      increasedWages: this.fields.increasedWages.value,
-      proficiencyReward: this.fields.proficiencyRewardId.value,
-      diplomaReward: this.fields.diplomaReward.value,
-      personalRank: this.fields.personalRank.value,
-      generalCourse: this.fields.generalCourseId.value,
-      generalTraining: this.fields.generalTrainingId.value,
-      course: this.fields.courseCycleId.value,
-      training: this.fields.trainingId.value,
-      wagesAdditions: this.fields.wagesAdditionsId.value,
-      framePercent: this.fields.framePercent.value,
-      expertDate: this.getDate(this.fields.expertDate?.value),
-      lastChildBirthDate: this.getDate(this.fields.lastChildBirthDate?.value),
-      socialWorkerTraining: this.fields.socialTrainingId.value || this.defaultSocialTraining?.entryNumber,
-      jobsConnection: this.jobsConnection,
-      jobsPercent: this.fields.jobsPercent || this.defaultJobsPercent,
+      birthDate: DateHelper.calculateWithoutTimeOffset(this.form.instance.option(optionName).birthDate),
+      sex: this.form.instance.option(optionName).sex,
+      lastChildBirthDate: DateHelper.calculateWithoutTimeOffset(
+        this.form.instance.option(optionName).youngestChildBirthDate
+      ),
+      employeeStatus: this.form.instance.option(optionName).employeeStatus,
+      professionalSeniority: DateHelper.calculateWithoutTimeOffset(
+        this.form.instance.option(optionName).professionalSeniority
+      ),
+      socialWorkerTraining: this.form.instance.option(optionName).socialTraining,
+      degree: this.form.instance.option(optionName).degree,
+      education: this.form.instance.option(optionName).education,
+      educationYears: this.form.instance.option(optionName).educationYears,
+      startDate: this.form.instance.option(optionName).startDate,
+      endDate: this.form.instance.option(optionName).endDate,
+      leaveReason: this.form.instance.option(optionName).leaveReason,
+      commitment: this.form.instance.option(optionName).obligation,
+      increasedWages: this.form.instance.option(optionName).increasedWages,
+      proficiencyReward: this.form.instance.option(optionName).proficiencyReward,
+      diplomaReward: this.form.instance.option(optionName).diplomaReward,
+      personalRank: this.form.instance.option(optionName).personalRank,
+      generalCourse: this.form.instance.option(optionName).generalCourse,
+      generalTraining: this.form.instance.option(optionName).generalTraining,
+      course: this.form.instance.option(optionName).courseCycle,
+      training: this.form.instance.option(optionName).trainingCycle,
+      wagesAdditions: this.form.instance.option(optionName).wagesAdditions,
+      framePercent: this.form.instance.option(optionName).framePercent,
+      expertDate: DateHelper.calculateWithoutTimeOffset(this.form.instance.option(optionName).expertDate),
     };
   }
 
   /**
-   * Returns date in dd-MM-yyyy format
-   * @param date date to be formatted
-   * @returns formatted date
+   * Gets personal details from service
    */
-  private getDate(date: Date): Date | undefined {
-    // const formattedDate = new Date(this.intl.formatDate(new Date(date), this.dateFormat));
-
-    return calculateWithoutTimeOffset(date);
+  private getPersonalDetails(): void {
+    if (this.$data.nationalId) {
+      this.personalDetails = this.$data.personalDetails;
+    }
   }
+
+  /**
+   * Sets validators of type 'range'
+   */
+  private setValidators(): void {
+    this.minBirthDate = DateHelper.subtractTimeUnitFromDate(this.maxAge);
+    this.maxBirthDate = DateHelper.subtractTimeUnitFromDate(this.minAge);
+    this.minChildBirthDate = DateHelper.subtractTimeUnitFromDate(this.maxChildAge);
+    this.maxChildBirthDate = DateHelper.subtractTimeUnitFromDate(this.minChildAge);
+    this.minProfessionalSeniority = DateHelper.subtractTimeUnitFromDate(this.maxProfessionalSeniorityYears);
+    this.maxProfessionalSeniority = DateHelper.subtractTimeUnitFromDate(this.minProfessionalSeniorityYears);
+    this.minStartDate = DateHelper.subtractTimeUnitFromDate(this.minStartYear);
+    this.maxStartDate = new Date();
+    this.minExpertDate = DateHelper.subtractTimeUnitFromDate(this.minExpertYear);
+    this.maxExpertDate = new Date();
+  }
+
+  /**
+   * Gets date to which endDate is compared
+   * @returns start date value
+   */
+  getEndDateComparisonTarget = () => {
+    return this.form?.instance.option('formData')?.startDate;
+  };
 
   /**
    * Retrieves lookups data
    */
   private getLookups(): void {
-    this.statuses$ = this.$data.getEmployeeStatuses().pipe(
-      selectMap,
-      tap((data) => (this.defaultStatus = data[1]))
-    );
-
-    this.educationDegrees$ = this.$data.getEducationDegrees().pipe(
-      selectMap,
-      tap((data) => (this.defaultEducationDegree = data[0]))
-    );
-    this.educationLevels$ = this.$data.getEducationLevels().pipe(
-      selectMap,
-      tap((data) => (this.defaultEducationLevel = data[0]))
-    );
-    this.leaveReasons$ = this.$data.getLeaveReasons().pipe(
-      selectMap,
-      tap((data) => (this.defaultLeaveReason = data[0]))
-    );
-    this.commitments$ = this.$data.getCommitments().pipe(
-      selectMap,
-      tap((data) => (this.defaultCommitment = data[0]))
-    );
-    this.proficiencyRewards$ = this.$data.getProficiencyRewards().pipe(
-      selectMap,
-      tap((data) => (this.defaultProficiencyReward = data[0]))
-    );
-    this.generalCourses$ = this.$data.getCycleCourses().pipe(
-      selectMap,
-      tap((data) => (this.defaultGeneralCourse = data[0]))
-    );
-    this.generalTrainings$ = this.$data.getCycleTrainings().pipe(
-      selectMap,
-      tap((data) => (this.defaultGeneralTraining = data[0]))
-    );
-    this.specialCourses$ = this.$data.getSpecialCourses().pipe(
-      selectMap,
-      tap((data) => (this.defaultCourseCycle = data[0]))
-    );
-    this.specialTrainings$ = this.$data.getSpecialTrainings().pipe(
-      selectMap,
-      tap((data) => (this.defaultTrainingCycle = data[0]))
-    );
-    this.wagesAdditions$ = this.$data.getWagesAdditions().pipe(
-      selectMap,
-      tap((data) => (this.defaultWageAdditions = data[0]))
-    );
-  }
-
-  /**
-   * Get personal details of the chosen employee
-   */
-  private getEmployeePersonalDetails(): void {
-    if (this.personalDetail?.nationalId > 0) {
-      if (this.personalDetail.birthDate) {
-        this.personalDetail.birthDate = new Date(this.personalDetail.birthDate);
-      }
-
-      if (this.personalDetail.professionalSeniority) {
-        this.personalDetail.professionalSeniority = new Date(this.personalDetail.professionalSeniority);
-      }
-
-      this.personalDetail.endDate = DateHelper.toDate(this.personalDetail.endDate);
-
-      this.personalDetail.expertDate = DateHelper.toDate(this.personalDetail.expertDate);
-
-      this.personalDetail.lastChildBirthDate = DateHelper.toDate(this.personalDetail.lastChildBirthDate);
-
-      this.personalDetail.startDate = DateHelper.toDate(this.personalDetail.startDate);
-
-      this.modelToForm(this.personalDetail);
-    }
+    this.statuses$ = this.$data.getEmployeeStatuses().pipe(selectMap);
+    this.socialTrainings$ = this.$data.getSocialTrainings().pipe(selectMap);
+    this.educationDegrees$ = this.$data.getEducationDegrees().pipe(selectMap);
+    this.educationLevels$ = this.$data.getEducationLevels().pipe(selectMap);
+    this.leaveReasons$ = this.$data.getLeaveReasons().pipe(selectMap);
+    this.commitments$ = this.$data.getCommitments().pipe(selectMap);
+    this.proficiencyRewards$ = this.$data.getProficiencyRewards().pipe(selectMap);
+    this.generalCourses$ = this.$data.getSpecialCourses().pipe(selectMap);
+    this.generalTrainings$ = this.$data.getSpecialTrainings().pipe(selectMap);
+    this.courseCycles$ = this.$data.getCourseCycles().pipe(selectMap);
+    this.trainingsCycles$ = this.$data.getTrainingsCycles().pipe(selectMap);
+    this.wagesAdditions$ = this.$data.getWagesAdditions().pipe(selectMap);
   }
 }

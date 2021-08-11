@@ -1,17 +1,6 @@
 @import '../../../../../../assets/scss/utils/variables';
 @import '../../../../../../assets/scss/utils/functions';
 
-.k-grid {
-  border: none;
-}
-::ng-deep.k-grid .k-grid-aria-root{
-  border-width: 0 1px 1px;
-  border-color: $bcg-inactive;
-  border-style: solid;
-}
-::ng-deep.k-dialog-button-layout-stretched {
-  border: none;
-}
 .employee-title{
     margin: 0;
 }
@@ -78,11 +67,4 @@
       }
   }
   }
-}
-.primary-color{
-  color:$primary
-}
-
-.dx-rtl .dx-treeview-node-container .dx-treeview-node, .dx-rtl .dx-treeview-node-container .dx-treeview-node.dx-treeview-item-with-checkbox .dx-treeview-item, .dx-rtl .dx-treeview-node-container:first-child>.dx-treeview-node {
-  padding-left: 3rem !important;
 }

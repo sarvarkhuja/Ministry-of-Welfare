@@ -1,387 +1,418 @@
+<!-- TODO: translate validation errors once provided -->
 <div id="form-container" class="dx-rtl">
-  <dx-form id="form" [formData]="employee | async" [colCount]="4" action="your-action" (submit)="onFormSubmit($event)">
-    <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-      <!-- INPUT  -->
-      <dxi-item
-        dataField="birthDate"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Birth date' }"
-      >
+  <form (submit)="onFormSubmit($event)">
+    <dx-form id="form" [formData]="personalDetails | async" [colCount]="4" validationGroup="employeeData">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
+        <!-- Birth date | CALENDAR  -->
+        <dxi-item
+          dataField="birthDate"
+          editorType="dxDateBox"
+          [label]="{ text: ' תאריך לידה ' | translate: 'Birth date' }"
+          [editorOptions]="{ dataType: 'date', displayFormat: dateFormat, placeholder: dateFormat }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+          <dxi-validation-rule
+            type="range"
+            [min]="minBirthDate"
+            [max]="maxBirthDate"
+            message="Age must be between 18 and 67"
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Gender | CHECKBOX -->
+        <dxi-item
+          dataField="sex"
+          [label]="{ text: 'מין' | translate: 'Sex' }"
+          editorType="dxRadioGroup"
+          [editorOptions]="{
+            dataSource: genderSelection,
+            layout: 'horizontal',
+            displayExpr: 'text',
+            valueExpr: 'value',
+            value: gender.FEMALE
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Birth of last child | CALENDAR -->
+        <dxi-item
+          dataField="youngestChildBirthDate"
+          editorType="dxDateBox"
+          [label]="{ text: 'תאריך ליד ילד אחרון' | translate: 'Youngest Child Birthdate' }"
+          [editorOptions]="{ width: '100%', dataType: 'date', displayFormat: dateFormat, placeholder: dateFormat }"
+        >
+          <dxi-validation-rule
+            type="range"
+            [min]="minChildBirthDate"
+            [max]="maxChildBirthDate"
+            [ignoreEmptyValue]="true"
+            message="Child Age must be between 1 and 17"
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Employee Status | SELECTBOX -->
+        <dxi-item
+          dataField="employeeStatus"
+          editorType="dxSelectBox"
+          [label]="{ text: 'סטטוס עובד ' | translate: 'Employee Status' }"
+          [editorOptions]="{
+            dataSource: statuses$ | async,
+            displayExpr: 'textField',
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber',
+            value: defaultEmployeeStatus
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Professional Seniority | CALENDAR -->
+        <dxi-item
+          dataField="professionalSeniority"
+          editorType="dxDateBox"
+          [label]="{ text: 'ותק מקצועי' | translate: 'Professional Seniority' }"
+          [editorOptions]="{ width: '100%', dataType: 'date', displayFormat: dateFormat, placeholder: dateFormat }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+          <dxi-validation-rule
+            type="range"
+            [min]="minProfessionalSeniority"
+            [max]="maxProfessionalSeniority"
+            message="Seniority Years must be between 0 and 50"
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Social Training | SELECTBOX -->
+        <dxi-item
+          dataField="socialTraining"
+          editorType="dxSelectBox"
+          [label]="{ text: 'ה. סוציאלית' | translate: 'Social Worker Trainer' }"
+          [editorOptions]="{
+            dataSource: socialTrainings$ | async,
+            displayExpr: 'textField',
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Education degree | SELECTBOX -->
+        <dxi-item
+          dataField="degree"
+          editorType="dxSelectBox"
+          [label]="{ text: 'תואר' | translate: 'Degree' }"
+          [editorOptions]="{
+            dataSource: educationDegrees$ | async,
+            displayExpr: 'textField',
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+          <!-- Education level | SELECTBOX -->
+          <dxi-item
+            dataField="education"
+            editorType="dxSelectBox"
+            [label]="{ text: 'השכלה' | translate: 'Education' }"
+            [editorOptions]="{
+              dataSource: educationLevels$ | async,
+              displayExpr: 'textField',
+              searchEnabled: 'true',
+              valueExpr: 'entryNumber'
+            }"
+          >
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
+          </dxi-item>
+
+          <!-- Education Years | NUMBER BOX -->
+          <dxi-item
+            dataField="educationYears"
+            editorType="dxNumberBox"
+            [label]="{ text: 'שנות לימוד' | translate: 'Education Years' }"
+            [editorOptions]="{
+              min: 0,
+              value: defaultEducationYears
+            }"
+          >
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
+          </dxi-item>
+        </dxi-item>
       </dxi-item>
 
-      <!-- CHECKBOX  -->
-      <dxi-item
-        data-field="sexId"
-        [label]="{ text: 'מין' | translate: 'Sex' }"
-        editorType="dxRadioGroup"
-        [editorOptions]="{ dataSource: truefalse, layout: 'horizontal', valueExpr: 'value', displayExpr: 'text' }"
-      >
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
+        <!-- Start Work Date | CALENDAR  -->
+        <dxi-item
+          dataField="startDate"
+          editorType="dxDateBox"
+          [label]="{ text: 'ת. התחלה' | translate: 'Start Work Date' }"
+          [editorOptions]="{
+            width: '100%',
+            dataType: 'date',
+            displayFormat: dateFormat,
+            placeholder: dateFormat,
+            value: defaultStartDate
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+          <dxi-validation-rule
+            *ngIf="!personalDetails"
+            type="range"
+            [min]="minStartDate"
+            [max]="maxStartDate"
+            message="Start Date must be between 0 and 5"
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- End Work Date | CALENDAR  -->
+        <dxi-item
+          dataField="endDate"
+          editorType="dxDateBox"
+          [label]="{ text: 'ת. סיום' | translate: 'End Work Date' }"
+          [editorOptions]="{ width: '100%', dataType: 'date', displayFormat: dateFormat, placeholder: dateFormat }"
+        >
+        </dxi-item>
+
+        <!-- Leave Reason | SELECTBOX  -->
+        <dxi-item
+          dataField="leaveReason"
+          editorType="dxSelectBox"
+          [label]="{ text: 'סיבת סיום' | translate: 'Leave Reason' }"
+          [editorOptions]="{
+            dataSource: leaveReasons$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber',
+            value: defaultLeaveReason
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Commitment | SELECTBOX  -->
+        <dxi-item
+          dataField="obligation"
+          editorType="dxSelectBox"
+          [label]="{ text: 'התחייבויות' | translate: 'Commitment' }"
+          [editorOptions]="{
+            dataSource: commitments$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Increased wages | CHECKBOX  -->
+        <dxi-item
+          dataField="increasedWages"
+          [label]="{ text: 'שכר מוגדל' | translate: 'Increased wages' }"
+          editorType="dxRadioGroup"
+          [editorOptions]="{
+            dataSource: radioButtonOptions,
+            layout: 'horizontal',
+            displayExpr: 'text',
+            valueExpr: 'value',
+            value: defaultRadioButtonValue
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Proficiency Reward | SELECTBOX  -->
+        <dxi-item
+          dataField="proficiencyReward"
+          editorType="dxSelectBox"
+          [label]="{ text: 'ג. השתלמות' | translate: 'Proficiency Reward' }"
+          [editorOptions]="{
+            dataSource: proficiencyRewards$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Diploma Reward | CHECKBOX -->
+        <dxi-item
+          dataField="diplomaReward"
+          [label]="{ text: 'גמול תעודה' | translate: 'Diploma Reward' }"
+          editorType="dxRadioGroup"
+          [editorOptions]="{
+            dataSource: radioButtonOptions,
+            layout: 'horizontal',
+            displayExpr: 'text',
+            valueExpr: 'value',
+            value: defaultRadioButtonValue
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Personal Rank | CHECKBOX -->
+        <dxi-item
+          dataField="personalRank"
+          [label]="{ text: 'דרגה אישית' | translate: 'Personal Rank' }"
+          editorType="dxRadioGroup"
+          [editorOptions]="{
+            dataSource: radioButtonOptions,
+            layout: 'horizontal',
+            displayExpr: 'text',
+            valueExpr: 'value',
+            value: defaultRadioButtonValue
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
       </dxi-item>
 
-      <!-- CALENDAR  -->
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
+        <!-- General Course | SELECTBOX -->
+        <dxi-item
+          dataField="generalCourse"
+          editorType="dxSelectBox"
+          [label]="{ text: 'קורס כללי' | translate: 'General Course' }"
+          [editorOptions]="{
+            dataSource: generalCourses$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- General Training | SELECTBOX -->
+        <dxi-item
+          dataField="generalTraining"
+          editorType="dxSelectBox"
+          [label]="{ text: 'השת` כללי' | translate: 'General Training' }"
+          [editorOptions]="{
+            dataSource: generalTrainings$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- OZ Course | SELECTBOX -->
+        <dxi-item
+          dataField="courseCycle"
+          editorType="dxSelectBox"
+          [label]="{ text: 'קורס עו``ז' | translate: 'OZ Course' }"
+          [editorOptions]="{
+            dataSource: courseCycles$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- OZ Training | SELECTBOX -->
+        <dxi-item
+          dataField="trainingCycle"
+          editorType="dxSelectBox"
+          [label]="{ text: 'השת` עו``ז' | translate: 'OZ Training' }"
+          [editorOptions]="{
+            dataSource: trainingsCycles$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <!-- Wages Additions | SELECTBOX -->
+        <dxi-item
+          dataField="wagesAdditions"
+          editorType="dxSelectBox"
+          [label]="{ text: 'תוספות' | translate: 'Wages Additions' }"
+          [editorOptions]="{
+            dataSource: wagesAdditions$ | async,
+            displayExpr: 'textField',
+            readOnly: personalDetails,
+            searchEnabled: 'true',
+            valueExpr: 'entryNumber'
+          }"
+        >
+          <dxi-validation-rule type="required"> </dxi-validation-rule>
+        </dxi-item>
+
+        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+          <!-- Frame Percent | INPUT -->
+          <dxi-item
+            dataField="framePercent"
+            [label]="{ text: 'אחוז מסגרת' | translate: 'Frame Percent' }"
+            [editorOptions]="{ value: defaultFramePercent }"
+          >
+            <dxi-validation-rule type="range" [min]="1" [max]="100" message="Frame Percent Value is inappropriate">
+            </dxi-validation-rule>
+          </dxi-item>
+
+          <!-- Job Percent | INPUT -->
+          <dxi-item
+            dataField="jobPercent"
+            [label]="{ text: 'אחוז משרות' | translate: 'Job Percent' }"
+            [editorOptions]="{ value: defaultJobsPercent, disabled: true }"
+          ></dxi-item>
+        </dxi-item>
+
+        <!-- Job Connection | INPUT -->
+        <dxi-item
+          dataField="jobConnection"
+          [label]="{ text: 'קשר למשרות' | translate: 'Job Connection' }"
+          [editorOptions]="{ value: defaultRadioButtonValue, disabled: true }"
+        ></dxi-item>
+
+        <!-- Date of Becoming an Expert' | CALENDAR -->
+        <dxi-item
+          dataField="expertDate"
+          editorType="dxDateBox"
+          [label]="{ text: 'ת. מומחיות' | translate: 'Date of Becoming an Expert' }"
+          [editorOptions]="{
+            dataType: 'date',
+            displayFormat: dateFormat,
+            placeholder: dateFormat
+          }"
+        >
+          <dxi-validation-rule
+            type="range"
+            [min]="minExpertDate"
+            [max]="maxExpertDate"
+            [ignoreEmptyValue]="true"
+            message="Expert Date must be between 0 and 50"
+          >
+          </dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
       <dxi-item
-        dataField="lastChildBirthDate"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Birth of last child' }"
-        [editorOptions]="{ width: '100%' }"
+        cssClass="second-group"
+        itemType="button"
+        [buttonOptions]="{ text: 'שמירה' | translate: 'Save', type: 'success', useSubmitBehavior: true }"
       >
       </dxi-item>
-
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="employeeStatus"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: statuses$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-
-      <!-- CALENDAR  -->
-      <dxi-item
-        dataField="professionalSeniority"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Professional Seniority' }"
-        [editorOptions]="{ width: '100%' }"
-      >
-      </dxi-item>
-
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="employeeStatus"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: socialTrainings$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="employeeStatus"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: educationDegrees$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="employeeStatus"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: educationLevels$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-    </dxi-item>
-
-    <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-      <!-- CALENDAR  -->
-      <dxi-item
-        dataField="startDate"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Professional Seniority' }"
-        [editorOptions]="{ width: '100%' }"
-      >
-      </dxi-item>
-
-      <!-- CALENDAR  -->
-      <dxi-item
-        dataField="startDate"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Professional Seniority' }"
-        [editorOptions]="{ width: '100%' }"
-      >
-      </dxi-item>
-
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="leaveReasonId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: leaveReasons$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="commitmentId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: commitments$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- CHECKBOX  -->
-      <dxi-item
-        data-field="increasedWages"
-        [label]="{ text: 'מין' | translate: 'Increased Wages' }"
-        editorType="dxRadioGroup"
-        [editorOptions]="{ dataSource: truefalse, layout: 'horizontal', valueExpr: 'value', displayExpr: 'text' }"
-      >
-      </dxi-item>
-
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: proficiencyRewards$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-
-      <!-- CHECKBOX  -->
-      <dxi-item
-        data-field="diplomaReward"
-        [label]="{ text: 'מין' | translate: 'Diploma Reward' }"
-        editorType="dxRadioGroup"
-        [editorOptions]="{ dataSource: truefalse, layout: 'horizontal', valueExpr: 'value', displayExpr: 'text' }"
-      >
-      </dxi-item>
-      <!-- CHECKBOX  -->
-      <dxi-item
-        data-field="personalRank"
-        [label]="{ text: 'מין' | translate: 'Personal Rank' }"
-        editorType="dxRadioGroup"
-        [editorOptions]="{ dataSource: truefalse, layout: 'horizontal', valueExpr: 'value', displayExpr: 'text' }"
-      >
-      </dxi-item>
-
-      
-    </dxi-item>
-    <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: generalCourses$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: generalTrainings$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: specialCourses$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: specialTrainings$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- SELECTBOX  -->
-      <dxi-item
-        dataField="proficiencyRewardId"
-        editorType="dxSelectBox"
-        [editorOptions]="{ dataSource: wagesAdditions$ | async, displayExpr: 'description', valueExpr: 'code' }"
-      >
-      </dxi-item>
-      <!-- INPUT -->
-      <dxi-item
-        dataField="framePercent"
-        [label]="{ text: 'שמירה' | translate: 'frame Percent' }"
-      >
-      </dxi-item>
-      <!-- CALENDAR  -->
-      <dxi-item
-        dataField="expertDate"
-        editorType="dxDateBox"
-        [label]="{ text: ' תאריך לידה ' | translate: 'Birth of last child' }"
-        [editorOptions]="{ width: '100%' }"
-      >
-      </dxi-item>
-    </dxi-item>
-    <dxi-item cssClass="second-group">
-      <dx-button id="button" text="Register" type="success" [useSubmitBehavior]="true"> </dx-button>
-    </dxi-item>
-  </dx-form>
-</div>
-
-<!-- <div class="add-employee">
-  <div class="d-flex justify-content-sm-between">
-    <div class="d-flex"></div>
-
-    <div class="buttons d-flex">
-      <button class="primary-button save-button mr-2">
-        {{ 'שמירה' | translate: 'Save' }}
-      </button>
-    </div>
-  </div>
-
-  <form class="k-form" [formGroup]="form">
-    <div class="form-row employee-data-rows row">
-      <div class="form-col col-md-3 mx-3">
-        <div class="personal-details">
-          <div class="dx-field">
-            <div class="dx-field-label">Horizontal layout</div>
-            <div class="dx-field-value">
-                <dx-radio-group
-                    [items]="priorities"
-                    layout="horizontal">
-                </dx-radio-group>
-            </div>
-        </div>
-          <div class="dx-field">
-            <div class="dx-field-label">Horizontal layout</div>
-            
-        </div>
-            <label
-              text="'תאריך לידה' | translate: 'Birth Date'"
-            ></label>
-
-            <label class="input-label" text="'מין' | translate: 'Sex'"></label>
-            <ul class="k-radio-list k-list-horizontal d-flex radio-buttons">
-              <li class="k-radio-item d-flex">
-                <input type="radio" #male [value]="gender.MALE"/>
-                <label
-                  class="k-radio-label my-0 mx-2"
-                  [for]="male"
-                  text="'זכר' | translate: 'Male'"
-                ></label>
-              </li>
-              <li class="k-radio-item d-flex">
-                <input type="radio" #female [value]="gender.FEMALE"/>
-                <label
-                  class="k-radio-label my-0 mx-2"
-                  [for]="female"
-                  text="'נקבה' | translate: 'Female'"
-                ></label>
-              </li>
-            </ul>
-
-          <label
-            class="input-label"
-            text="'תאריך ליד ילד אחרון' | translate: 'Birth of Last Child'"
-          ></label>
-
-          <hr />
-
-          <label text="'סטטוס עובד ' | translate: 'Employee Status'"></label>
-
-          <label
-            class="input-label"
-            text="'ותק מקצועי' | translate: 'Professional Seniority'"
-          ></label>
-
-          <label text="'ה. סוציאלית' | translate: 'Social Worker Trainer'"></label>
-
-          <label text="'תואר' | translate: 'Degree'"></label>
-
-          <div class="k-list-horizontal d-flex">
-            <label text="'השכלה' | translate: 'Education'"></label>
-            <label
-              class="input-label"
-              text="'שנות לימוד' | translate: 'Education Years'"
-            ></label>
-          </div>
-        </div>
-      </div>
-      <div class="form-col education-work-column col-md-3 mx-3">
-        <div class="personal-details">
-          <label
-            class="input-label"
-            text="'ת. התחלה' | translate: 'Start Work Date'"
-          ></label>
-
-          <label
-            class="input-label"
-            text="'ת. סיום' | translate: 'End Work Date'"
-          ></label>
-
-
-          <label text="סיבת סיום' | translate: 'Leave Reason"></label>
-
-
-          <hr />
-
-
-          text="התחייבויות' | translate: 'Commitment"
-
-            <label class="input-label" text="'שכר מוגדל' | translate: 'Increased wages'"></label>
-            <ul class="k-radio-list k-list-horizontal d-flex radio-buttons">
-              <li class="k-radio-item d-flex">
-                <input
-                  type="radio"
-                  #no
-                  [value]="radioButton.NO"
-                  kendoRadioButton
-                />
-                <label class="k-radio-label my-0 mx-2" [for]="no" text="'לא' | translate: 'No'"></label>
-              </li>
-              <li class="k-radio-item d-flex">
-                <input
-                  type="radio"
-                  #yes
-                  [value]="radioButton.YES"
-                  kendoRadioButton
-                />
-                <label class="k-radio-label my-0 mx-2" [for]="yes" text="'כן' | translate: 'Yes'"></label>
-              </li>
-            </ul>
-
-            <label text="ג. השתלמות' | translate: 'Proficiency Reward"></label>
-
-            <label class="input-label" text="'גמול תעודה' | translate: 'Diploma Reward'"></label>
-            <ul class="k-radio-list k-list-horizontal d-flex radio-buttons">
-              <li class="k-radio-item d-flex">
-                <input type="radio" #no [value]="radioButton.NO"/>
-                <label class="k-radio-label my-0 mx-2" text="'לא' | translate: 'No'"></label>
-              </li>
-              <li class="k-radio-item d-flex">
-                <input
-                  type="radio"
-                  #yes
-                />
-                <label class="k-radio-label my-0 mx-2" text="'כן' | translate: 'Yes'"></label>
-              </li>
-            </ul>
-          
-          text="'דרגה אישית' | translate: 'Personal Rank'"
-            <ul class="k-radio-list k-list-horizontal d-flex radio-buttons">
-              <li class="k-radio-item d-flex">
-                <input 
-                type="radio" 
-                #no />
-                <label class="k-radio-label my-0 mx-2" text="'לא' | translate: 'No'"></label>
-              </li>
-              <li class="k-radio-item d-flex">
-                text="'כן' | translate: 'Yes'"
-                <input
-                  type="radio"
-                  #yes
-                />
-               
-              </li>
-            </ul>
-          </div>
-      </div>
-      <div class="form-col col-md-3 mx-3">
-        <div class="personal-details">
-          text="קורס כללי' | translate: 'General Course"
-
-          text="השת` כללי' | translate: 'General Training"
-
-          text="קורס עו``ז' | translate: 'OZ Course"
-
-          text="השת` עו``ז' | translate: 'OZ Training"
-
-          text="'תוספות' | translate: 'Wages Additions'"
-
-          <hr />
-
-          <ul class="k-list-horizontal d-flex p-0">
-            <li class="d-flex">
-              text="'אחוז מסגרת' | translate: 'Frame Percent'"
-            </li>
-            <li class="d-flex mr-3">
-              <div class="jobs-percent">
-                  text="'אחוז משרות' | translate: 'Jobs Percent'"
-              </div>
-            </li>
-          </ul>
-          
-          text="'קשר למשרות' | translate: 'Job Connection'"
-
-          text="'ת. מומחיות' | translate: 'Date of Becoming an Expert'"
-        </div>
-      </div>
-    </div>
+    </dx-form>
   </form>
-</div>  -->
+</div>

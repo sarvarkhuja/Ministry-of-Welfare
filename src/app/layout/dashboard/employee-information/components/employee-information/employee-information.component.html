@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<div id="employee-tabs">
+  <h4 class="text-right">
+    {{ nationalId ? ('עריכת עובד' | translate: 'Update employee') : ('הוספת עובד' | translate: 'Add employee') }}
+  </h4>
+
+  <app-employee-quick-search [model]="employeeQuickSearch"></app-employee-quick-search>
+
+  <dx-drawer
+    template="template"
+    [(opened)]="isDrawerOpen"
+    [position]="'right'"
+    [revealMode]="'slide'"
+    [openedStateMode]="'shrink'"
+  >
+    <div *dxTemplate="let data of 'template'">
+      <dx-list [items]="navigation" [width]="140" selectionMode="single" (onSelectionChanged)="loadTab($event)">
+        <div *dxTemplate="let item of 'item'">
+          {{ item.text | translate: item.englishText }}
+        </div>
+      </dx-list>
+    </div>
+    <router-outlet></router-outlet>
+  </dx-drawer>
+</div>

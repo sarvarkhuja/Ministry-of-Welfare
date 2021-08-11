@@ -5,7 +5,7 @@ import { BreadcrumbService } from './../../../../modules/breadcrumb/breadcrumb.s
 import { SignOut } from './../../../../shared/store/auth/auth.action';
 import { UserInfoState } from 'src/app/shared/store/configurations/user-info/user-info.state';
 import { Observable } from 'rxjs';
-import { Component, OnInit, Renderer2, ElementRef, HostListener, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { UserDataModel } from 'src/app/layout/auth/models/user-data.model';
 import { Breadcrumb } from 'src/app/modules/breadcrumb/breadcrumb';

@@ -1,15 +1,14 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { EntityService } from './../../../../core/services/base/entity.service';
-import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
+import { GridResult } from 'src/app/core/configs/grid-result';
+import { AddTableEntryRequestBody } from '../models/add-table-entry-request-body.model';
+import { GeneralTableEntryQuery } from '../models/general-table-entry-query.model';
 import { GeneralTable } from '../models/general-table.model';
 import { UpdateTableEntryRequestBody } from '../models/update-table-entry-request-body.model';
-import { AddTableEntryRequestBody } from '../models/add-table-entry-request-body.model';
-import { GeneralTableEntry } from '../models/general-table-entry.model';
-import { GeneralTableEntryQuery } from '../models/general-table-entry-query.model';
-import { HttpParams } from '@angular/common/http';
-import { GridResult } from 'src/app/core/configs/grid-result';
+import { EndpointSettings } from './../../../../core/configs/endpoint.settings';
+import { EntityService } from './../../../../core/services/base/entity.service';
 
 @Injectable({
   providedIn: 'root',

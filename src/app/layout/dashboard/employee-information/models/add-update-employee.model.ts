@@ -7,6 +7,7 @@ export class AddUpdateEmployeeModel {
   employeeStatus!: number;
   professionalSeniority?: Date;
   degree!: number;
+  department?: number;
   education!: number;
   educationYears!: number;
   startDate?: Date;

@@ -1,291 +1,268 @@
-<!-- <div class="example-wrap">
-  <form class="form-row k-form row position-relative" [formGroup]="workspaces">
-    <div class="form-col col-md-3">
-      <fieldset class="k-form-fieldset single-workspace p-4">
-        <h3>{{ workplaceItem?.district }}</h3>
-        <div class="k-list-horizontal d-flex">
-          <kendo-formfield class="w-50">
-            <kendo-label class="input-label" [for]="department" text="Education"></kendo-label>
-            <kendo-combobox
-              [valuePrimitive]="true"
-              #department
-              [data]="departments$ | async"
-              [valueField]="'entryNumber'"
-              [textField]="'entryNumber'"
-              (selectionChange)="departmentChange($event, 'department')"
-              [formControlName]="'departmentId'"
-              [placeholder]="'Start typing or select an item'"
-            >
-            </kendo-combobox>
-          </kendo-formfield>
-          <div class="mr-3">
-            <kendo-formfield>
-              <kendo-label
-                class="input-label kendo-label"
-                [for]="departmentDescription"
-                text="Department Description"
-              ></kendo-label>
-              <kendo-textbox
-                [readonly]="true"
-                class="form-control -is-readonly"
-                formControlName="department"
-                #departmentDescription
-              ></kendo-textbox>
-            </kendo-formfield>
-          </div>
-        </div>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="priorityRegion" text="Priority Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #priorityRegion
-            formControlName="priorityRegion"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="councilType1Description" text="Council type"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #councilType1Description
-            formControlName="councilType1Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="geoRegion1Description" text="Graphical Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #geoRegion1Description
-            formControlName="geoRegion1Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <div class="k-form-field">
-          <label class="input-label" for="jobPercent">Comment</label>
-          <textarea
-            name="jobPercent"
-            id="jobPercent0"
-            formControlName="warning"
-            class="k-textarea mt-2"
-            placeholder="Add a remark or comment"
-            rows="3"
-          ></textarea>
-        </div>
-      </fieldset>
-    </div>
-    <div class="form-col col-md-3">
-      <fieldset class="k-form-fieldset single-workspace p-4">
-        <h3>{{ workplaceItem?.district2 }}</h3>
-        <div class="k-list-horizontal d-flex">
-          <kendo-formfield class="w-50">
-            <kendo-label class="input-label" [for]="department2" text="Education"></kendo-label>
-            <kendo-combobox
-              [valuePrimitive]="true"
-              #department2
-              [data]="departments$ | async"
-              [valueField]="'entryNumber'"
-              [textField]="'entryNumber'"
-              (selectionChange)="departmentChange($event, 'department2')"
-              [formControlName]="'department2Id'"
-              [placeholder]="'Start typing or select an item'"
-            >
-            </kendo-combobox>
-          </kendo-formfield>
-          <div class="mr-3">
-            <kendo-formfield>
-              <kendo-label
-                class="input-label"
-                [for]="department2Description"
-                text="Department Description"
-              ></kendo-label>
-              <kendo-textbox
-                class="form-control -is-readonly"
-                #department2Description
-                formControlName="department2"
-              ></kendo-textbox>
-            </kendo-formfield>
-          </div>
-        </div>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="priorityRegion2" text="Priority Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #priorityRegion2
-            formControlName="priorityRegion2"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="councilType2Description" text="Council type"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #councilType2Description
-            formControlName="councilType2Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="geoRegion2Description" text="Graphical Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #geoRegion2Description
-            formControlName="geoRegion2Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <div class="k-form-field">
-          <label class="input-label" for="warning2">Comment</label>
-          <textarea
-            name="warning2"
-            formControlName="warning2"
-            class="k-textarea mt-2"
-            placeholder="Add a remark or comment"
-            rows="3"
-          ></textarea>
-        </div>
-      </fieldset>
-    </div>
-    <div class="form-col col-md-3">
-      <fieldset class="k-form-fieldset single-workspace p-4">
-        <h3>{{ workplaceItem?.district3 }}</h3>
-        <div class="k-list-horizontal d-flex">
-          <kendo-formfield class="w-50">
-            <kendo-label class="input-label" [for]="department3" text="Education"></kendo-label>
-            <kendo-combobox
-              [valuePrimitive]="true"
-              #department3
-              [data]="departments$ | async"
-              [valueField]="'entryNumber'"
-              [textField]="'entryNumber'"
-              (selectionChange)="departmentChange($event, 'department3')"
-              [formControlName]="'department3Id'"
-              [placeholder]="'Start typing or select an item'"
-            >
-            </kendo-combobox>
-          </kendo-formfield>
-          <div class="mr-3">
-            <kendo-formfield>
-              <kendo-label class="input-label" [for]="department3" text="Department Description"></kendo-label>
-              <kendo-textbox
-                class="form-control -is-readonly"
-                #department3
-                formControlName="department3"
-              ></kendo-textbox>
-            </kendo-formfield>
-          </div>
-        </div>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="priorityRegion3" text="Priority Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #priorityRegion3
-            formControlName="priorityRegion3"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="councilType3Description" text="Council type"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #councilType3Description
-            formControlName="councilType3Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="geoRegion3Description" text="Graphical Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #geoRegion3Description
-            formControlName="geoRegion3Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <div class="k-form-field">
-          <label class="input-label" for="warning3">Comment</label>
-          <textarea
-            name="warning3"
-            formControlName="warning3"
-            class="k-textarea mt-2"
-            placeholder="Add a remark or comment"
-            rows="3"
-          ></textarea>
-        </div>
-      </fieldset>
-    </div>
-    <div class="form-col col-md-3">
-      <fieldset class="k-form-fieldset single-workspace p-4">
-        <h3>{{ workplaceItem?.district4 }}</h3>
-        <div class="k-list-horizontal d-flex">
-          <kendo-formfield class="w-50">
-            <kendo-label class="input-label" [for]="department4" text="Education"></kendo-label>
-            <kendo-combobox
-              [valuePrimitive]="true"
-              #department4
-              [data]="departments$ | async"
-              [valueField]="'entryNumber'"
-              [textField]="'entryNumber'"
-              [formControlName]="'department4Id'"
-              (selectionChange)="departmentChange($event, 'department4')"
-              [placeholder]="'Start typing or select an item'"
-            >
-            </kendo-combobox>
-          </kendo-formfield>
-          <div class="mr-3">
-            <kendo-formfield>
-              <kendo-label
-                class="input-label"
-                [for]="department4Description"
-                text="Department Description"
-              ></kendo-label>
-              <kendo-textbox
-                class="form-control -is-readonly"
-                #department4Description
-                formControlName="department4"
-              ></kendo-textbox>
-            </kendo-formfield>
-          </div>
-        </div>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="priorityRegion4" text="Priority Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #priorityRegion4
-            formControlName="priorityRegion4"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="councilType4Description" text="Council type"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #councilType4Description
-            formControlName="councilType4Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <kendo-formfield>
-          <kendo-label class="input-label" [for]="geoRegion4Description" text="Graphical Region"></kendo-label>
-          <kendo-textbox
-            class="form-control -is-readonly"
-            [readonly]="true"
-            #geoRegion4Description
-            formControlName="geoRegion4Description"
-          ></kendo-textbox>
-        </kendo-formfield>
-        <div class="k-form-field">
-          <label class="input-label" for="warning4">Comment</label>
-          <textarea
-            name="warning4"
-            formControlName="warning4"
-            class="k-textarea mt-2"
-            placeholder="Add a remark or comment"
-            rows="3"
-          ></textarea>
-        </div>
-      </fieldset>
-    </div>
-    <button class="k-button k-primary workspaces-save-btn" (click)="submitFormWorkplace()">Submit</button>
+<div id="form-container" class="dx-rtl" *ngIf="workplaceItem | async as workplaceItem">
+  <form (submit)="onFormSubmit($event)">
+    <dx-form
+      id="form"
+      [formData]="workplaceItem"
+      [colCount]="4"
+      validationGroup="employeeData"
+      class="mt-3 position-relative"
+    >
+      <dxi-item itemType="group" [caption]="'מקום עבודה 1'" cssClass="single-workspace p-5 m-3" [colCount]="1">
+        <dxi-item
+          [colCount]="1"
+          dataField="district"
+          cssClass="p-0"
+          editorType="dxSelectBox"
+          [label]="{ text: 'מחוז' | translate: 'District' }"
+          [editorOptions]="{
+            value: workplaceItem.district
+          }"
+        ></dxi-item>
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item
+            [colCount]="1"
+            dataField="department"
+            cssClass="p-0"
+            editorType="dxSelectBox"
+            [label]="{ text: 'מחלקה' | translate: 'Department ID' }"
+            [editorOptions]="{
+              dataSource: departments$ | async,
+              displayExpr: 'entryNumber',
+              searchEnabled: 'true',
+              valueExpr: 'entryNumber',
+              value: workplaceItem.department
+            }"
+          ></dxi-item>
+          <dxi-item
+            [colCount]="1"
+            dataField="departmentDescription"
+            [editorOptions]="{ readOnly: true }"
+            [label]="{ text: 'תאור מחלקה' | translate: 'Department' }"
+          >
+          </dxi-item>
+        </dxi-item>
+        <!-- Leave Reason | SELECTBOX  -->
+
+        <dxi-item
+          dataField="priorityRegion"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור עדיפות' | translate: 'Priority Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="councilTypeId"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'סוג רשות' | translate: 'Council type' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="geoRegionId"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור גיאוגרפי' | translate: 'Geographical Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="warning"
+          editorType="dxTextArea"
+          rows="4"
+          [label]="{ text: 'הערות' | translate: 'Comment' }"
+          [editorOptions]="{ placeholder: 'הוסף הערה או הערה' | translate: 'Add a remark or comment', height: 100 }"
+        >
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [caption]="'מקום עבודה 2'" cssClass="single-workspace p-5 m-3" [colCount]="1">
+        <dxi-item
+          [colCount]="1"
+          dataField="district"
+          cssClass="p-0"
+          editorType="dxSelectBox"
+          [label]="{ text: 'מחוז' | translate: 'District' }"
+          [editorOptions]="{
+            value: workplaceItem.district
+          }"
+        ></dxi-item>
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item
+            [colCount]="1"
+            dataField="department2"
+            cssClass="p-0"
+            editorType="dxSelectBox"
+            [label]="{ text: 'מחלקה' | translate: 'Department ID' }"
+            [editorOptions]="{
+              dataSource: departments$ | async,
+              displayExpr: 'entryNumber',
+              searchEnabled: 'true',
+              valueExpr: 'entryNumber',
+              value: workplaceItem.department2
+            }"
+          ></dxi-item>
+          <dxi-item
+            [colCount]="1"
+            dataField="department2Description"
+            [editorOptions]="{ readOnly: true }"
+            [label]="{ text: 'תאור מחלקה' | translate: 'Department' }"
+          >
+          </dxi-item>
+        </dxi-item>
+        <dxi-item
+          dataField="priorityRegion2"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור עדיפות' | translate: 'Priority Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="councilTypeId2"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'סוג רשות' | translate: 'Council type' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="geoRegion2Id"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור גיאוגרפי' | translate: 'Geographical Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="warning2"
+          editorType="dxTextArea"
+          rows="4"
+          [label]="{ text: 'הערות' | translate: 'Comment' }"
+          [editorOptions]="{ placeholder: 'הוסף הערה או הערה' | translate: 'Add a remark or comment', height: 100 }"
+        >
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [caption]="'מקום עבודה 3'" cssClass="single-workspace p-5 m-3" [colCount]="1">
+        <dxi-item
+          [colCount]="1"
+          dataField="district"
+          cssClass="p-0"
+          editorType="dxSelectBox"
+          [label]="{ text: 'מחוז' | translate: 'District' }"
+          [editorOptions]="{
+            value: workplaceItem.district
+          }"
+        ></dxi-item>
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item
+            [colCount]="1"
+            dataField="department3"
+            cssClass="p-0"
+            editorType="dxSelectBox"
+            [label]="{ text: 'מחלקה' | translate: 'Department ID' }"
+            [editorOptions]="{
+              dataSource: departments$ | async,
+              displayExpr: 'entryNumber',
+              searchEnabled: 'true',
+              valueExpr: 'entryNumber',
+              value: workplaceItem.department3
+            }"
+          ></dxi-item>
+          <dxi-item
+            [colCount]="1"
+            dataField="department3Description"
+            [editorOptions]="{ readOnly: true }"
+            [label]="{ text: 'תאור מחלקה' | translate: 'Department' }"
+          >
+          </dxi-item>
+        </dxi-item>
+        <dxi-item
+          dataField="priorityRegion3"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור עדיפות' | translate: 'Priority Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="councilTypeId3"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'סוג רשות' | translate: 'Council type' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="geoRegion3Id"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור גיאוגרפי' | translate: 'Geographical Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="warning3"
+          editorType="dxTextArea"
+          rows="4"
+          [label]="{ text: 'הערות' | translate: 'Comment' }"
+          [editorOptions]="{ placeholder: 'הוסף הערה או הערה' | translate: 'Add a remark or comment', height: 100 }"
+        >
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [caption]="'מקום עבודה 4'" cssClass="single-workspace p-5 m-3" [colCount]="1">
+        <dxi-item
+          [colCount]="1"
+          dataField="district"
+          cssClass="p-0"
+          editorType="dxSelectBox"
+          [label]="{ text: 'מחוז' | translate: 'District' }"
+          [editorOptions]="{
+            value: workplaceItem.district
+          }"
+        ></dxi-item>
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item
+            [colCount]="1"
+            dataField="department4"
+            cssClass="p-0"
+            editorType="dxSelectBox"
+            [label]="{ text: 'מחלקה' | translate: 'Department ID' }"
+            [editorOptions]="{
+              dataSource: departments$ | async,
+              displayExpr: 'entryNumber',
+              searchEnabled: 'true',
+              valueExpr: 'entryNumber',
+              value: workplaceItem.department4
+            }"
+          ></dxi-item>
+          <dxi-item
+            [colCount]="1"
+            dataField="department4Description"
+            [editorOptions]="{ readOnly: true }"
+            [label]="{ text: 'תאור מחלקה' | translate: 'Department' }"
+          >
+          </dxi-item>
+        </dxi-item>
+        <dxi-item
+          dataField="priorityRegion4"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור עדיפות' | translate: 'Priority Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="councilTypeId4"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'סוג רשות' | translate: 'Council type' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="geoRegion4Id"
+          [editorOptions]="{ readOnly: true }"
+          [label]="{ text: 'אזור גיאוגרפי' | translate: 'Geographical Region' }"
+        >
+        </dxi-item>
+        <dxi-item
+          dataField="warning4"
+          editorType="dxTextArea"
+          rows="4"
+          [label]="{ text: 'הערות' | translate: 'Comment' }"
+          [editorOptions]="{ placeholder: 'הוסף הערה או הערה' | translate: 'Add a remark or comment', height: 100 }"
+        >
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item
+        cssClass="workplace-save__btn"
+        itemType="button"
+        [buttonOptions]="{ text: 'שמירה' | translate: 'Save', type: 'success', useSubmitBehavior: true }"
+      >
+      </dxi-item>
+    </dx-form>
   </form>
-</div> -->
+</div>
+<dx-toast [(visible)]="isVisibleToast" [type]="type" [message]="message">
+  <dxo-position my="top left" at="top left" offset="10 10"> </dxo-position>
+</dx-toast>

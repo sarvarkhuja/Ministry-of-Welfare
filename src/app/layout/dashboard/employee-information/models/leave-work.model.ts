@@ -1,15 +1,59 @@
-import { Grid } from 'src/app/core/decorators/grid.decorator';
-import { EntityModel } from 'src/app/core/models/entity.model';
+import { EntityModel } from '../../../../core/models/entity.model';
+import { Grid } from '../../../../core/decorators/grid.decorator';
+import { Display } from '../../../../core/decorators/display.decorator';
 
 /**
  *
  */
 @Grid('LeaveWorkGrid')
 export class LeaveWorkModel extends EntityModel {
-  activityCode?: string;
-  reason!: string;
-  from?: Date;
-  until?: Date;
-  comment?: string;
-  payrollDate?: Date;
+  /**
+   *
+   */
+  @Display({
+    caption: 'פעיל',
+    captionInEnglish: 'Active',
+    dataType: 'string',
+  })
+  activityCode!: string;
+
+  /**
+   *
+   */
+  @Display({
+    caption: 'סיבת עזיבה',
+    captionInEnglish: 'Leave Reason',
+    dataType: 'string',
+  })
+  reasonDescription!: string;
+
+  /**
+   *
+   */
+  @Display({
+    caption: 'מתאריך',
+    captionInEnglish: 'Date from',
+    dataType: 'date',
+  })
+  fromDate!: Date;
+
+  /**
+   *
+   */
+  @Display({
+    caption: 'עד תאריך',
+    captionInEnglish: 'Date until',
+    dataType: 'date',
+  })
+  untilDate!: Date;
+
+  /**
+   *
+   */
+  @Display({
+    caption: 'תאריך נוסף',
+    captionInEnglish: 'Additional date',
+    dataType: 'date',
+  })
+  payrollDate!: Date;
 }

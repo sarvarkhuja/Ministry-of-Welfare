@@ -1,5 +1,5 @@
-import { UpdateEmployeeModel } from './update-employee.model';
+import { AddUpdateEmployeeModel } from './add-update-employee.model';
 
 export class SaveEmployeeModel {
-  employee!: Partial<UpdateEmployeeModel>;
+  employee!: Partial<AddUpdateEmployeeModel>;
 }

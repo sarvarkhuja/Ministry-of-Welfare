@@ -1,4 +1,3 @@
-import { PersonalDetailsTabComponent } from './../employee-information/components/employee-tabs/single-tabs/personal-details-tab/personal-details-tab.component';
 import { PermissionName } from './../components/menu/permission-name.enum';
 import { PermissionGuard } from './../../../core/guards/permission.guard';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
@@ -16,14 +15,6 @@ const EMPLOYEE_ROUTES: Routes = [
         path: '',
         component: EmployeeListComponent,
       },
-      {
-        path: 'add',
-        component: PersonalDetailsTabComponent,
-      },
-      {
-        path: ':id/edit',
-      },
-
       // put other paths before the wildcard route ('**')
       // if the requested URL doesn't match any of the above
       {

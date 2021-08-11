@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { StartupService } from '@core/services/startup.service';
 import { Select } from '@ngxs/store';
@@ -10,7 +10,6 @@ import 'reflect-metadata';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   @Select(UserInfoState.userLangDirection)

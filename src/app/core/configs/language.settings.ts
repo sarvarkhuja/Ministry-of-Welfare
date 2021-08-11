@@ -8,7 +8,6 @@ export enum Language {
 }
 
 export const LANGUAGES: Array<SelectItem> = [
-  {value: Language[0], text: 'עברית'},
-  {value: Language[1], text: 'English'},
-
+  { value: Language[0], text: 'עברית' },
+  { value: Language[1], text: 'English' },
 ];

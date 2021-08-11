@@ -1,21 +1,14 @@
-import { UserDataModel } from './../../../../layout/auth/models/user-data.model';
-import { LanguageModel } from 'src/app/core/models/language.model';
-import {
-  SetUserLanguage,
-  SetLastUser,
-  SetLogoutOccurence,
-  SetADSUser,
-  SetUserMetadata,
-  SetUserData,
-  ClearUserData,
-  ClearUserMetaData,
-  SetChosenEmloyeeCode,
-  SetUiSetting,
-} from './user-info.action';
-import { State, Action, StateContext, Selector, createSelector, Select } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { UserInfoStateModel } from './user-info-state.model';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { LanguageModel } from 'src/app/core/models/language.model';
 import { UISetting } from 'src/app/core/models/types/ui-setting';
+import { UserDataModel } from './../../../../layout/auth/models/user-data.model';
+import { UserInfoStateModel } from './user-info-state.model';
+import {
+  ClearUserData,
+  ClearUserMetaData, SetADSUser, SetChosenEmloyeeCode, SetLastUser,
+  SetLogoutOccurence, SetUiSetting, SetUserData, SetUserLanguage, SetUserMetadata
+} from './user-info.action';
 
 @State<UserInfoStateModel>({
   name: 'userInfo',
@@ -35,10 +28,6 @@ import { UISetting } from 'src/app/core/models/types/ui-setting';
 })
 @Injectable()
 export class UserInfoState {
-  /**
-   *
-   */
-  constructor() { }
   /**
    *
    */

@@ -1,7 +1,7 @@
-import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
+import { NgDestroy } from './../../../../shared/services/ng-destroy.service';
 import { LoggerService } from './../loggers/logger.service';
-import { ErrorHandler, Injectable, OnDestroy } from '@angular/core';
 
 /**
  * Global error handler service to handle errors

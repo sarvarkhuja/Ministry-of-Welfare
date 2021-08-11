@@ -1,17 +1,21 @@
 <div class="menu-header">
-  <span class="menu-header__name">תחזוקת טבלאות </span>
+  <span class="menu-header__name">
+    {{ 'תחזוקת טבלאות' | translate: 'Tables Management' }}
+  </span>
   <button class="primary-button" [routerLink]="['/']">&lt; Back</button>
 </div>
 
 <div class="container-fluid rows">
   <!-- First row -->
   <div class="single-row">
-    <a class="single-item green" [routerLink]="[]">
+    <a class="single-item green" [routerLink]="['/general-tables']">
       <div class="single-item__icon">
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלאות תאורים</div>
+        <div class="single-item__link--title">
+          {{ 'טבלאות תאורים' | translate: 'Descriptions Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +36,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת מחלקות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת מחלקות' | translate: 'Departments Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +59,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת דרגות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת דרגות' | translate: 'Ranks Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +82,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת מוסדות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת מוסדות' | translate: 'Institutes Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +108,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת פרמטרים</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת פרמטרים' | translate: 'Parameters Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +131,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת קודי דוחות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת קודי דוחות' | translate: 'Reports Codes Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +154,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת קודי ועדות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת קודי ועדות' | translate: 'Committees Codes Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +177,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת מועצות אזוריות</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת מועצות אזוריות' | translate: 'Local Councils Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +203,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">טבלת לתאונות דרכים</div>
+        <div class="single-item__link--title">
+          {{ 'טבלת לתאונות דרכים' | translate: 'Car Accidents Table' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -206,7 +226,9 @@
         <img src="assets/images/routine-operations.png" alt="documents icon" srcset="" />
       </div>
       <div class="single-item__link">
-        <div class="single-item__link--title">הערות פתוחות לרשות</div>
+        <div class="single-item__link--title">
+          {{ 'הערות פתוחות לרשות' | translate: 'Council's Open Remarks' }}
+        </div>
 
         <div class="single-item__link--arrow">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

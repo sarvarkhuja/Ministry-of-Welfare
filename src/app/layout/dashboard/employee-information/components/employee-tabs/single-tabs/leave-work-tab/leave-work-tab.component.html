@@ -1,1 +1,55 @@
-asdasd
+<dx-data-grid
+  id="gridContainer"
+  [style.max-height] = "gridHeight"
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [columnMinWidth]="columnMinWidth"
+  [columnWidth]="columnWidth"
+  [rowAlternationEnabled]="true"
+  [showBorders]="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+>
+
+<ng-template ngFor let-column [ngForOf]="columns">
+  <dxi-column
+    caption="{{ isHebrew ? column.caption : column.captionInEnglish }}"
+    dataField="{{ column.dataField }}"
+    dataType="{{ column.dataType }}"
+    format="{{ column.format }}"
+  >
+  </dxi-column>
+  </ng-template>
+
+  <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+  <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+  <dxo-paging [pageSize]="pageSize"></dxo-paging>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-pager
+    [visible]="true"
+    [allowedPageSizes]="allowedPageSizes"
+    [displayMode]="displayMode"
+    [showPageSizeSelector]="showPageSizeSelector"
+    [showInfo]="showInfo"
+    [showNavigationButtons]="showNavButtons"
+  >
+  </dxo-pager>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+
+  <dxo-export [enabled]="true" [excelFilterEnabled]="true" fileName="Leave work"></dxo-export>
+
+  <dxo-summary>
+    <dxi-group-item column="nationalId" summaryType="count"> </dxi-group-item>
+    <dxi-total-item column="nationalId" summaryType="count"> </dxi-total-item>
+  </dxo-summary>
+</dx-data-grid>
